@@ -1,0 +1,870 @@
+﻿@using PeerAMid.Support
+@using PeerAMid.Utility
+@{
+    ViewBag.Title = "AboutUs";
+    Layout = "~/Views/Shared/_PeerAMidLayout.cshtml";
+    var finalPeer = SessionData.Instance.FinalPeerCompanies;
+    var count = string.IsNullOrEmpty(finalPeer) ? 0 : finalPeer.Split(',').Length - 1;
+    var email = "\"<a target='_top' class='anchor-underline' href='mailto:insightcenter%40alvarezandmarsal.com'>insightcenter@alvarezandmarsal.com</a>\"";
+}
+<!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+<![endif]-->
+
+@{ var versionNumber = DateTime.Now.Ticks.ToString(); }
+<script src="~/Scripts/amchart/amcharts.js"></script>
+<script src="~/Scripts/angular/libs/serial.js"></script>
+<script src="~/Scripts/angular/libs/export.min.js"></script>
+<link href="~/Content/Css/export.css" rel="stylesheet" />
+@*versionNumber use in application for avoid caching, every time it will create new version and remove cach data from browser*@
+<link href="~/Content/animate.css?v=@versionNumber" rel="stylesheet" />
+<link href="~/PeerAmidContent/css/RunAnalysis.css?v=@versionNumber" rel="stylesheet" />
+@*
+    <script src="~/Scripts/pageState.js"></script>
+    <script src="~/Scripts/chevrons.js"></script>*@
+
+@if (SessionData.Instance.SelectedService.IsWCD())
+{
+    <script>let wcd = true;</script>
+}
+else
+{
+    <script>let wcd = false;</script>
+}
+
+<style>
+    .colorRed {
+        color: #670f00 !important;
+    }
+
+    .commonRevenueChart {
+        height: 145px;
+    }
+
+    .width25 {
+        width: 25%;
+    }
+</style>
+
+<!--Company details-->
+<div class="container-fluid border-bottom bg-light">
+    <section class="row py-2">
+        <aside class="col-sm-3">
+            <label class="size11">Benchmark Company </label><br>
+            <strong class="size14" id="benchmarkCompanyName"></strong>
+        </aside>
+        <aside class="col-sm-4">
+            <label class="size11">Industry </label><br>
+            <strong class="size14" id="headerIndustryName"></strong>
+        </aside>
+        <aside class="col-sm-4">
+            <label class="size11">Sub-Industry</label><br>
+            <strong class="size14" id="benchmarkCompanySubIndustry"></strong>
+        </aside>
+        <aside class="col-sm-1">
+            <label class="size11">Peers</label><br>
+            <strong class="size14" id="headerPeersCount">@count</strong>
+        </aside>
+    </section>
+</div>
+
+<strong class="size14" id="benchmarkCompanyNameMixedCase" visible="false"></strong>
+
+<!--Modify peers on CompanyAutoSelection -->
+<div class="container-fluid border-bottom py-3">
+
+    @if (SessionData.Instance.IsPossiblePeerCompanies)
+    {
+        <a onclick="modifyPeers(true);return false;" href="#" class="btn btn-outline-secondary BackLocation1">Modify Peers</a>
+    }
+    else
+    {
+        <a onclick="modifyPeers(false);return false;" href="#" class="btn btn-outline-secondary BackLocation1">Modify Peers</a>
+    }
+    @{
+        if (SessionData.Instance.SelectedService != PeerAMidService.SgaShort)
+        {
+            <a onclick="modifyBenchmarkCompanyData(); return false;" href="#" class="btn btn-outline-secondary ml-3 MBCD">Modify Benchmark Company Data</a>
+        }
+        else
+        {
+            <a href="#" class="btn btn-outline-secondary ml-3 MBCD" onclick="bAlert(`This functionality is not currently available in our SG&A Cost High Level service. To add a public target company, modify public target company data, or a public peer company please contact us at ${@email}.`);">Modify Benchmark Company Data</a>
+        }
+    }
+    <a href="javascript:void(0)" id="btnDownloadPPTFile" onclick="downloadPPT();" class="btn btn-outline-secondary ml-3 MBCD">Export the Deliverable</a>
+</div>
+
+<div class="container-fluid">
+    <!-- Peer Group Demographics -->
+    <section class="paddingTop20">
+        <aside class="row">
+            <div class="col-sm-12 paddingBottom20">
+                <section class="whiteBox">
+                    <div id="page6">
+                        <div class="pdfHeaderSectionOther">
+                            <div class="sideNavFixed"></div>
+                            <h2 class="size16  h2Blue bold padding20">
+                                Peer Group* Demographics
+                                <a class="mobileFilter pull-right visible-xs" href="#FiltersMobile">
+                                    <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                </a>
+                            </h2>
+                            <div class="PDFtopLine">
+                                <div class="filled"></div>
+                            </div>
+
+                            <div style="padding: 0px 20px" class="size13 bold h2Blue">The gold star on each demographic characteristic bar represents @SessionData.Instance.BenchmarkCompany.DisplayName's performance relative to the span of the peer group's.</div>
+
+                            <hr>
+                        </div>
+
+                        <!--Range of the selected peer companies - Graphical representation-->
+                        @*<hr />*@
+                        <aside class="mobileHide" id="FiltersMobile">
+                            <div class="paddingBottom20">
+
+                                <div id="divDemographicChartSection" class="container paddingTop75" style="padding-bottom: 85px;">
+
+                                    <div class="scalePlot fadeIn animated componentLabel" style="color: rgb(100, 100, 100);">
+                                        <span class="fas fa-star-sharp starColor"></span> @SessionData.Instance.BenchmarkCompany.DisplayName
+                                    </div>
+                                    <div id="RevenueDemographic" class="starScaleWrapper zoomIn animated">
+                                        <div id="RevenueTitle" class="mainLabel bold halfLineHeight minNightGrey" style="white-space: pre-line;">Net Revenue (in USD)</div>
+                                        <div class="starScale">
+                                            <div id="RevenueLocationPercent" title="@SessionData.Instance.BenchmarkCompany.DisplayName" class="scalePlot bounceInLeft animated"></div>
+                                            <!-- <div class="mainLabel bold">Revenue</div> -->
+                                            <div class="width25 scaleDivison">
+                                                <div class="scaleLabel top-left minNightGrey bold">Min</div>
+                                                <div id="divRevenueMin" class="scaleLabel bottom-left bold"></div>
+                                            </div>
+                                            <div class="width25 scaleDivison">
+                                                <div class="scaleLabel top-left minNightGrey bold">25<sup>th</sup> Percentile</div>
+                                                <div id="divRevenueP25" class="scaleLabel bottom-left bold"></div>
+                                            </div>
+                                            <div class="width25 scaleDivison">
+                                                <div class="scaleLabel top-left minNightGrey bold">Median</div>
+                                                <div id="divRevenueP50" class="scaleLabel bottom-left bold"></div>
+                                            </div>
+                                            <div class="width25 scaleDivison">
+                                                <div class="scaleLabel top-left minNightGrey bold">75<sup>th</sup> Percentile</div>
+                                                <div id="divRevenueP75" class="scaleLabel bottom-left bold"></div>
+                                                <div class="scaleLabel top-right minNightGrey bold">Max</div>
+                                                <div id="divRevenueMax" class="scaleLabel bottom-right bold"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="CAGRDemographic" class="starScaleWrapper zoomIn animated paddingTop40">
+                                        <div id="CAGRTitle" class="mainLabel bold halfLineHeight" style="white-space: pre-line;">Revenue<br>3 Year CAGR</div>
+                                        <div class="starScale">
+
+                                            <div id="divCAGRLocationPercent" title="@SessionData.Instance.BenchmarkCompany.DisplayName" class="scalePlot bounceInLeft animated"></div>
+                                            <!-- <div class="mainLabel bold">Revenue</div> -->
+                                            <div class="width25 scaleDivison">
+                                                <div id="divCAGRPMin" class="scaleLabel bottom-left bold"></div>
+                                            </div>
+                                            <div class="width25 scaleDivison">
+                                                <div id="divCAGRP25" class="scaleLabel bottom-left bold"></div>
+                                            </div>
+                                            <div class="width25 scaleDivison">
+                                                <div id="divCAGRP50" class="scaleLabel bottom-left bold"></div>
+                                            </div>
+                                            <div class="width25 scaleDivison">
+                                                <div id="divCAGR75" class="scaleLabel bottom-left bold"></div>
+
+                                                <div id="divCAGRMax" class="scaleLabel bottom-right bold"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="EBITDADemographic" class="starScaleWrapper zoomIn animated paddingTop40">
+                                        <div id="EBITDATitle" class="mainLabel bold" style="white-space: pre-line;">EBITDA Margin %</div>
+                                        <div class="starScale">
+                                            <div id="divEBITDALocationPercent" title="@SessionData.Instance.BenchmarkCompany.DisplayName" class="scalePlot bounceInLeft animated">
+                                                <span class="fas fa-star-sharp starColor"></span>
+                                            </div>
+                                            <!-- <div class="mainLabel bold">Revenue</div> -->
+                                            <div class="width25 scaleDivison">
+                                                <div id="divEBITDAMin" class="scaleLabel bottom-left bold"></div>
+                                            </div>
+                                            <div class="width25 scaleDivison">
+                                                <div id="divEBITDA25" class="scaleLabel bottom-left bold"></div>
+                                            </div>
+                                            <div class="width25 scaleDivison">
+                                                <div id="divEBITDA50" class="scaleLabel bottom-left bold"></div>
+                                            </div>
+                                            <div class="width25 scaleDivison">
+                                                <div id="divEBITDA75" class="scaleLabel bottom-left bold"></div>
+                                                <div id="divEBITDAMax" class="scaleLabel bottom-right bold"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="NumEmpDemographic" class="starScaleWrapper zoomIn animated paddingTop40">
+                                        <div id="NumEmpTitle" class="mainLabel bold" style="white-space: pre-line;">Number of Employees</div>
+                                        <div class="starScale">
+                                            <div id="divNumEmpLocationPercent" title="@SessionData.Instance.BenchmarkCompany.DisplayName" class="scalePlot bounceInLeft animated"></div>
+                                            <!-- <div class="mainLabel bold">Revenue</div> -->
+                                            <div class="width25 scaleDivison">
+                                                <div id="divNumEmpMin" class="scaleLabel bottom-left bold"></div>
+                                            </div>
+                                            <div class="width25 scaleDivison">
+                                                <div id="divNumEmp25" class="scaleLabel bottom-left bold"></div>
+                                            </div>
+                                            <div class="width25 scaleDivison">
+                                                <div id="divNumEmp50" class="scaleLabel bottom-left bold"></div>
+                                            </div>
+                                            <div class="width25 scaleDivison">
+                                                <div id="divNumEmp75" class="scaleLabel bottom-left bold"></div>
+                                                <div id="divNumEmpMax" class="scaleLabel bottom-right bold"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="GrossMarginDemographic" class="starScaleWrapper zoomIn animated paddingTop40">
+                                        <div id="GrossMarginTitle" class="mainLabel bold" style="white-space: pre-line;">Gross Margin %</div>
+                                        <div class="starScale">
+                                            <div id="divGrossMarginLocationPercent" title="@SessionData.Instance.BenchmarkCompany.DisplayName" class="scalePlot bounceInLeft animated">
+                                                <span class="fas fa-star-sharp starColor"></span>
+                                            </div>
+                                            <!-- <div class="mainLabel bold">Revenue</div> -->
+                                            <div class="width25 scaleDivison">
+                                                <div id="divGROSSMin" class="scaleLabel bottom-left bold"></div>
+                                            </div>
+                                            <div class="width25 scaleDivison">
+                                                <div id="divGROSS25" class="scaleLabel bottom-left bold"></div>
+                                            </div>
+                                            <div class="width25 scaleDivison">
+                                                <div id="divGROSS50" class="scaleLabel bottom-left bold"></div>
+                                            </div>
+                                            <div class="width25 scaleDivison">
+                                                <div id="divGROSS75" class="scaleLabel bottom-left bold"></div>
+                                                <div id="divGROSSMax" class="scaleLabel bottom-right bold"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="RevenuePerEmpDemographic" class="starScaleWrapper zoomIn animated paddingTop40">
+                                        <div id="RevenuePerEmpTitle" class="mainLabel bold halfLineHeight" style="white-space: pre-line;">Revenue per Employee<br />(in USD)</div>
+                                        <div class="starScale">
+                                            <div id="divRevenuePerEmpLocationPercent" title="@SessionData.Instance.BenchmarkCompany.DisplayName" class="scalePlot bounceInLeft animated">
+                                                <span class="fas fa-star-sharp starColor"></span>
+                                            </div>
+                                            <!-- <div class="mainLabel bold">Revenue</div> -->
+                                            <div class="width25 scaleDivison">
+                                                <div id="divRevenuePerEmpMin" class="scaleLabel bottom-left bold"></div>
+                                            </div>
+                                            <div class="width25 scaleDivison">
+                                                <div id="divRevenuePerEmp25" class="scaleLabel bottom-left bold"></div>
+                                            </div>
+                                            <div class="width25 scaleDivison">
+                                                <div id="divRevenuePerEmp50" class="scaleLabel bottom-left bold"></div>
+                                            </div>
+                                            <div class="width25 scaleDivison">
+                                                <div id="divRevenuePerEmp75" class="scaleLabel bottom-left bold"></div>
+                                                <div id="divRevenuePerEmpMax" class="scaleLabel bottom-right bold"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @if (SessionData.Instance.SelectedService.IsWCD()) // == PeerAMidService.WcdFull) || (SessionData.Instance.SelectedService == PeerAMidService.WcdShort))
+                                    {
+                                        <div id="Demographic1" class="starScaleWrapper zoomIn animated paddingTop40">
+                                            <div id="Title" class="mainLabel bold halfLineHeight minNightGrey" style="white-space: pre-line;">CCC (in USD)</div>
+                                            <div class="starScale">
+                                                <div id="LocationPercent" title="@SessionData.Instance.BenchmarkCompany.DisplayName" class="scalePlot bounceInLeft animated"></div>
+                                                <div class="width25 scaleDivison">
+                                                    <!--<div class="scaleLabel top-left minNightGrey bold">Min</div>-->
+                                                    <div id="Min" class="scaleLabel bottom-left bold"></div>
+                                                </div>
+                                                <div class="width25 scaleDivison">
+                                                    <!--<div class="scaleLabel top-left minNightGrey bold">25<sup>th</sup> Percentile</div>-->
+                                                    <div id="P25" class="scaleLabel bottom-left bold"></div>
+                                                </div>
+                                                <div class="width25 scaleDivison">
+                                                    <!--<div class="scaleLabel top-left minNightGrey bold">Median</div>-->
+                                                    <div id="P50" class="scaleLabel bottom-left bold"></div>
+                                                </div>
+                                                <div class="width25 scaleDivison">
+                                                    <!--<div class="scaleLabel top-left minNightGrey bold">75<sup>th</sup> Percentile</div>-->
+                                                    <div id="P75" class="scaleLabel bottom-left bold"></div>
+                                                    <!--<div class="scaleLabel top-right minNightGrey bold">Max</div>-->
+                                                    <div id="Max" class="scaleLabel bottom-right bold"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </aside>
+                        <div class="pdf-footer-top">* Financial data is sourced from A&amp;M; Demographic ranges are based on the peers selected.</div>
+                    </div>
+                    <div class="pdf-footer-top"></div>
+                    <div class="pdf-footer generatePDFFooter">
+                        <span class="footerLeftContent"></span>
+                        <span class="footerCenterPageNo">1</span>
+                        <span class="waterMark">
+                            <img src="~/PeerAmidContent/images/PeerAMid-logo.png" />
+                        </span>
+                    </div>
+                </section>
+            </div>
+        </aside>
+    </section>
+
+    <!-- SG&A Cost as a Percent of Revenue -->
+    @if (SessionData.Instance.SelectedService.IsWCD()) // == PeerAMidService.WcdFull) || (SessionData.Instance.SelectedService == PeerAMidService.WcdShort))
+    {
+        <section class="paddingTop20">
+            <aside class="row">
+                <div class="col-sm-12 paddingBottom20">
+                    <section class="whiteBox">
+                        <div id="page7">
+                            <div class="pdfHeaderSectionOther">
+                                <div class="sideNavFixed"></div>
+                                <h2 class="size16  h2Blue bold padding20">
+                                    Cash Conversion Cycle
+                                    <a class="mobileFilter pull-right visible-xs" href="#FiltersMobile">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </a>
+                                </h2>
+                                <div class="PDFtopLine">
+                                    <div class="filled"></div>
+                                </div>
+                                <!--SG&A Cost as a % of Revenue Bar chart-->
+                                <div style="padding: 0px 20px" class="size13 bold h2Blue" id="SGACostPercentRevenueHeading"></div>
+
+                                <hr>
+                            </div>
+
+                            <div style="padding: 0px 20px" class="size13 minNightBlue">
+                                <section class="row">
+                                    <aside class="col-sm-9">
+                                        @*<div class="pt-2 pl-2">
+                                                <i class="fas fa-square-full" style="color: #7030a0"></i> @SessionData.Instance.BenchmarkCompany.Name &nbsp;  &nbsp; <i class="fas fa-square-full" style="color: #00b050"></i> Median
+                                            </div>*@
+                                        <div class="container">
+                                            <div class="legend-div">
+                                                <span>
+                                                    <img src="/Content/Images/l1.jpg"> @SessionData.Instance.BenchmarkCompany.DisplayName
+                                                </span>
+                                                <span><img src="/Content/Images/l2.jpg"> Median</span>
+                                                <span id="outliersDot"><img src="/Content/Images/outlierDot.jpg"> Outliers</span>
+                                                @*<span><img src="/Content/Images/l5.jpg"> Top Quartile</span>*@
+                                                @*<span><img src="/Content/Images/l7.jpg"> Bottom Quartile</span>*@
+                                            </div>
+                                        </div>
+                                    </aside>
+                                    <aside class="col-sm-9">
+                                        <div id="chartdiv" style="height: 600px; overflow: hidden; text-align: left; width: 100%;"></div>
+                                    </aside>
+                                    <aside class="col-sm-3 border-left">
+                                        <strong class="size14"></strong>
+                                        <div id="chartdiv2" style="height: 660px; width: 100%;"></div>
+                                    </aside>
+                                </section>
+                                <div class="pdf-footer-top" id="outliers" style="color: red;"></div>
+                                <div class="pdf-footer-top">* Financial Data Sourced from SEC Edgar DB</div>
+                            </div>
+                        </div>
+                        <div class="pdf-footer-top"></div>
+                        <div class="pdf-footer generatePDFFooter">
+                            <span class="footerLeftContent"></span>
+                            <span class="footerCenterPageNo">2</span>
+                            <span class="waterMark">
+                                <img src="~/PeerAmidContent/images/PeerAMid-logo.png" />
+                            </span>
+                        </div>
+                    </section>
+                </div>
+            </aside>
+        </section>
+    }
+    else
+    {
+        <section class="paddingTop20">
+            <aside class="row">
+                <div class="col-sm-12 paddingBottom20">
+                    <section class="whiteBox">
+                        <div id="page7">
+                            <div class="pdfHeaderSectionOther">
+                                <div class="sideNavFixed"></div>
+                                <h2 class="size16  h2Blue bold padding20">
+                                    SG&A Cost as a Percent of Revenue*
+                                    <a class="mobileFilter pull-right visible-xs" href="#FiltersMobile">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </a>
+                                </h2>
+                                <div class="PDFtopLine">
+                                    <div class="filled"></div>
+                                </div>
+                                <!--SG&A Cost as a % of Revenue Bar chart-->
+                                <div style="padding: 0px 20px" class="size13 bold h2Blue" id="SGACostPercentRevenueHeading"></div>
+
+                                <hr>
+                            </div>
+
+                            <div style="padding: 0px 20px" class="size13 minNightBlue">
+                                <section class="row">
+                                    <aside class="col-sm-9">
+                                        @*<div class="pt-2 pl-2">
+                                                <i class="fas fa-square-full" style="color: #7030a0"></i> @SessionData.Instance.BenchmarkCompany.Name &nbsp;  &nbsp; <i class="fas fa-square-full" style="color: #00b050"></i> Median
+                                            </div>*@
+                                        <div class="container">
+                                            <div class="legend-div">
+                                                <span>
+                                                    <img src="/Content/Images/l1.jpg"> @SessionData.Instance.BenchmarkCompany.DisplayName
+                                                </span>
+                                                <span><img src="/Content/Images/l2.jpg"> Median</span>
+                                                <span id="outliersDot"><img src="/Content/Images/outlierDot.jpg"> Outliers</span>
+                                                @*<span><img src="/Content/Images/l5.jpg"> Top Quartile</span>*@
+                                                @*<span><img src="/Content/Images/l7.jpg"> Bottom Quartile</span>*@
+                                            </div>
+                                        </div>
+                                    </aside>
+                                    <aside class="col-sm-9">
+                                        <div id="chartdiv" style="height: 600px; overflow: hidden; text-align: left; width: 100%;"></div>
+                                    </aside>
+                                    <aside class="col-sm-3 border-left">
+                                        <strong class="size14"></strong>
+                                        <div id="chartdiv2" style="height: 660px; width: 100%;"></div>
+                                    </aside>
+                                </section>
+                                <div class="pdf-footer-top" id="outliers" style="color: red;"></div>
+                                <div class="pdf-footer-top">* Financial Data Sourced from SEC Edgar DB</div>
+                            </div>
+                        </div>
+                        <div class="pdf-footer-top"></div>
+                        <div class="pdf-footer generatePDFFooter">
+                            <span class="footerLeftContent"></span>
+                            <span class="footerCenterPageNo">2</span>
+                            <span class="waterMark">
+                                <img src="~/PeerAmidContent/images/PeerAMid-logo.png" />
+                            </span>
+                        </div>
+                    </section>
+                </div>
+            </aside>
+        </section>
+    }
+
+    @* These additional slides are only displayed if the selected service is "SG&A Diagnostic" *@
+    @if (SessionData.Instance.SelectedService == PeerAMidService.SgaFull)
+    {
+        <!-- SG&A vs. EBITDA Performance -->
+        <section class="paddingTop20" style="max-width: 1200px;">
+            <aside class="row">
+                <div class="col-sm-12 paddingBottom20">
+                    <section class="whiteBox">
+                        <div id="page8">
+                            <!--Profitability vs Cost Performance Chart-->
+                            <div class="pdfHeaderSectionOther maxheight">
+                                <div class="sideNavFixed"></div>
+                                <h2 class="size16  h2Blue bold padding20">
+                                    SG&A vs. EBITDA Performance*
+                                    @*Overall SG&A Performance: @SessionData.Instance.BenchmarkCompany.Name vs. Peers*@
+                                    <a class="mobileFilter pull-right visible-xs" href="#FiltersMobile">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </a>
+                                </h2>
+                                <div class="PDFtopLine">
+                                    <div class="filled"></div>
+                                </div>
+
+                                <div style="padding: 0px 20px" class="size13 bold h2Blue" id="divPerformanceChartSummaryLine">
+                                </div>
+
+                                <hr>
+                            </div>
+
+                            <aside class="padding20 paddingTop0 mobileHide" id="FiltersMobile">
+                                <div class="container">
+                                    <div class="legend-div" style="margin-bottom: 5px;">
+                                        <span>
+                                            <img src="/Content/Images/lc1.jpg" /> @SessionData.Instance.BenchmarkCompany.DisplayName
+                                        </span>
+                                        <span><img src="/Content/Images/l3.jpg" /> Top Quartile</span>
+                                        <span><img src="/Content/Images/l4.jpg" /> Median</span>
+                                        <span><img src="/Content/Images/l9.jpg" /> Vital Peers</span>
+                                    </div>
+                                    <!--<div id="divChartSGAPermance" style="width: 1050px; height: 400px; background-color: #FFFFFF;"></div>-->
+
+                                    <div class="floatingChart" style="height: 550px; padding-top: 30px;">
+                                        <div class="mainChart">
+                                            <div class="blueGrid g1"></div>
+                                            <div class="blueGrid g2"></div>
+                                            <div class="greenGrid g3"></div>
+                                            <div class="greenGrid g4"></div>
+                                            <div class="leftLabel">
+                                                <span class="l1">
+                                                    <span class="labeltext">1.0</span>
+                                                </span>
+                                                <span class="l2">
+                                                    <span class="labeltext">0.9</span>
+                                                </span>
+                                                <span class="l3">
+                                                    <span class="labeltext">0.8</span>
+                                                </span>
+                                                <span class="l4">
+                                                    <span class="labeltext">0.7</span>
+                                                </span>
+                                                <span class="l5">
+                                                    <span class="labeltext">0.6</span>
+                                                </span>
+                                                <span class="l6">
+                                                    <span class="labeltext">0.5</span>
+                                                </span>
+                                                <span class="l7">
+                                                    <span class="labeltext">0.4</span>
+                                                </span>
+                                                <span class="l8">
+                                                    <span class="labeltext">0.3</span>
+                                                </span>
+                                                <span class="l9">
+                                                    <span class="labeltext">0.2</span>
+                                                </span>
+                                                <span class="l10">
+                                                    <span class="labeltext">0.1</span>
+                                                </span>
+                                                <span class="l00">
+                                                    <span class="labeltext">0</span>
+                                                </span>
+                                            </div>
+                                            <div class="bottomLabel">
+                                                <span class="b1">
+                                                    <span class="labeltext">0.1</span>
+                                                </span>
+                                                <span class="b2">
+                                                    <span class="labeltext">0.2</span>
+                                                </span>
+                                                <span class="b3">
+                                                    <span class="labeltext">0.3</span>
+                                                </span>
+                                                <span class="b4">
+                                                    <span class="labeltext">0.4</span>
+                                                </span>
+                                                <span class="b5">
+                                                    <span class="labeltext">0.5</span>
+                                                </span>
+                                                <span class="b6">
+                                                    <span class="labeltext">0.6</span>
+                                                </span>
+                                                <span class="b7">
+                                                    <span class="labeltext">0.7</span>
+                                                </span>
+                                                <span class="b8">
+                                                    <span class="labeltext">0.8</span>
+                                                </span>
+                                                <span class="b9">
+                                                    <span class="labeltext">0.9</span>
+                                                </span>
+                                                <span class="b10">
+                                                    <span class="labeltext">1.0</span>
+                                                </span>
+                                            </div>
+                                            <!--<span class="circularLabel"></span>-->
+                                            @*<span class="highlightedSection"></span>*@
+                                            <div id="divPerformanceChartId">
+                                            </div>
+                                            <!--<span class="dots d1">test data</span>
+                                            <span class="dots d1">test data</span>
+                                            <span class="dots d2">test data</span>-->
+                                        </div>
+                                        <span class="leftCaption">EBITDA Score</span>
+                                        <span class="bottomCaption">SG&A Score</span>
+                                    </div>
+                                </div>
+                                <div style="font-size: small; margin-bottom: -10px; padding-bottom: 0px; padding-top: 10px;">
+                                    EBITDA Score: is a percentile ranking score based on the EBITDA Margin (%) for all the selected peers, higher the EBITDA Margin, better the EBITDA Score.<br />
+                                    SG&A Score: is a percentile ranking score based on the SG&A Margin (%) for all the selected peers, lower the SG&A Margin, better the SG&A Score.
+                                </div>
+                            </aside>
+                            <div class="pdf-footer-top">* Financial Data Sourced from SEC Edgar DB</div>
+                        </div>
+
+                        <div class="pdf-footer-top"></div>
+                        <div class="pdf-footer generatePDFFooter">
+                            <span class="footerLeftContent"></span>
+                            <span class="footerCenterPageNo">3</span>
+                            <span class="waterMark">
+                                <img src="~/PeerAmidContent/images/PeerAMid-logo.png" />
+                            </span>
+                        </div>
+                    </section>
+                </div>
+            </aside>
+        </section>
+        <!-- SG&A Decomposed Functional Costs and FTE Analysis -->
+        <section class="paddingTop20" style="max-width: 1200px;">
+            <!--FunctionalCost chart-->
+            <aside class="row">
+                <div class="col-sm-12 paddingBottom20">
+                    <section class="whiteBox ">
+                        <div id="page13">
+                            <div class="pdfHeaderSectionOther">
+                                <div class="sideNavFixed"></div>
+                                <h2 class="size16  h2Blue bold padding20">
+                                    SG&A Decomposed Functional Costs and FTE Analysis*
+                                    @*Decomposed Function Costs and FTEs per Billion of Revenue - Peer Group Comparison**@
+                                    <a class="mobileFilter pull-right visible-xs" href="#FiltersMobile">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </a>
+                                </h2>
+                                <div class="PDFtopLine">
+                                    <div class="filled"></div>
+                                </div>
+
+                                <div style="padding: 0px 20px" class="size13 bold h2Blue" id="divFunctionalCostSummary">
+                                </div>
+
+                                <hr>
+                            </div>
+                            <aside class="padding20 paddingTop0 mobileHide" id="FiltersMobile">
+                                <div class="container">
+                                    <div class="legend-div">
+                                        <span>
+                                            <img src="/Content/Images/l1.jpg"> @SessionData.Instance.BenchmarkCompany.DisplayName
+                                        </span>
+                                        <span><img src="/Content/Images/l2.jpg"> Median</span>
+                                        <span><img src="/Content/Images/l5.jpg"> Top Quartile</span>
+                                    </div>
+
+                                    <div>
+                                        <!--FTEs per Billion Revenue-->
+                                        <section class="row  text-center pt-3 minNightGrey">
+                                            <div class="col-sm-6">
+                                                <aside class="row">
+                                                    <section class="col-sm-4">
+                                                        &nbsp;
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <strong>Functional Cost % Revenue</strong>
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <strong>FTEs per Billion Revenue</strong>
+                                                    </section>
+                                                </aside>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <aside class="row">
+                                                    <section class="col-sm-4">
+                                                        &nbsp;
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <strong>Functional Cost % Revenue</strong>
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <strong>FTEs per Billion Revenue</strong>
+                                                    </section>
+                                                </aside>
+                                            </div>
+                                        </section>
+
+                                        <section class="row">
+                                            <div class="col-sm-6">
+                                                <aside class="row">
+                                                    <section class="col-sm-4 paddingR0">
+                                                        <div class="comRevHead size14  BGGreySlate blue line43">Finance</div>
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <div class="commonRevenueChart" id="divFunCostFinanceChart"></div>
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <div class="commonRevenueChart" id="divFTEFinanceChart"></div>
+                                                    </section>
+                                                </aside>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <aside class="row">
+                                                    <section class="col-sm-4 paddingR0">
+                                                        <div class="comRevHead size14  BGGreySlate blue line43">Sales</div>
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <div class="commonRevenueChart" id="divFunCostSalesChart"></div>
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <div class="commonRevenueChart" id="divFTESalesChart"></div>
+                                                    </section>
+                                                </aside>
+                                            </div>
+                                        </section>
+
+                                        <section class="row">
+                                            <div class="col-sm-6">
+                                                <aside class="row">
+                                                    <section class="col-sm-4 paddingR0">
+                                                        <div class="comRevHead size14  BGGreySlate blue line43">HR</div>
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <div class="commonRevenueChart" id="divFunCostHRChart"></div>
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <div class="commonRevenueChart" id="divFTEHRChart"></div>
+                                                    </section>
+                                                </aside>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <aside class="row">
+                                                    <section class="col-sm-4 paddingR0">
+                                                        <div class="comRevHead size14  BGGreySlate blue line43">Marketing</div>
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <div class="commonRevenueChart" id="divFunCostMarketChart"></div>
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <div class="commonRevenueChart" id="divFTEMarketChart"></div>
+                                                    </section>
+                                                </aside>
+                                            </div>
+                                        </section>
+
+                                        <section class="row">
+                                            <div class="col-sm-6">
+                                                <aside class="row">
+                                                    <section class="col-sm-4 paddingR0">
+                                                        <div class="comRevHead size14  BGGreySlate blue line43">IT</div>
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <div class="commonRevenueChart" id="divFunCostITChart"></div>
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <div class="commonRevenueChart" id="divFTEITChart"></div>
+                                                    </section>
+                                                </aside>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <aside class="row">
+                                                    <section class="col-sm-4 paddingR0">
+                                                        <div class="comRevHead size14  BGGreySlate blue line43">Customer Service</div>
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <div class="commonRevenueChart" id="divFunCostCustServChart"></div>
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <div class="commonRevenueChart" id="divFTECustServChart"></div>
+                                                    </section>
+                                                </aside>
+                                            </div>
+                                        </section>
+
+                                        <section class="row">
+                                            <div class="col-sm-6">
+                                                <aside class="row">
+                                                    <section class="col-sm-4 paddingR0">
+                                                        <div class="comRevHead size14  BGGreySlate blue line43">Procurement</div>
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <div class="commonRevenueChart" id="divFunCostProcurementChart"></div>
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <div class="commonRevenueChart" id="divFTEProcurementChart"></div>
+                                                    </section>
+                                                </aside>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <aside class="row">
+                                                    <section class="col-sm-4 paddingR0">
+                                                        <div class="comRevHead size14 BGGreySlate blue line43">Corporate Support</div>
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <div class="commonRevenueChart" id="divFunCostCSSupportServChart"></div>
+                                                    </section>
+                                                    <section class="col-sm-4">
+                                                        <div class="commonRevenueChart" id="divFTECSSupportServChart"></div>
+                                                    </section>
+                                                </aside>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </aside>
+                            <div class="pdf-footer-top">* SG&A top down model is A&M’s proprietary methodology for modeling benchmark company and peers' data</div>
+                        </div>
+                        <div class="pdf-footer-top"></div>
+                        <div class="pdf-footer generatePDFFooter">
+                            <span class="footerLeftContent"></span>
+                            <span class="footerCenterPageNo">4</span>
+                            <span class="waterMark">
+                                <img src="~/PeerAmidContent/images/PeerAMid-logo.png" />
+                            </span>
+                        </div>
+                    </section>
+                </div>
+            </aside>
+        </section>
+        <!-- Estimated Opportunity Waterfall -->
+        <section class="paddingTop20" style="max-width: 1200px;">
+
+            <aside class="row">
+                <!--WaterfallSummary chart-->
+                <div class="col-sm-12 paddingBottom20">
+                    <section class="whiteBox">
+                        <div id="page12">
+
+                            <div class="pdfHeaderSectionOther">
+                                <div class="sideNavFixed"></div>
+                                <h2 class="size16  h2Blue bold padding20">
+                                    @SessionData.Instance.BenchmarkCompany.DisplayName Estimated Opportunity Waterfall*
+
+                                    <a class="mobileFilter pull-right visible-xs" href="#FiltersMobile">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </a>
+                                </h2>
+                                <div class="PDFtopLine">
+                                    <div class="filled"></div>
+                                </div>
+
+                                <div style="padding: 0px 20px" class="size13 bold h2Blue" id="divWaterfallSummary">
+                                    <!--The top quartile SG&A cost reduction opportunity waterfall indicates the overall opportunity of $84Mn, the 80% of the opportunity comes from Marketing, IT, Sales and Finance.-->
+                                </div>
+
+                                <hr>
+                            </div>
+                            @*<div style="text-align:center" class="size13 bold minNightBlue">
+                                    <b>Note: All Data in $ Mn</b>
+                                </div>*@
+                            <aside class="padding20 paddingTop0 mobileHide" id="FiltersMobile" style="padding-left: 0px !important;">
+                                <div class="paddingBottom20 text-center container" style="padding-left: 0px !important;">
+                                    <div id="divMedianAndBestInClass" class="row">
+                                        <div id="div_P_DecOpprtunityWaterfallChartMedian" class="col-sm-6 padding0">
+                                            <div id="divDecOpprtunityWaterfallChartMedian" style="height: 600px; width: 100%;"></div>
+                                        </div>
+                                        <div id="div_P_DecOpprtunityWaterfallChartBestInClass" class="col-sm-6 padding0">
+                                            <div id="divDecOpprtunityWaterfallChartBestInClass" style="height: 600px; width: 100%;">
+                                            </div>
+                                        </div>
+                                        <div id="div_P_DecOpprtunityWaterfallTopDecile" class="col-sm-6 padding0">
+                                            <div id="divDecOpprtunityWaterfallTopDecile" style="height: 600px; width: 100%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </aside>
+                            <div class="pdf-footer-top">* Financial Data Sourced from SEC Edgar DB</div>
+                        </div>
+
+                        <div class="pdf-footer-top"></div>
+                        <div class="pdf-footer generatePDFFooter">
+                            <span class="footerLeftContent"></span>
+                            <span class="footerCenterPageNo">5</span>
+                            <span class="waterMark">
+                                <img src="~/PeerAmidContent/images/PeerAMid-logo.png" />
+                            </span>
+                        </div>
+                    </section>
+                </div>
+            </aside>
+        </section>
+    }
+</div>
+
+
+@*
+    <script src="~/Scripts/pageState.js"></script>
+    <script src="~/Scripts/chevrons.js"></script>*@
+<script src="~/PeerAmidContent/charts/Demographics.js"></script>
+<script src="~/PeerAmidContent/charts/SGA.js"></script>
+<script src="~/PeerAmidContent/charts/SGAPerformance.js"></script>
+<script src="~/PeerAmidContent/charts/FunCostAsPercentOfRevenue.js"></script>
+<script src="~/PeerAmidContent/charts/Waterfall.js"></script>
+<script src="~/PeerAmidContent/js/PreviewAnalysisPage.js"></script>

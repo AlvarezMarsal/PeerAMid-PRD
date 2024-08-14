@@ -1,0 +1,303 @@
+﻿@using PeerAMid.Support
+@using PeerAMid.Utility
+@{
+    ViewBag.Title = "AboutUs";
+    Layout = "~/Views/Shared/_PeerAMidLayout.cshtml";
+    const string email = "\"<a target='_top' class='anchor-underline' href='mailto:insightcenter%40alvarezandmarsal.com'>insightcenter@alvarezandmarsal.com</a>\"";
+}
+
+<style>
+
+    .column-1-of-9 {
+        position: relative;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 0;
+        flex: 0 0 auto;
+        width: 11.1111%;
+    }
+
+    .column-0275 {
+        position: relative;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 0;
+        flex: 0 0 auto;
+        width: 2.75%;
+    }
+
+    .column-1050 {
+        position: relative;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 0;
+        flex: 0 0 auto;
+        width: 10.50%;
+    }
+
+    td.fitwidth {
+        width: 1px;
+        white-space: nowrap;
+        padding-left: 2.5em;
+    }
+</style>
+
+<link rel="stylesheet" href="~/Scripts/kendo/styles/kendo.common.min.css" />
+<link rel="stylesheet" href="~/Scripts/kendo/styles/kendo.default.min.css" />
+
+<style>
+    .k-grid-header .k-header {
+        background-color: black;
+    }
+
+    .k-grid-header th.k-header {
+        color: white;
+    }
+
+    .k-grid-header .k-column-title {
+        color: white;
+    }
+
+    .suggestedCompanyRow {
+        background-color: #77CA00;
+    }
+
+    .userSelectedRow {
+        background-color: #E8D218;
+    }
+
+    .k-grid .k-grid-content {
+        max-height: 400px;
+    }
+
+    .k-grid td {
+        white-space: nowrap;
+    }
+
+    .k-grid-header .k-i-sort-asc-sm, .k-grid-header .k-i-sort-desc-sm, .k-grid-header .k-sort-order {
+        color: lightblue;
+    }
+</style>
+
+<script src="~/Scripts/kendo/js/kendo.all.min.js"></script>
+
+<!-- Modal for alert and for displaying messages in popup-->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!--
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="divHeaderMessage">Alert!</h4>
+            </div>
+            -->
+            <div class="modal-body">
+                <p id="divMessage">Some text in the modal.</p>
+            </div>
+            <div class="modal-footer hide">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="btnText">Ok</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnText2" style="display:none;">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+
+<!--identification of companies for benchmark -->
+<div class="container-fluid">
+
+    <section class="row">
+        <aside class="col-sm-1 mt-3">
+            <form>
+                <div class="form-group" style="min-width: 300px">
+                    <label for="selectedRegions" class="size11">Regions <i class="fas fa-info-circle text-secondary" title="Select which regions to search for peers." data-toggle="tooltip"></i></label>
+                    <!-- input box for Search by company name -->
+                    <select id="selectedRegions" multiple="multiple" class="form-control" data-actions-box="true">
+                    </select>
+                </div>
+            </form>
+        </aside>
+    </section>
+
+    <section class="row">
+        <aside class="col-sm-3 pt-3 py-2" style="max-width: 400px;">
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputCompany" class="size11">Company Name <i class="fas fa-info-circle text-secondary" title="Search by company name. For example, you can type 'Microsoft' to return 'Microsoft Corporation.'" data-toggle="tooltip"></i></label>
+                    <!-- input box for Search by company name --> <input type="text" class="form-control" maxlength="100" autocomplete="off" id="exampleInputCompany" aria-describedby="emailHelp" style="text-transform: uppercase;">
+                </div>
+            </form>
+        </aside>
+        <span class="align-self-center justify-content-center">or</span>
+        <aside class="col-sm-3 pt-3 py-2" style="max-width: 250px;">
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputTicker" class="size11">Ticker <i class="fas fa-info-circle text-secondary" title="Search by ticker name. For example, you can type 'MSFT' to return 'Microsoft Corporation.' Please do not include the exchange title (NASDAQ)." data-toggle="tooltip"></i></label>
+                    <!-- input box for Search by Ticker --> <input type="text" class="form-control" maxlength="30" autocomplete="off" id="exampleInputTicker" style="text-transform: uppercase;">
+                </div>
+            </form>
+        </aside>
+        <aside class="col-sm-1 pt-4 mt-3 text-center">
+            <button type="button" class="btn btn-secondary" onClick="navigateToSearchResult();" id="SearchButton">Search</button>
+        </aside>
+        <aside class="col-sm-4 pt-3 py-2">
+            <form id="allowAddNewCompany" style="display: none">
+                <div class="alert alert-warning mt-4" role="alert" style="height: 37px; margin-right: -6px; padding: .60rem 1.25rem; white-space: nowrap;">
+                    Didn't find the Company?
+                    <a href="/PeerAMid/AddNewCompany" class="text-yellow anchor-underline">
+                        <strong>Click here</strong>
+                    </a> to add a new company.
+                </div>
+            </form>
+            <form id="teaseAddNewCompany" style="display: none">
+                <div class="alert alert-warning mt-4" role="alert" style="height: 37px; margin-right: -6px; padding: .60rem 1.25rem; white-space: nowrap;">
+                    Didn't find the Company?
+                    <a href="#" onclick="bAlert(`This functionality is not currently available in our SG&A Cost High Level service. To add a public target company, modify public target company data, or a public peer company please contact us at ${@email}.`);" class="text-yellow">
+                        <strong style="text-decoration: underline">Click here</strong>
+                    </a> to add a new company.
+                </div>
+            </form>
+        </aside>
+    </section>
+</div>
+<!--company search list-->
+<div id="companySearch" style="display: none">
+    <header class="border-bottom px-3 py-2 bg-light size14" style="border-top: 2px solid rgba(52, 58, 64, 0.2); box-shadow: 0px -3px 10px rgba(0, 0, 0, 0.05);">
+        <strong>Please select your “Benchmark Client” company from the following list:</strong>
+        <input type="hidden" id="hdnCompanyId" value="@SessionData.Instance.BenchmarkCompany.Id" />
+        <input type="hidden" id="hdnCompanyYear" value="@SessionData.Instance.BenchmarkCompany.FinancialYear" />
+    </header>
+
+    <div class="container-fluid">
+        <section class="mt-3 mb-2" style="max-width: 1100px;">
+            <div id="table1"></div>
+        </section>
+    </div>
+</div>
+<!--Selection option of company-->
+<div id="companySelectionOption" style="border-top: 2px solid rgba(52, 58, 64, 0.2); box-shadow: 0px -3px 10px rgba(0, 0, 0, 0.05); display: none;">
+    <header class="container-fluid py-2 bg-light">
+        <strong class="size14" id="txtCompanyName"></strong>
+    </header>
+    <div class="container-fluid border-bottom  bg-light">
+
+        <table style="width: 100%" class="size14">
+            <tr>
+                <td width="1px"></td>
+                <td class="fitwidth">
+                    <label class="size11">Fiscal Year</label>
+                </td>
+                <td class="fitwidth">
+                    <label class="size11">Reporting Currency</label>
+                </td>
+                <td class="fitwidth">
+                    <label class="size11">Converted Currency</label>
+                </td>
+                <td class="fitwidth">
+                    <label class="size11">Ex. Rate to USD</label>
+                </td>
+                <td class="fitwidth">
+                    <label class="size11">Revenue (in US$ MM) </label>
+                </td>
+                <td class="fitwidth">
+                    <label class="size11">EBITDA Margin (in %)</label>
+                </td>
+                <td class="fitwidth">
+                    <label class="size11">SG&amp;A Expense (in US$ MM)</label>
+                </td>
+                <td class="fitwidth">
+                    <label class="size11">Gross Margin (in %)</label>
+                </td>
+                <td class="fitwidth">
+                    <label class="size11">Total Employees</label>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="fitwidth">
+                    <strong class="size14" id="txtFiscalYear"></strong>
+                </td>
+                <td class="fitwidth">
+                    <strong class="size14" id="txtCurrency1"></strong>
+                </td>
+                <td class="fitwidth">
+                    <strong class="size14" id="txtCurrency2"></strong>
+                </td>
+                <td class="fitwidth">
+                    <strong class="size14" id="txtExRate"></strong>
+                </td>
+                <td class="fitwidth">
+                    <strong class="size14" id="txtRevenue"></strong>
+                </td>
+                <td class="fitwidth">
+                    <strong class="size14" id="txtEBITDA"></strong>
+                </td>
+                <td class="fitwidth">
+                    <strong class="size14" id="txtExpense"></strong>
+                </td>
+                <td class="fitwidth">
+                    <strong class="size14" id="txtGrossMargin"></strong>
+                </td>
+                <td class="fitwidth">
+                    <strong class="size14" id="txtTotalEmployees"></strong>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <!--Select options below to use the listed data-->
+    <div class="container-fluid">
+        <section class="pt-3 mb-2 pb-2">
+            <div class="size14 pb-3 text-primary">
+                <strong>Do you want to use the data listed above? Please select one of the available options below: </strong>
+            </div>
+            @{
+                // Display data option 2 unless the SG&A High Level Cost diagnostic is chosen (PEER-2)
+                // var displayProperty = string.Empty;
+                // if (SessionData.SelectedService.IsWCD())
+                {
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="radio" value="4" name="option" class="PeerA" checked style="margin-top: 3px;" id="PeerSelectionMode1" />
+                                </td>
+                                <td>
+                                    <span style="padding-left: 5px;">Allow PeerAMid to identify possible peer companies.</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="radio" value="5" name="option" class="PeerS" style="margin-top: 3px;" id="PeerSelectionMode2" />
+                                </td>
+                                <td>
+                                    <span style="padding-bottom: 0px; padding-left: 5px;">I will select my peer companies.</span>
+                                </td>
+                            </tr>
+                            @if (SessionData.Instance.SelectedService != PeerAMidService.SgaShort)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="radio" value="3" name="option" style="margin-top: 3px;" id="PeerSelectionMode3" />
+                                    </td>
+                                    <td>
+                                        <span style="padding-bottom: 0; padding-left: 5px;">I will provide the latest client data.</span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            }
+            <section class="border-top py-2">
+                <button type="button" class="btn btn-secondary" onClick="navigateURL(event);" id="NextButton" style="color:darkgray">Next</button>
+            </section>
+        </section>
+    </div>
+</div>
+
+<script src="~/Scripts/companyGrid.js"></script>
+@*<script src="~/Scripts/chevrons.js"></script>*@
+<script src="~/PeerAmidContent/js/BenchmarkCompanySearchPage.js"></script>

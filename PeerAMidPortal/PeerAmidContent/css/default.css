@@ -1,0 +1,442 @@
+body {
+    color: #666666;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.75rem;
+    padding-bottom: 40px;
+}
+
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+a:hover {
+    text-decoration: underline
+}
+
+label {
+    margin-bottom: .3rem
+}
+
+.navbar {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 0 1rem;
+}
+
+.navbar-brand {
+    background: #fff;
+    font-size: inherit;
+    margin-left: -10px;
+    padding: 0.7rem 20px 0.7rem 0.7rem;
+    position: relative
+}
+
+    .navbar-brand:before {
+        background: #fff;
+        content: "";
+        display: block;
+        height: 100%;
+        left: -10px;
+        position: absolute;
+        top: 0;
+        width: 10px;
+    }
+
+.nav-link {
+    padding: 1rem 2rem;
+    transition: all 300ms ease-in-out
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.f {
+    bottom: 0;
+    height: 30px;
+    line-height: 30px;
+    position: absolute;
+    width: 100%;
+}
+
+.form-control, .btn {
+    font-size: 0.75rem
+}
+
+    .form-control, .form-control:focus {
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2) inset
+    }
+
+.custom-select.form-control, .custom-select.form-control:focus {
+    box-shadow: none
+}
+
+.table td, .table th {
+    border-bottom: 1px solid #f6f6f6;
+    border-top: 0;
+}
+
+.page-link {
+    border: 0;
+    border-radius: 3px;
+    color: #292e3d;
+    margin-left: .5rem;
+    padding: .25rem .5rem;
+}
+
+.page-item.disabled .page-link {
+    border-color: #fff
+}
+
+.page-item.active .page-link {
+    background-color: #0085ca
+}
+
+table.dataTable {
+    border-bottom: 1px solid #eeeeee;
+}
+
+    table.dataTable tbody tr.selected {
+        background: #f8fcf2;
+    }
+
+        table.dataTable tbody tr.selected.user {
+            background: #fefdf3;
+        }
+
+    table.dataTable tbody tr > td:first-child {
+        border-left: 3px solid transparent
+    }
+
+    table.dataTable tbody tr.selected > td:first-child {
+        border-left: 3px solid #77ca00
+    }
+
+    table.dataTable tbody tr.selected.user > td:first-child {
+        border-left: 3px solid #e8d218
+    }
+
+.tooltip.in {
+    opacity: 0.9
+}
+
+.tooltip.top .tooltip-arrow {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #000;
+    bottom: -5px;
+    height: 0;
+    left: 50%;
+    position: absolute;
+    width: 0;
+}
+
+.legend {
+    bottom: 5px;
+    left: 0;
+}
+
+
+
+.bg-dark {
+    background: #292e3d
+}
+
+.btn { /*text-transform: uppercase; */
+    font-weight: bold;
+    padding: .5rem 1.2rem;
+}
+
+.size11 {
+    font-size: 0.70rem
+}
+
+.size14 {
+    font-size: 0.88rem
+}
+
+.size16 {
+    font-size: 1rem
+}
+
+.text-yellow, .text-yellow:hover {
+    color: #856404
+}
+
+.anchor-underline {
+    text-decoration: underline
+}
+
+.table-fixed table {
+    width: 100%;
+}
+
+.table-fixed table, td {
+    border-collapse: collapse;
+}
+
+.table-fixed thead {
+    display: table; /* to take the same width as tr */
+    width: calc(100% - 0px); /* - 17px because of the scrollbar width */
+}
+
+.table-fixed tbody {
+    display: block; /* to enable vertical scrolling */
+    max-height: 200px; /* e.g. */
+    overflow-y: auto; /* keeps the scrollbar even if it doesn't need it; display purpose */
+}
+
+.table-fixed th, .table-fixed td {
+    /*width: 16.66%;  to enable "word-break: break-all" */
+    padding: 5px;
+    word-break: break-all; /* 4. */
+}
+
+.table-fixed tr {
+    box-sizing: border-box; /* because of the border (Chrome needs this line, but not FF) */
+    display: table; /* display purpose; th's border */
+    width: 100%;
+}
+
+.table-fixed td {
+    text-align: left;
+    /*border-bottom: none;*/
+}
+
+.table-adjust table {
+    width: 100%;
+}
+
+.table-adjust table, td {
+    border-collapse: collapse;
+}
+
+.table-adjust thead {
+    display: table; /* to take the same width as tr */
+    position: relative;
+    width: calc(100% - 17px); /* - 17px because of the scrollbar width */
+}
+
+    .table-adjust thead:after {
+        background: #343a40;
+        content: "";
+        display: block;
+        height: 98%;
+        position: absolute;
+        right: -17px;
+        top: 0;
+        width: 17px;
+    }
+
+.table-adjust tbody {
+    display: block; /* to enable vertical scrolling */
+    max-height: 200px; /* e.g. */
+    overflow-y: auto; /* keeps the scrollbar even if it doesn't need it; display purpose */
+}
+
+.table-adjust th, .table-adjust td {
+    padding: 5px;
+    width: 25%; /* to enable "word-break: break-all" */
+    word-break: break-all; /* 4. */
+}
+
+.table-adjust tr {
+    box-sizing: border-box; /* because of the border (Chrome needs this line, but not FF) */
+    display: table; /* display purpose; th's border */
+    width: 100%;
+}
+
+.table-adjust td {
+    /*border-bottom: none;*/
+    border-left: 3px solid transparent;
+    text-align: left;
+}
+
+    .table-adjust td:first-child {
+        border-left: 3px solid transparent;
+    }
+
+.table2 tbody tr {
+    background: #fefdf3;
+    border-left: 3px solid #e8d218;
+}
+
+.btn-circle, .btn-circle:hover {
+    border-radius: 15px;
+    font-size: 12px;
+    height: 30px;
+    line-height: 1.428571429;
+    padding: 6px 0;
+    text-align: center;
+    transition: 200ms all ease-in-out;
+    width: 30px;
+}
+
+    .btn-circle:hover {
+        background: #292e3d
+    }
+
+.w-40 {
+    width: 40% !important;
+}
+
+.hr-style {
+    top: 32px;
+}
+
+.noHover {
+    pointer-events: none;
+}
+
+.c {
+    background: #f8fcf2 !important;
+}
+
+    .c > td:first-child {
+        border-left: 3px solid #77ca00 !important;
+    }
+
+    .c > td:first-child {
+        text-align: center;
+        width: calc(5% - 3px);
+    }
+
+.d {
+    background: #FEFDF3 !important;
+}
+
+    .d > td:first-child {
+        border-left: 3px solid #e8d218 !important;
+    }
+
+    .d > td:first-child {
+        text-align: center;
+        width: 5%;
+    }
+
+.c0 > td:first-child {
+    text-align: center;
+}
+
+/* Dispaly a tranparent overlay over disabled page elements */
+
+.dimmed {
+    position: relative;
+}
+
+    .dimmed:after {
+        background: rgba(0, 0, 0, .6);
+        content: " ";
+        display: block;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 100;
+    }
+
+/* 'Select' radio button */
+
+.v-width {
+    width: 4% !important;
+}
+
+/* Company Name */
+
+.v-width2 {
+    width: 20% !important;
+}
+
+th.v-width2 {
+    width: 19.25% !important;
+}
+
+/* Ticker */
+
+.v-width3 {
+    width: 8% !important;
+}
+
+/* Country */
+
+.v-width4 {
+    width: 8% !important;
+}
+
+th.v-width4 {
+    width: 7.125% !important;
+}
+
+/* Industry, Sub Industry */
+
+.v-width5 {
+    width: 21% !important;
+}
+
+th.v-width5 {
+    width: 21% !important;
+}
+
+/* Industry, Sub Industry */
+
+.v-width5a {
+    width: 20% !important;
+}
+
+th.v-width5a {
+    width: 22% !important;
+}
+
+/* Revenue */
+
+.v-width6 {
+    width: 8% !important;
+}
+
+th.v-width6 {
+    width: 6% !important;
+}
+
+/* FY */
+
+.v-width7 {
+    width: 6% !important;
+}
+
+/* Peer Company Grid Spacing */
+
+.spc-col1 {
+    /* Select Checkbox*/
+    width: 10% !important;
+}
+
+.spc-col2 {
+    /* Company Name*/
+    width: 38% !important;
+}
+
+.spc-col3 {
+    /* Ticker */
+    width: 12% !important;
+}
+
+.spc-col4 {
+    /* Country */
+    width: 12% !important;
+}
+
+.spc-col5 {
+    /* Revenue*/
+    width: 19% !important;
+}
+
+.spc-col6 {
+    /* FY */
+    width: 8% !important;
+}
+
+.button-center {
+    margin-top: 92px;
+}

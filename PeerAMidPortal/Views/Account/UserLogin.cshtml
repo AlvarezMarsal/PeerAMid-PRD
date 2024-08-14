@@ -1,0 +1,148 @@
+﻿@{ Layout = "~/Views/Shared/_RegisterLayout.cshtml"; }
+<style>
+    .width-btn49 {
+        width: 49%;
+    }
+
+    .width-btn50 {
+        width: 50%;
+    }
+</style>
+
+<script src="~/Scripts/angular/libs/angular.js"></script>
+<script src="~/Scripts/Js/jquery-1.9.1.min.js"></script>
+<script src="~/Scripts/Js/bootstrap.min.js"></script>
+<script src="~/Scripts/angular/libs/angular-route.js"></script>
+
+@*<script type="text/javascript" src="~/Scripts/angular/libs/ngStorage.min.js"></script>*@
+<script src="~/Scripts/angular/libs/angular-local-storage.min.js"></script>
+
+<div class="login">
+
+    @*<video playsinline="" autoplay muted loop poster="" id="bgvid">
+            <source src="http://supplierriskportal.thesmartcube.com/srpdemo/assets/public/video/satelite.webm" type="video/webm">
+
+             <source src="~/Content/videos/anm-background3.mp4" type="video/mp4">
+        </video>*@
+    <img src="~/Content/Images/buildings-image.png" id="bgvid" />
+    <!--login page-->
+    <div class="n-login-box padding20" ng-app="login">
+        <div class="paddingBottom20 text-center">
+
+            <img src="~/PeerAmidContent/images/PeerAMid-logo.png">
+        </div>
+        <!-- END LOGO -->
+        <!-- BEGIN LOGIN -->
+        <div class="content" ng-controller="AccountController">
+            <!-- BEGIN LOGIN FORM -->
+            <div class="alert alert-danger borderRadius0" role="alert" style="display: none">Error Msg</div>
+            <form id="form_login">
+                <div class="form-group">
+                    <i class="glyphicon glyphicon-user"></i>
+                    <input class="inp w100 size14 padding10" type="email" ng-model="UserName" ng-keypress="$event.keyCode == 13 ? SubmitLogin() : null" autocomplete="off" placeholder="Email" name="email" id="email">
+                </div>
+                <div class="form-group">
+                    <i class="glyphicon glyphicon-lock"></i>
+                    <input class="inp w100 size14 padding10" type="password" ng-model="Password" ng-keypress="$event.keyCode == 13 ? SubmitLogin() : null" autocomplete="off" placeholder="Password" name="password" id="password">
+                </div>
+
+                <div class="row paddingBottom10">
+                    <section class="col-xs-12">
+                        <div class="text-danger paddingLeft15 bold">
+                            {{msg}}
+                        </div>
+                    </section>
+                </div>
+                <div class="form-actions text-center">
+                    <button type="button" id="submit" class="btn btn-blue width-btn50 padding10 bold" ng-keypress="$event.keyCode == 13 ? SubmitLogin() : null" ng-click="SubmitLogin()">Login</button>
+                    <a class="btn btn-default width-btn50 padding10 bold" style="display: none" href="/Account/Register">SignUp</a>
+                </div>
+            </form>
+            <!-- END LOGIN FORM -->
+            <!-- BEGIN FORGOT PASSWORD FORM -->
+            <form class="forget-form" method="post" id="ForgotForm" style="display: none">
+                <h4 class="grey Bold size16">Forgot Password?</h4>
+                <p class="greyLight size13 paddingBottom10"> Enter your e-mail address below to reset your password. </p>
+                <div class="form-group">
+                    <input class="inp w100 size14 padding10" id="emailCheck" type="text" autocomplete="off" placeholder="Email" name="email">
+                </div>
+                <div class="clearbox">
+                    <button type="button" id="back-btn" class="btn btn-default padding10 pull-left">Back</button>
+                    <button type="button" id="btnSubmit" class="btn btn-primary padding10 bold pull-right">Submit</button>
+                </div>
+            </form>
+            <!-- END FORGOT PASSWORD FORM -->
+        </div>
+    </div>
+
+    <!-- 	<div class="container text-center paddingTop30 grey logFoot">
+        <p class="paddingBottom10"><a href="javascript:void(0)" class="grey">Help</a> &nbsp;&nbsp;  &bull; &nbsp; &nbsp; <a href="javascript:void(0)" class="grey">Terms &amp; Conditions</a> &nbsp;&nbsp;  &bull; &nbsp;&nbsp;  <a href="javascript:void(0)" class="grey">Contact</a></p>
+        <p>&copy; 2017 <a href="http://www.thesmartcube.com" target="_blank" class="grey">thesmartcube.com</a>. All Rights Reserved.</p>
+    </div>
+    -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+    <script src="~/Scripts/jquery-1.11.3.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+    <script src="~/Scripts/master.js"></script>
+    <script src="~/Scripts/f4c09a9637.js"></script>
+</div>
+@*</html>*@
+<script type="text/javascript">
+    //Not in use.
+//Creating login module by angular.
+    var applogin = angular.module("login", ["ngRoute"]);
+//Not in use.
+    applogin.config(function($routeProvider) {
+        $routeProvider
+            .when("/Account/Register",
+                {
+                    //templateUrl: "/Account/Register"//,
+                    //controller: "AccountController"
+
+                })
+            .when("/products/:productSku",
+                {
+                    templateUrl: "/BooKart/bookdetail",
+                    controller: "BookListCtrl"
+                })
+            .when("/kart",
+                {
+                    templateUrl: "/BooKart/Second",
+                    controller: "KartListCtrl"
+                })
+            .otherwise({
+                redirectTo: "/books"
+            });
+    });
+//Not in use.
+//Adding colntroller in module via angular.
+    applogin.controller("AccountController",
+        [
+            "$scope", "AcountService", function($scope, acountService) {
+                $scope.SubmitLogin = function() {
+                    const getData = acountService.login($scope.UserName, $scope.Password);
+                    getData.then(function(result) {
+                        if (result.data.UserId <= 0) {
+                            $scope.msg = "Invalid Login Credentials!";
+                        } else {
+
+                            localStorage.setItem('UserId', result.data.UserId);
+                            //localStorage.setItem('userName', 'vOuzTZH04SDfWy0XQ49wSQ');
+
+                            window.location.href = "/PeerAMid/Index";
+                        }
+                    });
+                };
+            }
+        ]);
+//Not in use
+    applogin.service("AcountService",
+        function($http) {
+            this.login = function(username, password, callback) {
+                const response = $http.post("/Account/Login", { username: username, password: password });
+                return response;
+            };
+        });
+</script>

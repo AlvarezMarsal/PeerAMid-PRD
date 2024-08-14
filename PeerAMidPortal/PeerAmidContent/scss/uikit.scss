@@ -1,0 +1,65 @@
+/* Scss Document */
+@import "variables";
+@import "custom-properties";
+@import "buttons";
+@import "text-colors";
+@import "background-colors";
+@import "link-colors";
+@import "alerts";
+@import "typography";
+@import "breadcrumbs";
+@import "badges";
+@import "pagination";
+@import "tables";
+@import "spinners";
+@import "tooltip";
+@import "popovers";
+@import "collapse";
+@import "inputgroup";
+@import "navbar";
+@import "tabs";
+
+
+//$bg-primary-2:desaturate( $primary, 10% );
+
+//.btn-primary {
+//    background: #338e85;
+//    color: #fff;
+//    border-color: transparent;
+//}
+
+//
+//@mixin button($background,$color,$border-color) {
+// 	background: $background;
+//    color: $color;
+//    border-color: $border-color;
+//}
+//
+//.defaultbtn { @include button($primary, #fff, transparent); }
+//.defaultbtn2 { @include button(transparentize($primary,.2), #fff, transparent); }
+//.defaultbtn3 { @include button(transparentize($primary,.4), #fff, transparent); }
+//.defaultbtn4 { @include button(transparentize($primary,.6), #fff, transparent); }
+//
+//
+//$color-collection: (red, orange, green, blue);
+
+//
+//$ids: 21, 33, 73;
+//$colors: #fff, #000, #333;
+//
+//@for $i from 1 through length($color-names) {
+//  $id: nth($color-names, $i);
+//  $c: nth($color-values, $i);
+//    .btn-#{$id} {
+//        background: $c;
+//		color: #fff;
+//		border-color:transparent;
+//		border-radius:0;
+//    }
+//	.btn-#{$id}:hover {
+//        background: transparentize($c,.2);
+//		color: #fff;
+//		border-color:transparent;
+//		border-radius:0;
+//    }
+//}

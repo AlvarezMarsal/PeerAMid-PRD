@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "ContactUs";
+    Layout = "~/Views/Shared/_PeerAMidLayout.cshtml";
+    var email = "<a target='_top' class='anchor-underline' href='mailto:insightcenter%40alvarezandmarsal.com'>insightcenter@alvarezandmarsal.com</a>";
+}
+<style>
+    .black {
+        background-color: rgba(0, 0, 0, 0.75);
+        color: white;
+        font-size: 18px;
+        left: 9%;
+        padding: 3%;
+        position: absolute;
+        top: 29%;
+    }
+
+    .second-text, .first-text {
+        color: white;
+        float: left;
+        font-size: 20px;
+    }
+
+    .second-text { padding-right: 80px; }
+
+    a { color: #95cfec; }
+
+    .far, .fas, .fab { width: 35px }
+</style>
+<img src="~/Content/Images/img23.jpg" style="-moz-transform: translateX(-50%) translateY(-50%); -ms-transform: translateX(-50%) translateY(-50%); -webkit-transform: translateX(-50%) translateY(-50%); background: #000; background-size: cover; height: auto; left: 50%; min-height: 100%; min-width: 100%; position: fixed; top: 50%; transform: translateX(-50%) translateY(-50%); width: auto; z-index: -100;"/>
+<div class="black">
+    <h1>Contact Us</h1>
+    <ul class="second-text">
+        <li> Learn more about our capabilities</li>
+        <li> Inquire about this report</li>
+        <li> Have us speak to your group</li>
+    </ul>
+    <!--Contact us email ids-->
+    <p class="first-text">
+        <i class="far fa-envelope-open"></i><a target="_top" class="anchor-underline" href="mailto:insightcenter%40alvarezandmarsal.com">insightcenter@alvarezandmarsal.com</a><br/>
+        <i class="fas fa-mobile-alt"></i> +1 404 260 4156<br/>
+        <i class="fab fa-internet-explorer"></i> <a href="https://itinfoalvarezandmarsal.sharepoint.com/sites/InsightCenter" target="_blank">Insight Center Website</a>
+    </p>
+</div>

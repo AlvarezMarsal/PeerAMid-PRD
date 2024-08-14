@@ -1,0 +1,69 @@
+/* Scss Document */
+.table{
+	color:$table-light-text-color;
+	/*font-family:$table-font-family;
+	font-size:$table-font-size;*/
+	td, th{
+		padding: $table-padding;
+		border-top: 1px solid $table-border-color;
+		font-weight: 400;
+	}
+	thead th{
+		border-bottom: 1px solid $table-border-color;
+		font-weight: 700;
+	}
+}
+
+.table{
+.thead-dark {
+    th {
+      color: $table-dark-text-color;
+      background-color: $table-dark-head-color;
+	  font-weight: 700;
+    }
+  }
+
+.thead-light {
+    th {
+      color: $table-light-text-color;
+      background-color: $table-light-head-color;
+	  font-weight: 700;
+    }
+  }
+}
+
+.table-dark {
+  color: $table-dark-text-color;
+  background-color: $primary;	
+  }
+
+.table-striped {
+  tbody tr:nth-of-type(#{$table-striped-order}) {
+    background-color: $light5;
+  }
+}
+
+.table-bordered {
+  border: 1px solid $table-border-color;
+
+  th,
+  td {
+    border: 1px solid $table-border-color;
+  }
+
+  thead {
+    th,
+    td {
+      border-bottom-width: (2 * 1px);
+    }
+  }
+}
+
+.table-hover {
+  tbody tr:hover {
+      background-color: $light;
+    }
+}
+
+
+

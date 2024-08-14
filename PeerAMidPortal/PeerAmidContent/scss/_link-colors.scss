@@ -1,0 +1,21 @@
+/* Scss Document */
+a{
+	@each $name,$c in $color {
+		&.text-#{$name}:hover {
+		color: transparentize($c,.2)!important;
+		}
+		&.text-#{$name}2:hover {
+		color: transparentize($c,.4)!important; 
+		}
+		&.text-#{$name}3:hover {
+		color: transparentize($c,.6)!important;
+		}
+		&.text-#{$name}4:hover {
+		color: transparentize($c,.4)!important; 
+		}
+		&.text-#{$name}5:hover {
+		color: transparentize($c,.2)!important; 
+		}
+	}
+}
+

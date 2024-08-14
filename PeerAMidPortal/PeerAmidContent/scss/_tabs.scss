@@ -1,0 +1,41 @@
+/* CSS Document */
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: $tabs_text_color_active;
+    background-color: $tabs_background_color_active;
+    border-color: #dee2e6 #dee2e6 #fff;
+    border-top: 3px solid #4fae9b;
+}
+
+.nav-tabs .nav-link {
+    border-left: 1px solid $light5;
+	border-right: 1px solid $light5;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+	color: $primary;
+	    border-top: 3px solid transparent;
+}
+
+.nav-tabs .nav-link.disabled {
+    color: #6c757d;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+    border-color: #ffffff #e9ecef #ffffff;
+    border-top: 3px solid #00ae9b;
+}
+
+.nav-link.disabled:hover{
+	border-color: transparent transparent transparent;
+    border-top: 3px solid transparent;
+}
+
+.nav-tabs {
+    border-bottom: 3px solid #00ae9b;
+}
+
+.nav-tabs .nav-item {
+    margin-bottom: 0px;
+}

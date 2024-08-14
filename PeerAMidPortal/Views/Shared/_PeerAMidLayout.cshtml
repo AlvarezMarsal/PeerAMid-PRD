@@ -1,0 +1,324 @@
+﻿@using PeerAMid.Support
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width" />
+    <title>PeerAMid</title>
+    <link rel="shortcut icon" href="https://www.alvarezandmarsal.com/sites/default/themes/custom/am/favicon.ico" type="image/vnd.microsoft.icon" />
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+    <!--	css-->
+    <link rel="stylesheet" type="text/css" href="~/PeerAmidContent/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="~/PeerAmidContent/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/PeerAmidContent/css/uikit.css">
+    <link rel="stylesheet" type="text/css" href="~/PeerAmidContent/css/default.css">
+    <link rel="stylesheet" type="text/css" href="~/PeerAmidContent/css/Chevron_v1.css">
+    <link rel="stylesheet" type="text/css" href="~/PeerAmidContent/plugins/multiselect/bootstrap-multiselect.css">
+
+    <script src="~/PeerAmidContent/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/PeerAmidContent/js/popper.min.js"></script>
+    <script src="~/PeerAmidContent/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/PeerAmidContent/js/master.js"></script>
+    <script src="~/PeerAmidContent/js/f4c09a9637.js"></script>
+    <script src="~/PeerAmidContent/plugins/multiselect/bootstrap-multiselect.js"></script>
+    <script src="~/Scripts/fundamentals.js"></script>
+    <script src="~/Scripts/lazydropdown.js"></script>
+
+    <style>
+        .loader-div {
+            background: #000000;
+            background: rgba(0, 0, 0, 0.2);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            /* display: table; */
+            z-index: 9999;
+        }
+
+        .holder {
+            background: white;
+            left: 42%;
+            padding: 21px;
+            position: absolute;
+            text-align: center;
+            top: 45%;
+        }
+
+        .loadText {
+            color: #696969;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .loader {
+            -webkit-animation: spin 1.5s linear infinite;
+            animation: spin 1.5s linear infinite;
+            border: 8px solid #ecf1f3;
+            border-radius: 50%;
+            border-top: 8px solid #3498db;
+            height: 60px;
+            margin: 0 auto;
+            vertical-align: middle;
+            width: 60px;
+        }
+
+        #accordion {
+        }
+
+        .accordion .card-header a:after {
+            content: "\f068";
+            float: right;
+            font-family: 'FontAwesome';
+        }
+
+        .accordion .card-header .collapsed:after {
+            /* symbol for "collapsed" panels */
+            content: "\f067";
+        }
+
+        .card-header {
+            padding: 0;
+        }
+
+        .card-body {
+            height: auto;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        #accordion h5 {
+            margin-bottom: 0;
+            padding: 0;
+        }
+
+        h5.detail a {
+            background: #0085ca;
+            color: white;
+            display: block;
+            font-size: 14px;
+            padding: 10px 15px;
+        }
+
+            h5.detail a:hover {
+                text-decoration: none;
+            }
+
+        .detail {
+        }
+
+        .available-downloads-div {
+            background: white;
+            border: 1px solid #999;
+            position: absolute;
+            top: 60px;
+            width: 100%;
+            z-index: 9998;
+        }
+
+        .available-downloads-text-div {
+            background: white;
+            font-size: 14px;
+            padding: 21px;
+            top: 24px;
+            width: 100%;
+        }
+    </style>
+
+    <style>
+
+        .multiselect-native-select div.btn-group {
+            width: 100%;
+        }
+
+        .multiselect-native-select div button {
+            width: 100%;
+            text-align: left;
+            overflow-x: hidden;
+        }
+
+        .multiselect-native-select div ul {
+            font-size: 12px;
+            min-width: 300px;
+            max-height: 300px;
+            overflow-y: scroll;
+        }
+
+            .multiselect-native-select div ul li a label {
+                color: black;
+                padding-left: 10px;
+                padding-right: 10px;
+                width: 100%;
+                white-space: nowrap;
+            }
+
+                .multiselect-native-select div ul li a label:hover {
+                    background-color: #999999;
+                }
+
+        .multiselect-container input[type=radio] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body style="padding-top: 0;">
+
+    @{
+        var sgaTarget = "Insight_Center_SGA_Diagnostic_Sample_Deliverable.pdf";
+        var sgaSource = "\\PPTTemplate\\" + sgaTarget;
+        var wcTarget = "Insight_Center_Working_Capital_Diagnostic_Sample_Deliverable.pdf";
+        var wcSource = "\\PPTTemplate\\" + wcTarget;
+        //string email = "<a target='_top' class='anchor-underline' href='mailto:insightcenter%40alvarezandmarsal.com'>insightcenter@alvarezandmarsal.com</a>";
+    }
+
+    <div class="loader-div" style="display: none">
+        <div class="available-downloads-div" style="display: none">
+            <div class="available-downloads-text-div">
+                Thank you for using PeerAMid, the Insight Center’s proprietary benchmarking application. We hope you will find the SG&amp;A Cost High Level report helpful. We also offer a full-length
+                <a href="@sgaSource" download="@sgaTarget" class="anchor-underline">SG&amp;A Diagnostic</a>
+                and a
+                <a href="@wcSource" download="@wcTarget" class="anchor-underline">Working Capital Diagnostic</a>.
+                The
+                <a href="@sgaSource" download="@sgaTarget" class="anchor-underline">SG&amp;A Diagnostic</a>
+                includes the content from the SG&amp;A Cost High Level report in addition to SG&amp;A vs EBITDA performance, decomposed functional costs and FTE comparisons, and an SG&A opportunity waterfall by function. The
+                <a href="@wcSource" download="@wcTarget" class="anchor-underline">Working Capital Diagnostic</a>
+                features the traditional DSO, DIO, DPO, CCC metrics in addition to proprietary drivers for liquidity, profitability, leverage, and turnover. For more information, please contact us at
+                <a target="_top" class="anchor-underline" href="mailto:insightcenter%40alvarezandmarsal.com">insightcenter@alvarezandmarsal.com</a>.
+            </div>
+            <div style="text-align: right">
+                <button type="button" onclick="showAdWindow(false)" id="CloseAdWindow">Close</button>
+            </div>
+        </div>
+        <section class="holder">
+            <div class="loader"></div>
+            <div class="loadText">Loading, Please wait....</div>
+        </section>
+    </div>
+
+    @*
+        <input type="hidden" id="optionId" value="@SessionData.Instance.OptionId" />
+        <input type="hidden" id="BenchmarkCompanyId" value="@(SessionData.Instance.BenchmarkCompany.Id ?? "")" />
+        <input type="hidden" id="BenchmarkCompanySymbol" value="@(SessionData.Instance.BenchmarkCompany.Ticker ?? "")" />
+        <input type="hidden" id="peerCompanyList" value="@(SessionData.Instance.FinalPeerCompanies ?? "")" />
+        <input type="hidden" id="benchMarkCompYear" value="@(SessionData.Instance.BenchmarkCompany.FinancialYear)" />
+        <input type="hidden" id="serviceSelection" value="@(SessionData.Instance.SelectedService)" />
+    *@
+    <!-- Main Header starts -->
+    <!-- Menu -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary themeBorderBottom tsc_nav_1" id="navSectionLayout" style="padding: 0px;">
+        <a href="/PeerAMid/index">
+            <img src="~/PeerAmidContent/images/PeerAMid-logo.png">
+        </a>
+        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button> -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown PeerAMid">
+                    <a class="nav-link dropdown-toggle text-white service" href="/PeerAMid/index" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Services </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <!-- Dispay SG&A Diagnostic link based  on user's permissions (PEER-10) -->
+                        <a class="dropdown-item" href="@Url.Action("Search", "PeerAMid", new { ServiceSelection = PeerAMidService.SgaShort })" onclick="selectService(3);">SG&amp;A Cost High Level Diagnostics</a>
+                        @if (SessionData.Instance.User.IsSgaDiagnosticUser)
+                        {
+                            <a class="dropdown-item" href="@Url.Action("Search", "PeerAMid", new { ServiceSelection = PeerAMidService.SgaFull })" onclick="selectService(1);">SG&amp;A Full Functional Diagnostics</a>
+                        }
+                        <!-- Display remaining links -->
+                        <a class="dropdown-item" href="@Url.Action("Search", "PeerAMid", new { ServiceSelection = PeerAMidService.WcdShort })" onclick="selectService(4);">Cash Conversion Cycle Diagnostics</a>
+                        @if (SessionData.WorkingCapitalIsAvailable && SessionData.Instance.User.IsWorkingCapitalUser)
+                        {
+                            <a class="dropdown-item" href="@Url.Action("Search", "PeerAMid", new { ServiceSelection = PeerAMidService.WcdFull })" onclick="selectService(2);">Working Capital Full Diagnostics</a>
+                        }
+                    </div>
+                </li>
+                <li class="nav-item dropdown PeerAMid">
+                    <a class="nav-link text-white dropdown-toggle service" href="#" id="navbarDropdownAboutUs" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About Us</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownAboutUs">
+                        <a class="dropdown-item" href="https://itinfoalvarezandmarsal.sharepoint.com/sites/InsightCenter" target="_blank">A&amp;M Insight Center</a>
+                        <a class="dropdown-item" href="javascript:void(0)">PeerAMid User Guide</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/PeerAMid/ContactUs">Contact Us</a>
+                </li>
+                @if (SessionData.Instance.User.IsAdmin) // PEER-10
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/PeerAMid/ConfigManager">Configuration Manager</a>
+                    </li>
+                }
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-white" href="javascript:void(0)">@SessionData.Instance.User.Name</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/Account/Logout">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Service Description -->
+    <header class="border-bottom px-3 py-1 bg-light size16" style="display: none;">
+        <strong id="ServiceDescription">Service Description</strong>
+    </header>
+
+    <!--Chevrons -->
+    <header class="border-bottom px-3 py-3  size14" id="chevronParent" style="display: none;">
+        <ul class="nav d-flex justify-content-center" id="tabs_1020" style="margin-right: 5px;">
+            <li class="nav-item1" id="chevronCompanySelection">
+                <a class="innovation_tracker_history_nav-link nav-link active-color nav-link1" data-toggle="tab" href="javascript:void(0)" onclick="chevronNavigation('chevronCompanySelection');">
+                    <span class="size12">Step 1</span><br><span class="size14">Company Selection</span>
+                </a>
+            </li>
+            <li class="nav-item1" id="chevronDepartmentCosts">
+                <a class="innovation_tracker_history_nav-link nav-link after-active nav-link1" data-toggle="tab" href="javascript:void(0)" onclick="chevronNavigation('chevronDepartmentCosts');">
+                    <span class="size12">Step 2</span><br><span class="size14">Department Costs & FTE Data Collection</span>
+                </a>
+            </li>
+            <li class="nav-item1" id="chevronPeerCompanySelection">
+                <a class="innovation_tracker_history_nav-link nav-link after-active nav-link1" data-toggle="tab" href="javascript:void(0)" onclick="chevronNavigation('chevronPeerCompanySelection');">
+                    <span class="size12">Step 3</span><br><span class="size14">Peer Company Selection</span>
+                </a>
+            </li>
+            @*
+                <li class="nav-item1" id="chevronConfirm">
+                    <a class="innovation_tracker_history_nav-link nav-link after-active nav-link1" data-toggle="tab" href="javascript:void(0)" onclick="chevronNavigation('chevronConfirm');">
+                        <span class="size12">Step 4</span><br><span class="size14">Confirm & Run Analysis</span>
+                    </a>
+                </li>
+            *@
+            <li class="nav-item1 dropdown" id="lastTab_1020">
+                <a class="innovation_tracker_history_nav-link nav-link after-active nav-link1" href="javascript:void(0)" onclick="chevronNavigation('lastTab_1020');">
+                    <span class="size12">Step 4</span><br><span class="size14">Results</span>
+                </a>
+            </li>
+        </ul>
+    </header>
+
+    <header class="border-bottom px-3 py-2 bg-light size14" id="InstructionsParent" style="display: none;">
+        <strong id="Instructions">Instructions</strong>
+    </header>
+
+    <script src="~/PeerAmidContent/js/common.js"></script>
+    <script src="~/Scripts/sessionData.js"></script>
+    <script src="~/Scripts/globalStaticData.js"></script>
+    <script src="~/Scripts/pageState.js"></script>
+    <script src="~/Scripts/chevrons.js"></script>
+    <script src="~/PeerAmidContent/js/PageLayout.js"></script>
+
+
+    <!-- Main Content starts -->
+    @RenderBody()
+    <!-- Main Content ends -->
+    @*<script src="~/PeerAmidContent/footer.js"></script>*@
+    <!-- footer starts -->
+    <footer class="px-3 border-top f" style="line-height: 29px;">
+        <small style="float: left;">&copy; Copyright @DateTime.Now.Year, Alvarez &amp; Marsal Holdings, LLC. All Rights Reserved.</small>
+        <small style="float: right;">Build @SessionData.BuildNumber @SessionData.BuildConfiguration</small>
+    </footer>
+    <!-- footer ends -->
+
+</body>
+</html>
+
+

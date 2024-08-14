@@ -1,0 +1,16 @@
+/* Scss Document */
+.breadcrumb {
+    padding: .5rem 0;
+    margin-bottom: 1rem;
+    list-style: none;
+	@include background-color-transparent;
+}
+.breadcrumb-item.active {
+    color: $light;	
+}
+
+.breadcrumb-item{
+	a{
+		color: $info;
+	}
+}

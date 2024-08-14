@@ -1,0 +1,20 @@
+/* Scss Document */
+
+@mixin alert($background)
+{
+	background: $background;
+}
+@each $name,$c in $color {
+	.alert-#{$name}{
+		@include alert(transparentize($c,.2));
+		/*@include border-radius-custom;
+		@include border-color-transparent;
+		@include text-color-default;*/
+	}
+}
+
+.alert-link{
+	color:white!important;
+	font-weight: 700;
+}
+

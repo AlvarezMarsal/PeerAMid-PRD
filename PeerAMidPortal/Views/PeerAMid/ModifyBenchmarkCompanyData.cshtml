@@ -1,0 +1,232 @@
+﻿@using PeerAMid.Support
+@using PeerAMid.Utility
+
+@{
+    ViewBag.Title = "AboutUs";
+    Layout = "~/Views/Shared/_PeerAMidLayout.cshtml";
+}
+<script src="~/PeerAmidContent/plugins/datatable/jquery.dataTables.min.js"></script>
+<script src="~/PeerAmidContent/plugins/datatable/dataTables.bootstrap4.min.js"></script>
+
+<header class="border-bottom px-3 py-2 bg-light">
+    <strong class="size14" id="benchmarkCompanyName"></strong>
+</header>
+
+<form id="formCompleteDataByUser">
+    <aside id="CompleteDataByUser">
+        <div class="container-fluid">
+            <section class="mt-2 size14 text-primary" id="PastDataLabel" >
+                Past Data
+            </section>
+            <!--Binding list of companies in table-->
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-hover">
+                <thead class="bg-light border-top" id="TableHeader">
+                    <tr>
+                        <th scope="col">FY</th>
+                        <th scope="col">Currency</th>
+                        <th scope="col">Revenue (in US$ MM)<small></small></th>
+                        <th scope="col">EBITDA Margin <small>(in %)</small></th>
+                        <th scope="col">SG&A Expenses (in US$ MM)<small></small></th>
+                        <th scope="col">Gross Margin <small>(in %)</small></th>
+                    </tr>
+                </thead>
+                <tbody id="companyYearTableBody">
+                    @*
+                        @foreach (var item in Model.CompanyList)
+                        {
+                            <tr>
+                                <td>@item.FinancialYear</td>
+                                <td>@item.DataEntryCurrency</td>
+                                <td>@Convert.ToInt64(item.Revenue).ToString("#,##0")</td>
+                                <td>@string.Format("{0:P}", item.EBITDA)</td>
+                                <td>@Convert.ToInt64(item.Expense).ToString("#,##0")</td>
+                                <td>@string.Format("{0:P}", item.GrossMargin)</td>
+                            </tr>
+                        }*@
+                </tbody>
+            </table>
+            <!--Modify Required Company Level Data -->
+            <div id="reqCompanyLevelData">
+                <section class="mt-2 size14 text-primary">
+                    Required Company Level Data
+                </section>
+                <section class="row mb-2 pb-2">
+                    <aside class="col-sm-3">
+                        <label class="size11">Fiscal Year <i class="fas fa-info-circle text-secondary" title="Select the data year of your business entity data" data-toggle="tooltip"></i></label>
+                        <select id="ddlFiscalYear" name="YearId" class="form-control req notIn">
+                            @*<option value="">Select</option>*@
+                        </select>
+                    </aside>
+                    <aside class="col-sm-2">
+                        <label class="size11">Unit of Measurement <i class="fas fa-info-circle text-secondary" title="Please select Unit of your data" data-toggle="tooltip"></i></label>
+                        <!--Binding units in dropdown -->
+                        <select id="ddlUnitOfMeasurement" name="UnitOfMeasure" class="form-control req">
+                            <option value="Millions" selected="selected">Millions</option>
+                            <option value="Billions">Billions</option>
+                            <option value="Thousands">Thousands</option>
+                            <option value="WholeNumbers">Whole Numbers</option>
+                        </select>
+                    </aside>
+                    <aside class="col-sm-2">
+                        <label class="size11">Currency <i class="fas fa-info-circle text-secondary" title="Select the currency of the data" data-toggle="tooltip"></i></label>
+                        <!--Binding data of currency-->
+                        <select id="ddlCurrency" name="CurrencyId" class="form-control req">
+                            <option value="USD">USD</option>
+                        </select>
+                    </aside>
+                    <aside class="col-sm-2">
+                        <label class="size11">Exchange Rate (to USD) <i class="fas fa-info-circle text-secondary" title="Enter the exchange rate for this currency" data-toggle="tooltip"></i></label>
+                        <!--Binding data of exchange rate-->
+                        <input id="txtExchangeRate" name="ExchangeRate" type="text" maxlength="13" class="form-control req decimal">
+                    </aside>
+                    <aside class="col-sm-3">
+                        <label class="size11">Revenue <i class="fas fa-info-circle text-secondary" title="What is the total annual revenue for your business entity? " data-toggle="tooltip"></i></label>
+                        <input id="txtRevenue" name="Revenue" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.Revenue == null ? "" : Math.Round(Model.CompanyModel.Revenue, 2))"*@ type="text" maxlength="13" class="form-control req decimal">
+                    </aside>
+                </section>
+                <section class="row mb-2 pb-2">
+                    <aside class="col-sm-3">
+                        <label class="size11">EBITDA <i class="fas fa-info-circle text-secondary" title="What is the EBITDA for your business entity? " data-toggle="tooltip"></i></label>
+                        <input id="txtEBITDA" name="EBITDA" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.EBITDA == null ? "" : Math.Round(Model.CompanyModel.EBITDA, 2))"*@ type="text" maxlength="13" class="form-control req negativeDecimal">
+                    </aside>
+                    <aside class="col-sm-3">
+                        <label class="size11">SG&A Expense <i class="fas fa-info-circle text-secondary" title="What is the total annual selling, general, and administrative (SG&A) costs incurred by your business entity? " data-toggle="tooltip"></i></label>
+                        <input id="txtExpense" name="SGA" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.SGA == null ? "" : Math.Round(Model.CompanyModel.SGA, 2))"*@ type="text" maxlength="13" class="form-control req decimal">
+                    </aside>
+                    <aside class="col-sm-3">
+                        <label class="size11">Gross Profit <i class="fas fa-info-circle text-secondary" title="What is the total Gross Profit made by your business entity?" data-toggle="tooltip"></i></label>
+                        <input id="txtGrossMargin" type="text" maxlength="13" name="GrossMargin" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.GrossMargin == null ? "" : Math.Round(Model.CompanyModel.GrossMargin, 2))"*@ class="form-control req negativeDecimal">
+                    </aside>
+                    <aside class="col-sm-3">
+                        <label class="size11">Total Employees <i class="fas fa-info-circle text-secondary" title="What is the number of all employees (temporary, part-time, and full-time) at your business entity?" data-toggle="tooltip"></i></label>
+                        <input id="txtTotalEmployees" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.TotalNumOfEmployee == null ? "" : Model.CompanyModel.TotalNumOfEmployee)"*@ name="TotalNumOfEmployee" maxlength="8" type="text" class="form-control req numeric">
+                        @*<input type="hidden" id="isOptionalDataReq" name="IsOptionalData" value="0" />*@
+                    </aside>
+                </section>
+            </div>
+
+            <!--Inputs for  Functional Department Level Data-->
+            <section class="mt-2 pb-2 mb-2 border-bottom size14 text-primary" id="DepartmentLevelHeader">
+                Functional Department Level Data <i class="fas fa-info-circle text-secondary" title="The functional departmental data comprises:
+                Total functional costs which includes, Labor, Outsourcing, Technology and Other Costs for the in scope staff.
+                FTE – A Full Time Equivalent (“FTE”) is based on a regular work week, typically 40 hours. An employee that works 20 hours a week would be 0.5 FTE.
+                " data-toggle="tooltip"></i>
+            </section>
+            <div id="DepartmentLevelBody">
+                <section class="row mb-2 pb-2">
+                    <aside class="col-sm-6">
+                        <section class="row mb-2">
+                            <div class="col-sm-4 offset-3">Cost </div>
+                            <div class="col-sm-3">FTEs</div>
+                        </section>
+                        <section class="row mb-2">
+                            <div class="col-sm-3 align-self-center">Finance <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Finance function cost, and how many full time equivalents (FTEs) are assigned to the Finance function?" data-toggle="tooltip"></i></div>
+                            <div class="col-sm-4">
+                                <input type="text" id="txtFinanceCost" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.SGACostFinance == null ? "" : Model.CompanyModel.SGACostFinance)"*@ maxlength="13" name="SGACostFinance" class="form-control decimal req">
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="txtFinanceFTE" maxlength="10" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.FTEFinance == null ? "" : Model.CompanyModel.FTEFinance)"*@ name="FTEFinance" class="form-control decimal req">
+                            </div>
+                        </section>
+                        <section class="row mb-2">
+                            <div class="col-sm-3 align-self-center">Human Resource <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Human Resource function cost, and how many full time equivalents (FTEs) are assigned to the Human Resource function?" data-toggle="tooltip"></i></div>
+                            <div class="col-sm-4">
+                                <input type="text" id="txtHumanResourceCost" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.SGACostHumanResources == null ? "" : Model.CompanyModel.SGACostHumanResources)"*@ maxlength="13" name="SGACostHumanResources" class="form-control decimal req">
+                            </div>
+                            <div class="col-sm-4">
+                                <input id="txtHumanResourceFTE" maxlength="10" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.FTEHumanResources == null ? "" : Model.CompanyModel.FTEHumanResources)"*@ type="text" name="FTEHumanResources" class="form-control decimal req">
+                            </div>
+                        </section>
+                        <section class="row mb-2">
+                            <div class="col-sm-3 align-self-center">Info Tech <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Information Technology function cost, and how many full time equivalents (FTEs) are assigned to the Information Technology function?" data-toggle="tooltip"></i></div>
+                            <div class="col-sm-4">
+                                <input id="txtInfoTechCost" maxlength="13" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.SGACostIT == null ? "" : Model.CompanyModel.SGACostIT)"*@ name="SGACostIT" type="text" class="form-control decimal req">
+                            </div>
+                            <div class="col-sm-4">
+                                <input id="txtInfoTechFTE" maxlength="10" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.FTEIT == null ? "" : Model.CompanyModel.FTEIT)"*@ type="text" name="FTEIT" class="form-control decimal req">
+                            </div>
+                        </section>
+                        <section class="row mb-2">
+                            <div class="col-sm-3 align-self-center">Procurement <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Procurement function cost, and how many full time equivalents (FTEs) are assigned to the Procurement function?" data-toggle="tooltip"></i></div>
+                            <div class="col-sm-4">
+                                <input id="txtProcurementCost" maxlength="13" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.SGACostProcurement == null ? "" : Model.CompanyModel.SGACostProcurement)"*@ name="SGACostProcurement" type="text" class="form-control decimal req">
+                            </div>
+                            <div class="col-sm-4">
+                                <input id="txtProcurementFTE" maxlength="10" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.FTEProcurement == null ? "" : Model.CompanyModel.FTEProcurement)"*@ type="text" name="FTEProcurement" class="form-control decimal req">
+                            </div>
+                        </section>
+                    </aside>
+
+                    <aside class="col-sm-6">
+                        <section class="row mb-2">
+                            <div class="col-sm-4 offset-3">Cost </div>
+                            <div class="col-sm-3">FTEs</div>
+                        </section>
+                        <section class="row mb-2">
+                            <div class="col-sm-3 align-self-center">Sales <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Sales function cost, and how many full time equivalents (FTEs) are assigned to the Sales function?" data-toggle="tooltip"></i></div>
+                            <div class="col-sm-4">
+                                <input id="txtSalesCost" maxlength="13" type="text" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.SGACostSales == null ? "" : Model.CompanyModel.SGACostSales)"*@ name="SGACostSales" class="form-control decimal req">
+                            </div>
+                            <div class="col-sm-4">
+                                <input id="txtSalesFTE" maxlength="10" type="text" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.FTESales == null ? "" : Model.CompanyModel.FTESales)"*@ name="FTESales" class="form-control decimal req">
+                            </div>
+                        </section>
+                        <section class="row mb-2">
+                            <div class="col-sm-3 align-self-center">Marketing <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Marketing function cost, and how many full time equivalents (FTEs) are assigned to the Marketing function?" data-toggle="tooltip"></i></div>
+                            <div class="col-sm-4">
+                                <input id="txtMarketingCost" maxlength="13" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.SGACostMarketing == null ? "" : Model.CompanyModel.SGACostMarketing)"*@ type="text" name="SGACostMarketing" class="form-control decimal req">
+                            </div>
+                            <div class="col-sm-4">
+                                <input id="txtMarketingFTE" maxlength="10" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.FTEMarketing == null ? "" : Model.CompanyModel.FTEMarketing)"*@ type="text" name="FTEMarketing" class="form-control decimal req">
+                            </div>
+                        </section>
+                        <section class="row mb-2">
+                            <div class="col-sm-3 align-self-center">Customer Services <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Customer Service function cost, and how many full time equivalents (FTEs) are assigned to the Customer Service function?" data-toggle="tooltip"></i></div>
+                            <div class="col-sm-4">
+                                <input id="txtCustomerServicesCost" maxlength="13" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.SGACostCustomerServices == null ? "" : Model.CompanyModel.SGACostCustomerServices)"*@ type="text" name="SGACostCustomerServices" class="form-control decimal req">
+                            </div>
+                            <div class="col-sm-4">
+                                <input id="txtCustomerServicesFTE" maxlength="10" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.FTECustomerServices == null ? "" : Model.CompanyModel.FTECustomerServices)"*@ type="text" name="FTECustomerServices" class="form-control decimal req">
+                            </div>
+                        </section>
+                        <section class="row mb-2">
+                            <div class="col-sm-3 align-self-center">Corp Services <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Corporate Service function cost, and how many full time equivalents (FTEs) are assigned to the Corporate Service function?" data-toggle="tooltip"></i></div>
+                            <div class="col-sm-4">
+                                <input id="txtCorpServicesCost" maxlength="13" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.SGACostCorporateSupportServices == null ? "" : Model.CompanyModel.SGACostCorporateSupportServices)"*@ type="text" name="SGACostCorporateSupportServices" class="form-control decimal req">
+                            </div>
+                            <div class="col-sm-4">
+                                <input id="txtCorpServicesFTE" maxlength="10" @*value="@(Model.CompanyModel == null ? "" : Model.CompanyModel.FTECorporateSupportServices == null ? "" : Model.CompanyModel.FTECorporateSupportServices)"*@ type="text" name="FTECorporateSupportServices" class="form-control decimal req">
+                            </div>
+                        </section>
+                    </aside>
+                </section>
+            </div>
+            <section class="border-top py-2">
+                <a href="#" onlick="back(); return false;" class="btn btn-outline-secondary ">Back</a>
+                <a href="#" onlick="next(); return false;" class="btn btn-outline-secondary ">Next</a>
+            </section>
+        </div>
+    </aside>
+</form>
+
+<!-- Modal dialog for when it's needed -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" id="myModalHeader">
+                @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                <h4 class="modal-title" id="divHeaderMessage">Alert!</h4>
+            </div>
+            <div class="modal-body">
+                <p id="divMessage">Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnText">Ok</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="btnText2" style="display:none;">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/PeerAmidContent/js/common.js"></script>
+<script src="~/PeerAmidContent/js/BenchmarkCompanyLatestDataPage.js"></script>

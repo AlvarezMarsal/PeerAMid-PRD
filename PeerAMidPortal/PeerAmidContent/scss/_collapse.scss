@@ -1,0 +1,22 @@
+.card{
+	border-radius:$collapse-card-border-radius;
+	border: $collapse-card-border;
+}
+
+.card-header {
+    background-color: $collapse-cardheader-background;
+    border-bottom: $collapse-cardheader-border-bottom;
+}
+
+.btn-link {
+    font-weight: $collapse-cardheader-font-weight;
+    color: $collapse-cardheader-text-color;
+    background-color: transparent;
+}
+
+.btn-link:hover {
+    color: $collapse-cardheader-text-color-hover;
+    text-decoration: underline;
+    background-color: transparent;
+    border-color: transparent;
+}

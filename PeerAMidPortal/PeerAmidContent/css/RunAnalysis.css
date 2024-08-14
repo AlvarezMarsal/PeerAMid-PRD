@@ -1,0 +1,679 @@
+body {
+    min-width: 1024px;
+}
+
+.pdfHide {
+    display: none;
+}
+
+.colorRed {
+    color: #670f00 !important;
+}
+
+.downloadPPTIconDiv {
+    position: absolute;
+    right: 77px;
+    top: 19px;
+}
+
+#btnDownloadPPT {
+    background: transparent;
+    border: 1px solid #5e8ab4;
+    border-radius: 35px;
+    box-shadow: none;
+    color: #5e8ab4;
+    font-size: 19px;
+    height: 35px;
+    padding: 3px;
+    width: 35px;
+}
+
+.paddingTop20 {
+    padding-top: 20px;
+}
+
+.whiteBox {
+    background: #fff;
+    border: 1px solid #dfebf3;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
+}
+
+.pdfHeaderSectionOther {
+    height: 118px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
+    position: relative;
+}
+
+    .pdfHeaderSectionOther .sideNavFixed {
+        background: #5e8ab4;
+        height: 53px;
+        left: 0px;
+        position: absolute;
+        top: 66px;
+        width: 10px;
+    }
+
+.bold {
+    font-weight: bold;
+}
+
+.padding20 {
+    padding: 20px;
+}
+
+.h2Blue {
+    color: rgb(94, 138, 180);
+    padding-bottom: 0 !important;
+}
+
+.size16 {
+    font-size: 16px;
+}
+
+.pdfHeaderSectionOther .PDFtopLine {
+    background: #cedce8;
+    height: 5px;
+    /*width: 90%;*/
+    margin: 20px;
+    margin-top: 10px;
+}
+
+.PDFtopLine .filled {
+    background: #5e8ab4;
+    height: 5px;
+    width: 25%;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.minNightBlue {
+    color: midnightblue;
+}
+
+.starColor {
+    color: rgb(249, 194, 10);
+}
+
+.paddingBottom20 {
+    padding-bottom: 20px;
+}
+
+.paddingTop75 {
+    padding-top: 75px;
+}
+
+#divDemographicChartSection {
+    position: relative;
+}
+
+.pdf-footer-top {
+    color: #002b49;
+    font-weight: bold;
+    padding: 5px 15px;
+}
+
+.pdf-footer-top {
+    color: #002b49;
+    font-weight: bold;
+    padding: 5px 15px;
+}
+
+.generatePDFFooter {
+    border-top: 1px solid #fff !important;
+    height: 43px;
+    overflow: hidden;
+    position: relative;
+}
+
+.footerLeftContent {
+    font-size: 14px;
+    left: 25px;
+    position: absolute;
+    top: 13px;
+}
+
+.pdf-footer-top {
+    color: #002b49;
+    font-weight: bold;
+    padding: 5px 15px;
+}
+
+.pdf-footer {
+    border-top: 1px solid #eee;
+    padding: 10px;
+    text-align: center;
+}
+
+.footerCenterPageNo {
+    display: inline-block;
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+.pdf-footer .waterMark {
+    color: #a0b1b9;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.generatePDFFooter img {
+    /*height: 37px;*/
+    margin-top: -10px;
+    position: absolute;
+    right: 15px;
+}
+
+.starScale {
+    /*-webkit-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.63);*/
+    -moz-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.63);
+    -webkit-print-color-adjust: exact;
+    background: rgb(0, 43, 73);
+    display: inline-block;
+    /*box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.63);*/
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3279ff', endColorstr='#013ba9', GradientType=1);
+    height: 40px;
+    position: relative;
+    width: 850px;
+}
+
+    .starScale .scalePlot {
+        color: rgb(249, 194, 10);
+        display: inline-block;
+        font-size: 16px;
+        line-height: 40px;
+        padding-left: 15px;
+        position: absolute;
+        z-index: 99;
+    }
+
+        .starScale .scalePlot .fas {
+            font-size: 20px;
+            left: -10px;
+            position: absolute;
+            top: 8px;
+        }
+
+    .starScale .scaleDivison {
+        background: transparent;
+        border-right: 2px solid #fff;
+        display: inline-block;
+        float: left;
+        height: inherit;
+        position: relative;
+        width: 25%;
+    }
+
+        .starScale .scaleDivison:last-child {
+            border-right: none
+        }
+
+.scaleDivison .top-left {
+    left: -50px;
+    position: absolute;
+    top: -28px;
+}
+
+.scaleDivison .top-right {
+    position: absolute;
+    right: -50px;
+    top: -28px;
+}
+
+.scaleDivison .bottom-left {
+    bottom: -28px;
+    left: -50px;
+    position: absolute;
+}
+
+.scaleDivison .bottom-right {
+    bottom: -28px;
+    position: absolute;
+    right: -50px;
+}
+
+.scaleDivison .scaleLabel {
+    color: #646464;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    min-width: 100px;
+    text-align: center;
+}
+
+.starScaleWrapper .mainLabel {
+    color: #646464;
+    display: inline-block;
+    float: left;
+    font-size: 13px;
+    line-height: 40px;
+    min-width: 180px;
+    padding-right: 15px;
+    text-align: right;
+}
+
+    .starScaleWrapper .mainLabel.halfLineHeight {
+        line-height: 20px
+    }
+
+.colorRed {
+    color: red !important
+}
+
+.bold {
+    font-weight: bold
+}
+
+.paddingTop100 {
+    padding-top: 100px;
+}
+
+.paddingTop50 {
+    padding-top: 50px;
+}
+
+.paddingTop40 {
+    padding-top: 40px;
+}
+
+.paddingLeft50 {
+    padding-left: 50px;
+}
+
+.paddingLeft75 {
+    padding-left: 75px;
+}
+
+.paddingBottom100 {
+    padding-bottom: 100px;
+}
+
+.paddingBottom50 {
+    padding-bottom: 50px;
+}
+
+.componentLabel {
+    color: red;
+    font-size: 14px;
+    line-height: 25px;
+    padding-left: 25px;
+    position: absolute;
+    right: 125px;
+    top: -10px;
+}
+
+/*.scaleDivison .bottom-left:before,.scaleDivison .bottom-right:before {
+     font-family: FontAwesome;
+    content: "\f0d8";
+    position:absolute;
+    top:-5px;
+    font-size:20px;
+    left:43px;
+}
+
+.scaleDivison .top-left:before,.scaleDivison .top-right:before {
+     font-family: FontAwesome;
+    content: "\f0d7";
+    position:absolute;
+    bottom:-12px;
+    font-size:20px;
+    left:43px;
+}*/
+
+.scaleDivison .top-left:before, .scaleDivison .top-right:before {
+    border-color: rgb(100, 100, 100) transparent transparent transparent;
+    border-style: solid;
+    border-width: 7px 5px 0 5px;
+    bottom: 0;
+    content: " ";
+    height: 0;
+    left: 44px;
+    position: absolute;
+    width: 0;
+}
+
+.scaleDivison .bottom-left:before, .scaleDivison .bottom-right:before {
+    border-color: transparent transparent rgb(100, 100, 100) transparent;
+    border-style: solid;
+    border-width: 0 5px 7px 5px;
+    content: " ";
+    height: 0;
+    left: 43px;
+    position: absolute;
+    top: 5px;
+    width: 0;
+}
+
+.scaleDivison .bottom-left, .scaleDivison .bottom-right {
+    padding-top: 7px;
+}
+
+.scaleDivison .top-left, .scaleDivison .top-right {
+    top: -35px;
+}
+
+.scaleDivison:nth-child(2) .top-left:before, .scaleDivison:nth-child(2) .bottom-left:before {
+    left: 44px;
+}
+
+.paddingR0 {
+    padding-right: 0 !important;
+}
+
+.line43 {
+    line-height: 43px;
+}
+
+.size14 {
+    font-size: 14px;
+}
+
+.comRevHead {
+    border-radius: 10px;
+    color: #000;
+    font-weight: bold;
+    margin: 45px 0 25px 0;
+    min-height: 66px;
+    padding: 10px;
+    /*box-shadow: 5px 4px 3px rgba(0,0,0,0.3);*/
+    text-align: center;
+}
+
+.BGBlue {
+    background: #0077c0;
+}
+
+.BGGreyLight {
+    background: #f7fafc;
+}
+
+.BGWhite {
+    background: #fff;
+}
+
+.BGBlueDark {
+    background: #002060;
+}
+
+.BGGreen {
+    background: #00b050;
+}
+
+.BGYellow {
+    background: #ffc000;
+}
+
+.BGChocolate {
+    background: #993300;
+}
+
+.BGBlueLight {
+    background: #b2f1ff;
+}
+
+.BGBlueLight2 {
+    background: #d3edff;
+}
+
+.BGLavender {
+    background: #decdee;
+}
+
+.BGGreySlate {
+    background: #c3c3c3;
+}
+
+.white, .white:hover {
+    color: #fff;
+}
+
+.floatingChart {
+    border: 0px solid #ccc;
+    height: 600px;
+    padding: 50px 10%;
+    position: relative;
+}
+
+    .floatingChart .mainChart {
+        border-bottom: 1px solid #888;
+        border-left: 1px solid #888;
+        height: 450px;
+        position: relative;
+    }
+
+        .floatingChart .mainChart:after {
+            clear: both;
+            content: "";
+            display: block;
+        }
+
+    .floatingChart .leftLabel {
+        height: inherit;
+        left: -50px;
+        position: absolute;
+        width: 50px;
+    }
+
+        .floatingChart .leftLabel > span {
+            display: block;
+            height: 10%;
+            position: relative;
+        }
+
+            .floatingChart .leftLabel > span:after {
+                background: #000;
+                content: "";
+                height: 1px;
+                position: absolute;
+                right: 0px;
+                top: -1px;
+                width: 5px;
+            }
+
+        .floatingChart .leftLabel span .labeltext {
+            display: inline-block;
+            position: absolute;
+            right: 15px;
+            top: -8px;
+        }
+
+    .floatingChart .bottomLabel {
+        bottom: -50px;
+        height: 50px;
+        position: absolute;
+        width: 100%;
+    }
+
+        .floatingChart .bottomLabel > span {
+            display: inline-block;
+            float: left;
+            padding-top: 10px;
+            position: relative;
+            text-align: right;
+            width: 10%;
+        }
+
+        .floatingChart .bottomLabel span .labeltext {
+            display: inline-block;
+            margin-right: -10px
+        }
+
+        .floatingChart .bottomLabel > span:after {
+            background: #000;
+            content: "";
+            height: 5px;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            width: 1px;
+        }
+
+    .floatingChart .blueGrid {
+        display: inline-block;
+        position: absolute;
+    }
+
+    .floatingChart .greenGrid {
+        display: inline-block;
+        position: absolute;
+    }
+
+    .floatingChart .g1 {
+        border-top: 1px dashed #29702A;
+        bottom: 75%;
+        height: 1px;
+        margin-bottom: -1px;
+        width: 100%;
+    }
+
+    .floatingChart .g3 {
+        border-top: 1px dashed #F9C20A;
+        bottom: 50%;
+        height: 1px;
+        margin-bottom: 0px;
+        width: 100%;
+    }
+
+    .floatingChart .g2 {
+        border-right: 1px dashed #29702A;
+        height: 100%;
+        left: 75%;
+        width: 1px;
+    }
+
+    .floatingChart .g4 {
+        border-right: 1px dashed #F9C20A;
+        height: 100%;
+        left: 50%;
+        width: 1px;
+    }
+
+    .floatingChart .dots {
+        color: rgb(100, 100, 100);
+        display: inline-block;
+        margin-bottom: -8px;
+        margin-left: -8px;
+        padding-left: 20px;
+        position: absolute;
+        white-space: nowrap
+    }
+
+        .floatingChart .dots:before {
+            border-radius: 16px;
+            content: "";
+            height: 16px;
+            left: 0px;
+            position: absolute;
+            width: 16px;
+        }
+
+        .floatingChart .dots.greenDot:before {
+            background: rgb(0, 206, 106); /* Old browsers */
+            /* ReSharper disable once InvalidValue */
+            background: -moz-radial-gradient(center, ellipse cover, rgba(0, 206, 106, 1) 1%, rgba(0, 124, 27, 1) 100%); /* FF3.6-15 */
+            /*background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 206, 106, 1) 1%, rgba(0, 124, 27, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: radial-gradient(ellipse at center, rgba(0, 206, 106, 1) 1%, rgba(0, 124, 27, 1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ce6a', endColorstr='#007c1b', GradientType=1); /* IE6-9 fallback on horizontal gradient */
+        }
+
+        .floatingChart .dots.blueDot:before {
+            background: rgb(136, 56, 201); /* Old browsers */
+            /* ReSharper disable once InvalidValue */
+            background: -moz-radial-gradient(center, ellipse cover, rgba(136, 56, 201, 1) 0%, rgba(75, 33, 119, 1) 100%); /* FF3.6-15 */
+            /* ReSharper disable once InvalidValue */
+            /*background: -webkit-radial-gradient(center, ellipse cover, rgba(136, 56, 201, 1) 0%, rgba(75, 33, 119, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: radial-gradient(ellipse at center, rgba(136, 56, 201, 1) 0%, rgba(75, 33, 119, 1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8838c9', endColorstr='#4b2177', GradientType=1); /* IE6-9 fallback on horizontal gradient */
+        }
+
+        .floatingChart .dots.d1 {
+            bottom: 40%;
+            left: 40%;
+        }
+
+        .floatingChart .dots.d2 {
+            bottom: 30%;
+            left: 20%;
+        }
+
+    .floatingChart .leftCaption {
+        -ms-transform: rotate(-90deg);
+        -webkit-transform: rotate(-90deg);
+        bottom: 50%;
+        color: rgb(100, 100, 100);
+        font-size: 16px;
+        font-weight: bold;
+        left: -30px;
+        position: absolute;
+        transform: rotate(-90deg);
+    }
+
+    .floatingChart .bottomCaption {
+        bottom: 10px;
+        color: rgb(100, 100, 100);
+        font-size: 16px;
+        font-weight: bold;
+        left: 46%;
+        position: absolute;
+    }
+
+    .floatingChart .dots.greenDotPDF:before {
+        background: #5e8ab4
+    }
+
+    .floatingChart .dots.blueDotPDF:before {
+        background: #002B49
+    }
+
+    .floatingChart .circularLabel {
+        border: 2px solid #f7a641;
+        border-radius: 253px;
+        height: 280px;
+        left: 56%;
+        position: absolute;
+        top: -42px;
+        width: 280px;
+    }
+
+    .floatingChart .highlightedSection {
+        background: rgb(237, 240, 239);
+        border: 1px solid rgba(247, 166, 65, 0.3);
+        bottom: 75%;
+        height: 120px;
+        left: 75%;
+        position: absolute;
+        width: 188px;
+    }
+
+.pdfHeaderSectionOther.maxheight {
+    height: 152px;
+}
+
+.legend-div span {
+    color: #646464;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.pull-left {
+    float: left !important;
+}
+
+.size10 {
+    font-size: 10px;
+}
+
+.paddingRight15 {
+    padding-right: 15px;
+}
+
+.minNightGrey {
+    color: #646464;
+}
+

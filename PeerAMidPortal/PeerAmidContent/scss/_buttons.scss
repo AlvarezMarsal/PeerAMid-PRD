@@ -1,0 +1,68 @@
+/* Scss Document */
+
+
+@each $name,$c in $color {
+    .btn-#{$name} {
+		background: $c;
+		border-radius: $button-border-radius;
+		border-color: $button-border-color;
+		color: $button-text-color;
+    }
+	.btn-#{$name}:hover {
+		background: transparentize($c,.2);
+		border-radius: $button-hover-border-radius;
+		border-color: $button-hover-border-color;
+		color: $button-hover-text-color;
+    }
+	
+	.btn-#{$name}:focus {
+		box-shadow: none;
+		outline:0;	
+    }
+	
+	.btn-#{$name}:not(:disabled):not(.disabled).active:focus, 
+	.btn-#{$name}:not(:disabled):not(.disabled):active:focus, 
+	.show>.btn-#{$name}.dropdown-toggle:focus {
+     	box-shadow: none; 
+	}
+	
+	.btn-#{$name}:not(:disabled):not(.disabled).active,
+	.btn-#{$name}:not(:disabled):not(.disabled):active,
+	.show>.btn-#{$name}.dropdown-toggle {
+		background: $c;
+		border-color: $button-border-color;
+		color: $button-text-color;
+}
+	
+	.btn-outline-#{$name} {
+		background: transparent;
+		border-radius: $button-border-radius;
+		border-color: $c;
+		color: $c;
+    }
+	
+	.btn-outline-#{$name}:focus {
+		box-shadow: none;
+		outline:0;	
+    }
+	.btn-outline-#{$name}:hover {
+		background: $c;
+		border-radius: $button-hover-border-radius;
+		border-color: $button-hover-border-color;
+		color: $button-hover-text-color;
+    }
+	.btn-outline-#{$name}:not(:disabled):not(.disabled).active:focus, 
+	.btn-outline-#{$name}:not(:disabled):not(.disabled):active:focus, 
+	.show>.btn-outline-#{$name}.dropdown-toggle:focus {
+     	box-shadow: none; 
+	}
+	
+	.btn-outline-#{$name}:not(:disabled):not(.disabled).active,
+	.btn-outline-#{$name}:not(:disabled):not(.disabled):active,
+	.show>.btn-outline-#{$name}.dropdown-toggle {
+		background: $c;
+		border-color: $button-border-color;
+		color: $button-text-color;
+}
+}
+

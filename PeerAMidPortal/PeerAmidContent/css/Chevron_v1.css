@@ -1,0 +1,90 @@
+﻿ul.nav > li > .innovation_tracker_history_nav-link.active {
+    color: white;
+    height: 64px;
+    margin-right: 8px;
+    padding-left: 46px;
+    /*background-color: rgba(75, 108, 189, 1);*/
+    position: relative;
+    /*width:241px;*/
+}
+
+ul.nav > li:not(:last-child) > .innovation_tracker_history_nav-link::before {
+    border-bottom: 32px solid transparent;
+    border-left: 32px solid white;
+    border-top: 32px solid transparent;
+    content: '';
+    height: 0;
+    left: calc(100% + 7px);
+    position: absolute;
+    top: 0;
+    width: 0;
+    z-index: 1;
+}
+
+ul.nav > li:not(:last-child) > .innovation_tracker_history_nav-link.active:after {
+    /*border-left: 33px solid rgb(75, 108, 189);*/
+    border-bottom: 32px solid transparent;
+    border-top: 32px solid transparent;
+    content: '';
+    height: 64px;
+    left: 99.5%;
+    position: absolute;
+    top: 0;
+    width: 0;
+    z-index: 2;
+}
+
+ul.nav > li:not(:last-child) > .innovation_tracker_history_nav-link:after {
+    /*border-left: 33px solid rgba(75, 108, 189, 0.5);*/
+    border-bottom: 32px solid transparent;
+    border-top: 32px solid transparent;
+    content: '';
+    height: 64px;
+    left: 99.5%;
+    position: absolute;
+    top: 0;
+    width: 0;
+    z-index: 2;
+}
+
+ul.nav > li > .innovation_tracker_history_nav-link {
+    color: white;
+    height: 64px;
+    margin-right: 8px;
+    padding-left: 46px;
+    /*background-color: rgba(75, 108, 189, 0.5);*/
+    position: relative;
+    /*width:241px;*/
+}
+
+.nav-link1 { padding-top: 8px !important; }
+
+.active-color {
+    -webkit-print-color-adjust: exact;
+    background-color: #0085ca;
+}
+
+.active-color:after { border-left: 33px solid #0085ca; }
+
+.after-active {
+    -webkit-print-color-adjust: exact;
+    background-color: #e2e3e7;
+    color: #606263 !important;
+}
+
+.after-active:after { border-left: 33px solid #e2e3e7; }
+
+.before-active {
+    -webkit-print-color-adjust: exact;
+    background-color: #5c5b5b;
+}
+
+.before-active:after { border-left: 33px solid #5c5b5b; }
+
+.nav-item1 { width: 25%; }
+
+.nav-item1 .size14 {
+    display: inline-block;
+    font-size: 12px !important;
+    margin-top: -1px;
+}

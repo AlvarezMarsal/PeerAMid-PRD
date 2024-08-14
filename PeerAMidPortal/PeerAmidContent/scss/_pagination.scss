@@ -1,0 +1,33 @@
+/* CSS Document */
+
+
+
+
+.page-item{
+	&.active .page-link{
+		z-index:1;
+		color:$pagination-hover-text-color;
+		background-color: $secondary;
+		@include border-color-transparent;
+	}
+	&:first-child .page-link{
+		border-top-left-radius:$custom-border-radius; 
+    	border-bottom-left-radius:$custom-border-radius;
+	}
+	&:last-child .page-link{
+		border-top-right-radius: $custom-border-radius; 
+    	border-bottom-right-radius:$custom-border-radius;
+	}
+}
+
+
+.page-link{
+	 color: $info; 
+		&:hover{
+			color:$pagination-hover-text-color;
+			text-decoration:$pagination-hover-text-decoration;
+			background-color: $secondary;
+			border-color: $secondary!important;
+		}
+	
+}

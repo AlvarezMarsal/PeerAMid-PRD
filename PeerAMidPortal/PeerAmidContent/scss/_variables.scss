@@ -1,0 +1,124 @@
+/* Scss Document */
+//$component-state-property-size
+
+$primary: #292e3d;
+$primary2:#545864;
+$primary3:#7f828b;
+$primary4:#a9abb1;
+$primary5:#d4d5d8;
+
+$secondary:#0085ca;
+$secondary2:#338e85;
+$secondary3:#66aaa3;
+$secondary4:#99c7c2;
+$secondary5:#cce3e0;
+
+$info:#00ae9b;
+$info2:#856404;
+$info3:#66cec3;
+$info4:#99dfd7;
+$info5:#ccefeb;
+
+$light:#f8f8f8;
+$light2:#b5c6cd;
+$light3:#c7d4da;
+$light4:#dae3e6;
+$light5:#ecf1f3;
+
+$highlight:#7ccc4e;
+$highlight2:#96d671;
+$highlight3:#b0e095;
+$highlight4:#cbebb8;
+$highlight5:#e5f5dc;
+
+$danger:#BB3609;
+$success:#25BB3D;
+$warning:#fff3cd;
+$white:#fff;
+$tablehead-color:#C7D4DA;
+
+$link-color: $secondary;
+$link-color-hover: $secondary;
+
+
+$color: (primary, $primary), (secondary, $secondary), (info, $info),(light, $light),(highlight, $highlight), (danger, $danger), (success, $success), (warning, $warning), (white, $white);
+
+$custom-border-radius: 3px;
+
+$button-border-radius:3px;
+$button-hover-border-radius:3px;
+$button-border-color:transparent;
+$button-hover-border-color:transparent;
+$button-text-color: white;
+$button-hover-text-color: white;
+
+$pagination-hover-text-decoration:none;
+$pagination-text-color: white;
+$pagination-hover-text-color: white;
+
+$table-striped-order:odd;
+$table-dark-head-color:$primary;
+$table-light-head-color:$light3;
+$table-light-text-color:$primary2;
+$table-dark-text-color:white;
+$table-font-family:"Fira Sans";
+$table-border-color:$light4;
+$table-font-size: 14px;
+$table-padding:0.35rem;
+
+$loader-border-size:10px;
+$loader-border-radius:50%;
+$loader-background-color:$light5;
+$loader-width:75px;
+$loader-height:75px;
+$loader-speed:2s;
+
+$tooltip-border-radius: 0;
+
+$popover-border-radius: 0;
+
+$collapse-card-border-radius:0;
+$collapse-card-border:1px solid $light5;
+$collapse-cardheader-background:$light5;
+$collapse-cardheader-border-bottom:1px solid $light5;
+$collapse-cardheader-text-color: $primary2;
+$collapse-cardheader-text-color-hover: $primary;
+$collapse-cardheader-font-weight: 400;
+
+$input-group-prepend-border-radius: 3px;
+$input-group-prepend-border: 1px solid $light4;
+$input-group-prepend-background-color: $light5;
+$input-group-prepend-text-color: $primary;
+$input-group-border-color: $light4;
+$input-group-border-radius: 3px;
+$input-group-text-color: $primary;
+$input-group-border-color-focus: $light2;
+$input-group-text-color-focus: $primary;
+
+$navbar_border_bottom: 5px solid $info;
+$navbar_navlink_fontsize: 0.8rem;
+$navbar_heading_color:white!important;
+$navbar_heading_fontsize:1.3rem;
+$navbar_heading_fontweight:bold;
+$navbar_navlink_hover_background:#0085ca linear-gradient(135deg, rgba(0,135,202,1) 30%, rgba(0,135,202,1) 50%, rgba(66,166,216,1) 100%);
+$navbar_navlink_hover_color:#fff !important;
+$navbar_navlink_dropdown_menu_fontsize:12px;
+$navbar_navlink_dropdown_menu_border:1px solid #dfebf3;
+$navbar_navlink_dropdown_menu_boxshadow:2px 5px 6px 0px rgba(0, 174, 155, 0.07);
+$navbar_navlink_dropdown_menu_zindex:1071;
+$navbar_navlink_dropdown_item_padding: 0.4rem 0.9rem;
+$navbar_navlink_dropdown_item_hover_bgcolor:$light5;
+$navbar_toggler_border_color: white;
+
+$tabs_text_color_active: #00ae9b;
+$tabs_background_color_active: #fff;
+$tabs_leftborder_color_active:#dee2e6;
+$tabs_rightborder_color_active:#dee2e6;
+$tabs_topborder_color_active: white;
+$tabs_bottomborder_color_active:#fff;
+$tabs_bordertop_width_active:3px;
+
+
+
+
+

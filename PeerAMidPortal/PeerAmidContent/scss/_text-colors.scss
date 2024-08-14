@@ -1,0 +1,19 @@
+/* Scss Document */
+@each $name,$c in $color {
+	.text-#{$name} {
+		color: $c!important;
+	}
+	.text-#{$name}2 {
+		color: transparentize($c,.2); 
+	}
+	.text-#{$name}3 {
+		color: transparentize($c,.4);
+	}
+	.text-#{$name}4 {
+		color: transparentize($c,.6); 
+	}
+	.text-#{$name}5 {
+		color: transparentize($c,.8); 
+	}
+}
+

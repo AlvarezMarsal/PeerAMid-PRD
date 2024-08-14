@@ -1,0 +1,1930 @@
+/* Scss Document */
+/* Scss Document */
+/* Scss Document */
+/* line 20, ../scss/_custom-properties.scss */
+a {
+    color: #0085ca;
+    text-decoration: none;
+}
+
+/* line 24, ../scss/_custom-properties.scss */
+
+a:hover {
+    color: #0085ca;
+    text-decoration: none;
+}
+
+/* line 30, ../scss/_custom-properties.scss */
+
+.style_nav {
+    color: black !important;
+    text-decoration: underline;
+}
+
+/* Scss Document */
+
+/* line 5, ../scss/_buttons.scss */
+
+.btn-primary {
+    background: #292e3d;
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 11, ../scss/_buttons.scss */
+
+.btn-primary:hover {
+    background: rgba(41, 46, 61, 0.8);
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 18, ../scss/_buttons.scss */
+
+.btn-primary:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+/* line 23, ../scss/_buttons.scss */
+
+.btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show > .btn-primary.dropdown-toggle:focus { box-shadow: none; }
+
+/* line 29, ../scss/_buttons.scss */
+
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show > .btn-primary.dropdown-toggle {
+    background: #292e3d;
+    border-color: transparent;
+    color: white;
+}
+
+/* line 37, ../scss/_buttons.scss */
+
+.btn-outline-primary {
+    background: transparent;
+    border-color: #292e3d;
+    border-radius: 3px;
+    color: #292e3d;
+}
+
+/* line 44, ../scss/_buttons.scss */
+
+.btn-outline-primary:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+/* line 48, ../scss/_buttons.scss */
+
+.btn-outline-primary:hover {
+    background: #292e3d;
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 54, ../scss/_buttons.scss */
+
+.btn-outline-primary:not(:disabled):not(.disabled).active:focus, .btn-outline-primary:not(:disabled):not(.disabled):active:focus, .show > .btn-outline-primary.dropdown-toggle:focus { box-shadow: none; }
+
+/* line 60, ../scss/_buttons.scss */
+
+.btn-outline-primary:not(:disabled):not(.disabled).active, .btn-outline-primary:not(:disabled):not(.disabled):active, .show > .btn-outline-primary.dropdown-toggle {
+    background: #292e3d;
+    border-color: transparent;
+    color: white;
+}
+
+/* line 5, ../scss/_buttons.scss */
+
+.btn-secondary {
+    background: #0085ca;
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 11, ../scss/_buttons.scss */
+
+.btn-secondary:hover {
+    background: rgba(0, 133, 202, 0.8);
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 18, ../scss/_buttons.scss */
+
+.btn-secondary:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+/* line 23, ../scss/_buttons.scss */
+
+.btn-secondary:not(:disabled):not(.disabled).active:focus, .btn-secondary:not(:disabled):not(.disabled):active:focus, .show > .btn-secondary.dropdown-toggle:focus { box-shadow: none; }
+
+/* line 29, ../scss/_buttons.scss */
+
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
+    background: #0085ca;
+    border-color: transparent;
+    color: white;
+}
+
+/* line 37, ../scss/_buttons.scss */
+
+.btn-outline-secondary {
+    background: transparent;
+    border-color: #0085ca;
+    border-radius: 3px;
+    color: #0085ca;
+}
+
+/* line 44, ../scss/_buttons.scss */
+
+.btn-outline-secondary:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+/* line 48, ../scss/_buttons.scss */
+
+.btn-outline-secondary:hover {
+    background: #0085ca;
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 54, ../scss/_buttons.scss */
+
+.btn-outline-secondary:not(:disabled):not(.disabled).active:focus, .btn-outline-secondary:not(:disabled):not(.disabled):active:focus, .show > .btn-outline-secondary.dropdown-toggle:focus { box-shadow: none; }
+
+/* line 60, ../scss/_buttons.scss */
+
+.btn-outline-secondary:not(:disabled):not(.disabled).active, .btn-outline-secondary:not(:disabled):not(.disabled):active, .show > .btn-outline-secondary.dropdown-toggle {
+    background: #0085ca;
+    border-color: transparent;
+    color: white;
+}
+
+/* line 5, ../scss/_buttons.scss */
+
+.btn-info {
+    background: #00ae9b;
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 11, ../scss/_buttons.scss */
+
+.btn-info:hover {
+    background: rgba(0, 174, 155, 0.8);
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 18, ../scss/_buttons.scss */
+
+.btn-info:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+/* line 23, ../scss/_buttons.scss */
+
+.btn-info:not(:disabled):not(.disabled).active:focus, .btn-info:not(:disabled):not(.disabled):active:focus, .show > .btn-info.dropdown-toggle:focus { box-shadow: none; }
+
+/* line 29, ../scss/_buttons.scss */
+
+.btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active, .show > .btn-info.dropdown-toggle {
+    background: #00ae9b;
+    border-color: transparent;
+    color: white;
+}
+
+/* line 37, ../scss/_buttons.scss */
+
+.btn-outline-info {
+    background: transparent;
+    border-color: #00ae9b;
+    border-radius: 3px;
+    color: #00ae9b;
+}
+
+/* line 44, ../scss/_buttons.scss */
+
+.btn-outline-info:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+/* line 48, ../scss/_buttons.scss */
+
+.btn-outline-info:hover {
+    background: #00ae9b;
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 54, ../scss/_buttons.scss */
+
+.btn-outline-info:not(:disabled):not(.disabled).active:focus, .btn-outline-info:not(:disabled):not(.disabled):active:focus, .show > .btn-outline-info.dropdown-toggle:focus { box-shadow: none; }
+
+/* line 60, ../scss/_buttons.scss */
+
+.btn-outline-info:not(:disabled):not(.disabled).active, .btn-outline-info:not(:disabled):not(.disabled):active, .show > .btn-outline-info.dropdown-toggle {
+    background: #00ae9b;
+    border-color: transparent;
+    color: white;
+}
+
+/* line 5, ../scss/_buttons.scss */
+
+.btn-light {
+    background: #f8f8f8;
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 11, ../scss/_buttons.scss */
+
+.btn-light:hover {
+    background: rgba(248, 248, 248, 0.8);
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 18, ../scss/_buttons.scss */
+
+.btn-light:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+/* line 23, ../scss/_buttons.scss */
+
+.btn-light:not(:disabled):not(.disabled).active:focus, .btn-light:not(:disabled):not(.disabled):active:focus, .show > .btn-light.dropdown-toggle:focus { box-shadow: none; }
+
+/* line 29, ../scss/_buttons.scss */
+
+.btn-light:not(:disabled):not(.disabled).active, .btn-light:not(:disabled):not(.disabled):active, .show > .btn-light.dropdown-toggle {
+    background: #f8f8f8;
+    border-color: transparent;
+    color: white;
+}
+
+/* line 37, ../scss/_buttons.scss */
+
+.btn-outline-light {
+    background: transparent;
+    border-color: #f8f8f8;
+    border-radius: 3px;
+    color: #f8f8f8;
+}
+
+/* line 44, ../scss/_buttons.scss */
+
+.btn-outline-light:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+/* line 48, ../scss/_buttons.scss */
+
+.btn-outline-light:hover {
+    background: #f8f8f8;
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 54, ../scss/_buttons.scss */
+
+.btn-outline-light:not(:disabled):not(.disabled).active:focus, .btn-outline-light:not(:disabled):not(.disabled):active:focus, .show > .btn-outline-light.dropdown-toggle:focus { box-shadow: none; }
+
+/* line 60, ../scss/_buttons.scss */
+
+.btn-outline-light:not(:disabled):not(.disabled).active, .btn-outline-light:not(:disabled):not(.disabled):active, .show > .btn-outline-light.dropdown-toggle {
+    background: #f8f8f8;
+    border-color: transparent;
+    color: white;
+}
+
+/* line 5, ../scss/_buttons.scss */
+
+.btn-highlight {
+    background: #7ccc4e;
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 11, ../scss/_buttons.scss */
+
+.btn-highlight:hover {
+    background: rgba(124, 204, 78, 0.8);
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 18, ../scss/_buttons.scss */
+
+.btn-highlight:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+/* line 23, ../scss/_buttons.scss */
+
+.btn-highlight:not(:disabled):not(.disabled).active:focus, .btn-highlight:not(:disabled):not(.disabled):active:focus, .show > .btn-highlight.dropdown-toggle:focus { box-shadow: none; }
+
+/* line 29, ../scss/_buttons.scss */
+
+.btn-highlight:not(:disabled):not(.disabled).active, .btn-highlight:not(:disabled):not(.disabled):active, .show > .btn-highlight.dropdown-toggle {
+    background: #7ccc4e;
+    border-color: transparent;
+    color: white;
+}
+
+/* line 37, ../scss/_buttons.scss */
+
+.btn-outline-highlight {
+    background: transparent;
+    border-color: #7ccc4e;
+    border-radius: 3px;
+    color: #7ccc4e;
+}
+
+/* line 44, ../scss/_buttons.scss */
+
+.btn-outline-highlight:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+/* line 48, ../scss/_buttons.scss */
+
+.btn-outline-highlight:hover {
+    background: #7ccc4e;
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 54, ../scss/_buttons.scss */
+
+.btn-outline-highlight:not(:disabled):not(.disabled).active:focus, .btn-outline-highlight:not(:disabled):not(.disabled):active:focus, .show > .btn-outline-highlight.dropdown-toggle:focus { box-shadow: none; }
+
+/* line 60, ../scss/_buttons.scss */
+
+.btn-outline-highlight:not(:disabled):not(.disabled).active, .btn-outline-highlight:not(:disabled):not(.disabled):active, .show > .btn-outline-highlight.dropdown-toggle {
+    background: #7ccc4e;
+    border-color: transparent;
+    color: white;
+}
+
+/* line 5, ../scss/_buttons.scss */
+
+.btn-danger {
+    background: #BB3609;
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 11, ../scss/_buttons.scss */
+
+.btn-danger:hover {
+    background: rgba(187, 54, 9, 0.8);
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 18, ../scss/_buttons.scss */
+
+.btn-danger:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+/* line 23, ../scss/_buttons.scss */
+
+.btn-danger:not(:disabled):not(.disabled).active:focus, .btn-danger:not(:disabled):not(.disabled):active:focus, .show > .btn-danger.dropdown-toggle:focus { box-shadow: none; }
+
+/* line 29, ../scss/_buttons.scss */
+
+.btn-danger:not(:disabled):not(.disabled).active, .btn-danger:not(:disabled):not(.disabled):active, .show > .btn-danger.dropdown-toggle {
+    background: #BB3609;
+    border-color: transparent;
+    color: white;
+}
+
+/* line 37, ../scss/_buttons.scss */
+
+.btn-outline-danger {
+    background: transparent;
+    border-color: #BB3609;
+    border-radius: 3px;
+    color: #BB3609;
+}
+
+/* line 44, ../scss/_buttons.scss */
+
+.btn-outline-danger:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+/* line 48, ../scss/_buttons.scss */
+
+.btn-outline-danger:hover {
+    background: #BB3609;
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 54, ../scss/_buttons.scss */
+
+.btn-outline-danger:not(:disabled):not(.disabled).active:focus, .btn-outline-danger:not(:disabled):not(.disabled):active:focus, .show > .btn-outline-danger.dropdown-toggle:focus { box-shadow: none; }
+
+/* line 60, ../scss/_buttons.scss */
+
+.btn-outline-danger:not(:disabled):not(.disabled).active, .btn-outline-danger:not(:disabled):not(.disabled):active, .show > .btn-outline-danger.dropdown-toggle {
+    background: #BB3609;
+    border-color: transparent;
+    color: white;
+}
+
+/* line 5, ../scss/_buttons.scss */
+
+.btn-success {
+    background: #25BB3D;
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 11, ../scss/_buttons.scss */
+
+.btn-success:hover {
+    background: rgba(37, 187, 61, 0.8);
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 18, ../scss/_buttons.scss */
+
+.btn-success:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+/* line 23, ../scss/_buttons.scss */
+
+.btn-success:not(:disabled):not(.disabled).active:focus, .btn-success:not(:disabled):not(.disabled):active:focus, .show > .btn-success.dropdown-toggle:focus { box-shadow: none; }
+
+/* line 29, ../scss/_buttons.scss */
+
+.btn-success:not(:disabled):not(.disabled).active, .btn-success:not(:disabled):not(.disabled):active, .show > .btn-success.dropdown-toggle {
+    background: #25BB3D;
+    border-color: transparent;
+    color: white;
+}
+
+/* line 37, ../scss/_buttons.scss */
+
+.btn-outline-success {
+    background: transparent;
+    border-color: #25BB3D;
+    border-radius: 3px;
+    color: #25BB3D;
+}
+
+/* line 44, ../scss/_buttons.scss */
+
+.btn-outline-success:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+/* line 48, ../scss/_buttons.scss */
+
+.btn-outline-success:hover {
+    background: #25BB3D;
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 54, ../scss/_buttons.scss */
+
+.btn-outline-success:not(:disabled):not(.disabled).active:focus, .btn-outline-success:not(:disabled):not(.disabled):active:focus, .show > .btn-outline-success.dropdown-toggle:focus { box-shadow: none; }
+
+/* line 60, ../scss/_buttons.scss */
+
+.btn-outline-success:not(:disabled):not(.disabled).active, .btn-outline-success:not(:disabled):not(.disabled):active, .show > .btn-outline-success.dropdown-toggle {
+    background: #25BB3D;
+    border-color: transparent;
+    color: white;
+}
+
+/* line 5, ../scss/_buttons.scss */
+
+.btn-warning {
+    background: #fff3cd;
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 11, ../scss/_buttons.scss */
+
+.btn-warning:hover {
+    background: rgba(255, 243, 205, 0.8);
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 18, ../scss/_buttons.scss */
+
+.btn-warning:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+/* line 23, ../scss/_buttons.scss */
+
+.btn-warning:not(:disabled):not(.disabled).active:focus, .btn-warning:not(:disabled):not(.disabled):active:focus, .show > .btn-warning.dropdown-toggle:focus { box-shadow: none; }
+
+/* line 29, ../scss/_buttons.scss */
+
+.btn-warning:not(:disabled):not(.disabled).active, .btn-warning:not(:disabled):not(.disabled):active, .show > .btn-warning.dropdown-toggle {
+    background: #fff3cd;
+    border-color: transparent;
+    color: white;
+}
+
+/* line 37, ../scss/_buttons.scss */
+
+.btn-outline-warning {
+    background: transparent;
+    border-color: #fff3cd;
+    border-radius: 3px;
+    color: #fff3cd;
+}
+
+/* line 44, ../scss/_buttons.scss */
+
+.btn-outline-warning:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+/* line 48, ../scss/_buttons.scss */
+
+.btn-outline-warning:hover {
+    background: #fff3cd;
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 54, ../scss/_buttons.scss */
+
+.btn-outline-warning:not(:disabled):not(.disabled).active:focus, .btn-outline-warning:not(:disabled):not(.disabled):active:focus, .show > .btn-outline-warning.dropdown-toggle:focus { box-shadow: none; }
+
+/* line 60, ../scss/_buttons.scss */
+
+.btn-outline-warning:not(:disabled):not(.disabled).active, .btn-outline-warning:not(:disabled):not(.disabled):active, .show > .btn-outline-warning.dropdown-toggle {
+    background: #fff3cd;
+    border-color: transparent;
+    color: white;
+}
+
+/* line 5, ../scss/_buttons.scss */
+
+.btn-white {
+    background: #fff;
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 11, ../scss/_buttons.scss */
+
+.btn-white:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 18, ../scss/_buttons.scss */
+
+.btn-white:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+/* line 23, ../scss/_buttons.scss */
+
+.btn-white:not(:disabled):not(.disabled).active:focus, .btn-white:not(:disabled):not(.disabled):active:focus, .show > .btn-white.dropdown-toggle:focus { box-shadow: none; }
+
+/* line 29, ../scss/_buttons.scss */
+
+.btn-white:not(:disabled):not(.disabled).active, .btn-white:not(:disabled):not(.disabled):active, .show > .btn-white.dropdown-toggle {
+    background: #fff;
+    border-color: transparent;
+    color: white;
+}
+
+/* line 37, ../scss/_buttons.scss */
+
+.btn-outline-white {
+    background: transparent;
+    border-color: #fff;
+    border-radius: 3px;
+    color: #fff;
+}
+
+/* line 44, ../scss/_buttons.scss */
+
+.btn-outline-white:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+/* line 48, ../scss/_buttons.scss */
+
+.btn-outline-white:hover {
+    background: #fff;
+    border-color: transparent;
+    border-radius: 3px;
+    color: white;
+}
+
+/* line 54, ../scss/_buttons.scss */
+
+.btn-outline-white:not(:disabled):not(.disabled).active:focus, .btn-outline-white:not(:disabled):not(.disabled):active:focus, .show > .btn-outline-white.dropdown-toggle:focus { box-shadow: none; }
+
+/* line 60, ../scss/_buttons.scss */
+
+.btn-outline-white:not(:disabled):not(.disabled).active, .btn-outline-white:not(:disabled):not(.disabled):active, .show > .btn-outline-white.dropdown-toggle {
+    background: #fff;
+    border-color: transparent;
+    color: white;
+}
+
+/* Scss Document */
+
+/* line 3, ../scss/_text-colors.scss */
+
+.text-primary { color: #292e3d !important; }
+
+/* line 6, ../scss/_text-colors.scss */
+
+.text-primary2 { color: rgba(41, 46, 61, 0.8); }
+
+/* line 9, ../scss/_text-colors.scss */
+
+.text-primary3 { color: rgba(41, 46, 61, 0.6); }
+
+/* line 12, ../scss/_text-colors.scss */
+
+.text-primary4 { color: rgba(41, 46, 61, 0.4); }
+
+/* line 15, ../scss/_text-colors.scss */
+
+.text-primary5 { color: rgba(41, 46, 61, 0.2); }
+
+/* line 3, ../scss/_text-colors.scss */
+
+.text-secondary { color: #0085ca !important; }
+
+/* line 6, ../scss/_text-colors.scss */
+
+.text-secondary2 { color: rgba(0, 133, 202, 0.8); }
+
+/* line 9, ../scss/_text-colors.scss */
+
+.text-secondary3 { color: rgba(0, 133, 202, 0.6); }
+
+/* line 12, ../scss/_text-colors.scss */
+
+.text-secondary4 { color: rgba(0, 133, 202, 0.4); }
+
+/* line 15, ../scss/_text-colors.scss */
+
+.text-secondary5 { color: rgba(0, 133, 202, 0.2); }
+
+/* line 3, ../scss/_text-colors.scss */
+
+.text-info { color: #00ae9b !important; }
+
+/* line 6, ../scss/_text-colors.scss */
+
+.text-info2 { color: rgba(0, 174, 155, 0.8); }
+
+/* line 9, ../scss/_text-colors.scss */
+
+.text-info3 { color: rgba(0, 174, 155, 0.6); }
+
+/* line 12, ../scss/_text-colors.scss */
+
+.text-info4 { color: rgba(0, 174, 155, 0.4); }
+
+/* line 15, ../scss/_text-colors.scss */
+
+.text-info5 { color: rgba(0, 174, 155, 0.2); }
+
+/* line 3, ../scss/_text-colors.scss */
+
+.text-light { color: #f8f8f8 !important; }
+
+/* line 6, ../scss/_text-colors.scss */
+
+.text-light2 { color: rgba(248, 248, 248, 0.8); }
+
+/* line 9, ../scss/_text-colors.scss */
+
+.text-light3 { color: rgba(248, 248, 248, 0.6); }
+
+/* line 12, ../scss/_text-colors.scss */
+
+.text-light4 { color: rgba(248, 248, 248, 0.4); }
+
+/* line 15, ../scss/_text-colors.scss */
+
+.text-light5 { color: rgba(248, 248, 248, 0.2); }
+
+/* line 3, ../scss/_text-colors.scss */
+
+.text-highlight { color: #7ccc4e !important; }
+
+/* line 6, ../scss/_text-colors.scss */
+
+.text-highlight2 { color: rgba(124, 204, 78, 0.8); }
+
+/* line 9, ../scss/_text-colors.scss */
+
+.text-highlight3 { color: rgba(124, 204, 78, 0.6); }
+
+/* line 12, ../scss/_text-colors.scss */
+
+.text-highlight4 { color: rgba(124, 204, 78, 0.4); }
+
+/* line 15, ../scss/_text-colors.scss */
+
+.text-highlight5 { color: rgba(124, 204, 78, 0.2); }
+
+/* line 3, ../scss/_text-colors.scss */
+
+.text-danger { color: #BB3609 !important; }
+
+/* line 6, ../scss/_text-colors.scss */
+
+.text-danger2 { color: rgba(187, 54, 9, 0.8); }
+
+/* line 9, ../scss/_text-colors.scss */
+
+.text-danger3 { color: rgba(187, 54, 9, 0.6); }
+
+/* line 12, ../scss/_text-colors.scss */
+
+.text-danger4 { color: rgba(187, 54, 9, 0.4); }
+
+/* line 15, ../scss/_text-colors.scss */
+
+.text-danger5 { color: rgba(187, 54, 9, 0.2); }
+
+/* line 3, ../scss/_text-colors.scss */
+
+.text-success { color: #25BB3D !important; }
+
+/* line 6, ../scss/_text-colors.scss */
+
+.text-success2 { color: rgba(37, 187, 61, 0.8); }
+
+/* line 9, ../scss/_text-colors.scss */
+
+.text-success3 { color: rgba(37, 187, 61, 0.6); }
+
+/* line 12, ../scss/_text-colors.scss */
+
+.text-success4 { color: rgba(37, 187, 61, 0.4); }
+
+/* line 15, ../scss/_text-colors.scss */
+
+.text-success5 { color: rgba(37, 187, 61, 0.2); }
+
+/* line 3, ../scss/_text-colors.scss */
+
+.text-warning { color: #fff3cd !important; }
+
+/* line 6, ../scss/_text-colors.scss */
+
+.text-warning2 { color: rgba(255, 243, 205, 0.8); }
+
+/* line 9, ../scss/_text-colors.scss */
+
+.text-warning3 { color: rgba(255, 243, 205, 0.6); }
+
+/* line 12, ../scss/_text-colors.scss */
+
+.text-warning4 { color: rgba(255, 243, 205, 0.4); }
+
+/* line 15, ../scss/_text-colors.scss */
+
+.text-warning5 { color: rgba(255, 243, 205, 0.2); }
+
+/* line 3, ../scss/_text-colors.scss */
+
+.text-white { color: #fff !important; }
+
+/* line 6, ../scss/_text-colors.scss */
+
+.text-white2 { color: rgba(255, 255, 255, 0.8); }
+
+/* line 9, ../scss/_text-colors.scss */
+
+.text-white3 { color: rgba(255, 255, 255, 0.6); }
+
+/* line 12, ../scss/_text-colors.scss */
+
+.text-white4 { color: rgba(255, 255, 255, 0.4); }
+
+/* line 15, ../scss/_text-colors.scss */
+
+.text-white5 { color: rgba(255, 255, 255, 0.2); }
+
+/* Scss Document */
+
+/* line 3, ../scss/_background-colors.scss */
+
+.bg-primary { background: #292e3d !important; }
+
+/* line 6, ../scss/_background-colors.scss */
+
+.bg-primary2 { background: rgba(41, 46, 61, 0.8); }
+
+/* line 9, ../scss/_background-colors.scss */
+
+.bg-primary3 { background: rgba(41, 46, 61, 0.6); }
+
+/* line 12, ../scss/_background-colors.scss */
+
+.bg-primary4 { background: rgba(41, 46, 61, 0.4); }
+
+/* line 15, ../scss/_background-colors.scss */
+
+.bg-primary5 { background: rgba(41, 46, 61, 0.2); }
+
+/* line 3, ../scss/_background-colors.scss */
+
+.bg-secondary { background: #0085ca !important; }
+
+/* line 6, ../scss/_background-colors.scss */
+
+.bg-secondary2 { background: rgba(0, 133, 202, 0.8); }
+
+/* line 9, ../scss/_background-colors.scss */
+
+.bg-secondary3 { background: rgba(0, 133, 202, 0.6); }
+
+/* line 12, ../scss/_background-colors.scss */
+
+.bg-secondary4 { background: rgba(0, 133, 202, 0.4); }
+
+/* line 15, ../scss/_background-colors.scss */
+
+.bg-secondary5 { background: rgba(0, 133, 202, 0.2); }
+
+/* line 3, ../scss/_background-colors.scss */
+
+.bg-info { background: #00ae9b !important; }
+
+/* line 6, ../scss/_background-colors.scss */
+
+.bg-info2 { background: rgba(0, 174, 155, 0.8); }
+
+/* line 9, ../scss/_background-colors.scss */
+
+.bg-info3 { background: rgba(0, 174, 155, 0.6); }
+
+/* line 12, ../scss/_background-colors.scss */
+
+.bg-info4 { background: rgba(0, 174, 155, 0.4); }
+
+/* line 15, ../scss/_background-colors.scss */
+
+.bg-info5 { background: rgba(0, 174, 155, 0.2); }
+
+/* line 3, ../scss/_background-colors.scss */
+
+.bg-light { background: #f8f8f8 !important; }
+
+/* line 6, ../scss/_background-colors.scss */
+
+.bg-light2 { background: rgba(248, 248, 248, 0.8); }
+
+/* line 9, ../scss/_background-colors.scss */
+
+.bg-light3 { background: rgba(248, 248, 248, 0.6); }
+
+/* line 12, ../scss/_background-colors.scss */
+
+.bg-light4 { background: rgba(248, 248, 248, 0.4); }
+
+/* line 15, ../scss/_background-colors.scss */
+
+.bg-light5 { background: rgba(248, 248, 248, 0.2); }
+
+/* line 3, ../scss/_background-colors.scss */
+
+.bg-highlight { background: #7ccc4e !important; }
+
+/* line 6, ../scss/_background-colors.scss */
+
+.bg-highlight2 { background: rgba(124, 204, 78, 0.8); }
+
+/* line 9, ../scss/_background-colors.scss */
+
+.bg-highlight3 { background: rgba(124, 204, 78, 0.6); }
+
+/* line 12, ../scss/_background-colors.scss */
+
+.bg-highlight4 { background: rgba(124, 204, 78, 0.4); }
+
+/* line 15, ../scss/_background-colors.scss */
+
+.bg-highlight5 { background: rgba(124, 204, 78, 0.2); }
+
+/* line 3, ../scss/_background-colors.scss */
+
+.bg-danger { background: #BB3609 !important; }
+
+/* line 6, ../scss/_background-colors.scss */
+
+.bg-danger2 { background: rgba(187, 54, 9, 0.8); }
+
+/* line 9, ../scss/_background-colors.scss */
+
+.bg-danger3 { background: rgba(187, 54, 9, 0.6); }
+
+/* line 12, ../scss/_background-colors.scss */
+
+.bg-danger4 { background: rgba(187, 54, 9, 0.4); }
+
+/* line 15, ../scss/_background-colors.scss */
+
+.bg-danger5 { background: rgba(187, 54, 9, 0.2); }
+
+/* line 3, ../scss/_background-colors.scss */
+
+.bg-success { background: #25BB3D !important; }
+
+/* line 6, ../scss/_background-colors.scss */
+
+.bg-success2 { background: rgba(37, 187, 61, 0.8); }
+
+/* line 9, ../scss/_background-colors.scss */
+
+.bg-success3 { background: rgba(37, 187, 61, 0.6); }
+
+/* line 12, ../scss/_background-colors.scss */
+
+.bg-success4 { background: rgba(37, 187, 61, 0.4); }
+
+/* line 15, ../scss/_background-colors.scss */
+
+.bg-success5 { background: rgba(37, 187, 61, 0.2); }
+
+/* line 3, ../scss/_background-colors.scss */
+
+.bg-warning { background: #fff3cd !important; }
+
+/* line 6, ../scss/_background-colors.scss */
+
+.bg-warning2 { background: rgba(255, 243, 205, 0.8); }
+
+/* line 9, ../scss/_background-colors.scss */
+
+.bg-warning3 { background: rgba(255, 243, 205, 0.6); }
+
+/* line 12, ../scss/_background-colors.scss */
+
+.bg-warning4 { background: rgba(255, 243, 205, 0.4); }
+
+/* line 15, ../scss/_background-colors.scss */
+
+.bg-warning5 { background: rgba(255, 243, 205, 0.2); }
+
+/* line 3, ../scss/_background-colors.scss */
+
+.bg-white { background: #fff !important; }
+
+/* line 6, ../scss/_background-colors.scss */
+
+.bg-white2 { background: rgba(255, 255, 255, 0.8); }
+
+/* line 9, ../scss/_background-colors.scss */
+
+.bg-white3 { background: rgba(255, 255, 255, 0.6); }
+
+/* line 12, ../scss/_background-colors.scss */
+
+.bg-white4 { background: rgba(255, 255, 255, 0.4); }
+
+/* line 15, ../scss/_background-colors.scss */
+
+.bg-white5 { background: rgba(255, 255, 255, 0.2); }
+
+/* Scss Document */
+
+/* line 4, ../scss/_link-colors.scss */
+
+a.text-primary:hover { color: rgba(41, 46, 61, 0.8) !important; }
+
+/* line 7, ../scss/_link-colors.scss */
+
+a.text-primary2:hover { color: rgba(41, 46, 61, 0.6) !important; }
+
+/* line 10, ../scss/_link-colors.scss */
+
+a.text-primary3:hover { color: rgba(41, 46, 61, 0.4) !important; }
+
+/* line 13, ../scss/_link-colors.scss */
+
+a.text-primary4:hover { color: rgba(41, 46, 61, 0.6) !important; }
+
+/* line 16, ../scss/_link-colors.scss */
+
+a.text-primary5:hover { color: rgba(41, 46, 61, 0.8) !important; }
+
+/* line 4, ../scss/_link-colors.scss */
+
+a.text-secondary:hover { color: rgba(0, 133, 202, 0.8) !important; }
+
+/* line 7, ../scss/_link-colors.scss */
+
+a.text-secondary2:hover { color: rgba(0, 133, 202, 0.6) !important; }
+
+/* line 10, ../scss/_link-colors.scss */
+
+a.text-secondary3:hover { color: rgba(0, 133, 202, 0.4) !important; }
+
+/* line 13, ../scss/_link-colors.scss */
+
+a.text-secondary4:hover { color: rgba(0, 133, 202, 0.6) !important; }
+
+/* line 16, ../scss/_link-colors.scss */
+
+a.text-secondary5:hover { color: rgba(0, 133, 202, 0.8) !important; }
+
+/* line 4, ../scss/_link-colors.scss */
+
+a.text-info:hover { color: rgba(0, 174, 155, 0.8) !important; }
+
+/* line 7, ../scss/_link-colors.scss */
+
+a.text-info2:hover { color: rgba(0, 174, 155, 0.6) !important; }
+
+/* line 10, ../scss/_link-colors.scss */
+
+a.text-info3:hover { color: rgba(0, 174, 155, 0.4) !important; }
+
+/* line 13, ../scss/_link-colors.scss */
+
+a.text-info4:hover { color: rgba(0, 174, 155, 0.6) !important; }
+
+/* line 16, ../scss/_link-colors.scss */
+
+a.text-info5:hover { color: rgba(0, 174, 155, 0.8) !important; }
+
+/* line 4, ../scss/_link-colors.scss */
+
+a.text-light:hover { color: rgba(248, 248, 248, 0.8) !important; }
+
+/* line 7, ../scss/_link-colors.scss */
+
+a.text-light2:hover { color: rgba(248, 248, 248, 0.6) !important; }
+
+/* line 10, ../scss/_link-colors.scss */
+
+a.text-light3:hover { color: rgba(248, 248, 248, 0.4) !important; }
+
+/* line 13, ../scss/_link-colors.scss */
+
+a.text-light4:hover { color: rgba(248, 248, 248, 0.6) !important; }
+
+/* line 16, ../scss/_link-colors.scss */
+
+a.text-light5:hover { color: rgba(248, 248, 248, 0.8) !important; }
+
+/* line 4, ../scss/_link-colors.scss */
+
+a.text-highlight:hover { color: rgba(124, 204, 78, 0.8) !important; }
+
+/* line 7, ../scss/_link-colors.scss */
+
+a.text-highlight2:hover { color: rgba(124, 204, 78, 0.6) !important; }
+
+/* line 10, ../scss/_link-colors.scss */
+
+a.text-highlight3:hover { color: rgba(124, 204, 78, 0.4) !important; }
+
+/* line 13, ../scss/_link-colors.scss */
+
+a.text-highlight4:hover { color: rgba(124, 204, 78, 0.6) !important; }
+
+/* line 16, ../scss/_link-colors.scss */
+
+a.text-highlight5:hover { color: rgba(124, 204, 78, 0.8) !important; }
+
+/* line 4, ../scss/_link-colors.scss */
+
+a.text-danger:hover { color: rgba(187, 54, 9, 0.8) !important; }
+
+/* line 7, ../scss/_link-colors.scss */
+
+a.text-danger2:hover { color: rgba(187, 54, 9, 0.6) !important; }
+
+/* line 10, ../scss/_link-colors.scss */
+
+a.text-danger3:hover { color: rgba(187, 54, 9, 0.4) !important; }
+
+/* line 13, ../scss/_link-colors.scss */
+
+a.text-danger4:hover { color: rgba(187, 54, 9, 0.6) !important; }
+
+/* line 16, ../scss/_link-colors.scss */
+
+a.text-danger5:hover { color: rgba(187, 54, 9, 0.8) !important; }
+
+/* line 4, ../scss/_link-colors.scss */
+
+a.text-success:hover { color: rgba(37, 187, 61, 0.8) !important; }
+
+/* line 7, ../scss/_link-colors.scss */
+
+a.text-success2:hover { color: rgba(37, 187, 61, 0.6) !important; }
+
+/* line 10, ../scss/_link-colors.scss */
+
+a.text-success3:hover { color: rgba(37, 187, 61, 0.4) !important; }
+
+/* line 13, ../scss/_link-colors.scss */
+
+a.text-success4:hover { color: rgba(37, 187, 61, 0.6) !important; }
+
+/* line 16, ../scss/_link-colors.scss */
+
+a.text-success5:hover { color: rgba(37, 187, 61, 0.8) !important; }
+
+/* line 4, ../scss/_link-colors.scss */
+
+a.text-warning:hover { color: rgba(255, 243, 205, 0.8) !important; }
+
+/* line 7, ../scss/_link-colors.scss */
+
+a.text-warning2:hover { color: rgba(255, 243, 205, 0.6) !important; }
+
+/* line 10, ../scss/_link-colors.scss */
+
+a.text-warning3:hover { color: rgba(255, 243, 205, 0.4) !important; }
+
+/* line 13, ../scss/_link-colors.scss */
+
+a.text-warning4:hover { color: rgba(255, 243, 205, 0.6) !important; }
+
+/* line 16, ../scss/_link-colors.scss */
+
+a.text-warning5:hover { color: rgba(255, 243, 205, 0.8) !important; }
+
+/* line 4, ../scss/_link-colors.scss */
+
+a.text-white:hover { color: rgba(255, 255, 255, 0.8) !important; }
+
+/* line 7, ../scss/_link-colors.scss */
+
+a.text-white2:hover { color: rgba(255, 255, 255, 0.6) !important; }
+
+/* line 10, ../scss/_link-colors.scss */
+
+a.text-white3:hover { color: rgba(255, 255, 255, 0.4) !important; }
+
+/* line 13, ../scss/_link-colors.scss */
+
+a.text-white4:hover { color: rgba(255, 255, 255, 0.6) !important; }
+
+/* line 16, ../scss/_link-colors.scss */
+
+a.text-white5:hover { color: rgba(255, 255, 255, 0.8) !important; }
+
+/* Scss Document */
+
+/* line 8, ../scss/_alerts.scss */
+
+.alert-primary {
+    background: rgba(41, 46, 61, 0.8); /*@include border-radius-custom;
+@include border-color-transparent;
+@include text-color-default;*/
+}
+
+/* line 8, ../scss/_alerts.scss */
+
+.alert-secondary {
+    background: rgba(0, 133, 202, 0.8); /*@include border-radius-custom;
+@include border-color-transparent;
+@include text-color-default;*/
+}
+
+/* line 8, ../scss/_alerts.scss */
+
+.alert-info {
+    background: rgba(0, 174, 155, 0.8); /*@include border-radius-custom;
+@include border-color-transparent;
+@include text-color-default;*/
+}
+
+/* line 8, ../scss/_alerts.scss */
+
+.alert-light {
+    background: rgba(248, 248, 248, 0.8); /*@include border-radius-custom;
+@include border-color-transparent;
+@include text-color-default;*/
+}
+
+/* line 8, ../scss/_alerts.scss */
+
+.alert-highlight {
+    background: rgba(124, 204, 78, 0.8); /*@include border-radius-custom;
+@include border-color-transparent;
+@include text-color-default;*/
+}
+
+/* line 8, ../scss/_alerts.scss */
+
+.alert-danger {
+    background: rgba(187, 54, 9, 0.8); /*@include border-radius-custom;
+@include border-color-transparent;
+@include text-color-default;*/
+}
+
+/* line 8, ../scss/_alerts.scss */
+
+.alert-success {
+    background: rgba(37, 187, 61, 0.8); /*@include border-radius-custom;
+@include border-color-transparent;
+@include text-color-default;*/
+}
+
+/* line 8, ../scss/_alerts.scss */
+
+.alert-warning {
+    background: rgba(255, 243, 205, 0.8); /*@include border-radius-custom;
+@include border-color-transparent;
+@include text-color-default;*/
+}
+
+/* line 8, ../scss/_alerts.scss */
+
+.alert-white {
+    background: rgba(255, 255, 255, 0.8); /*@include border-radius-custom;
+@include border-color-transparent;
+@include text-color-default;*/
+}
+
+/* line 16, ../scss/_alerts.scss */
+
+.alert-link {
+    color: white !important;
+    font-weight: 700;
+}
+
+/* Scss Document */
+
+/* line 3, ../scss/_typography.scss */
+
+ul.circle { list-style-type: circle; }
+
+/* Scss Document */
+
+/* line 2, ../scss/_breadcrumbs.scss */
+
+.breadcrumb {
+    background-color: transparent;
+    list-style: none;
+    margin-bottom: 1rem;
+    padding: .5rem 0;
+}
+
+/* line 8, ../scss/_breadcrumbs.scss */
+
+.breadcrumb-item.active { color: #f8f8f8; }
+
+/* line 13, ../scss/_breadcrumbs.scss */
+
+.breadcrumb-item a { color: #00ae9b; }
+
+/* CSS Document */
+
+/* line 8, ../scss/_badges.scss */
+
+.badge-primary {
+    background-color: #292e3d;
+    border-color: transparent;
+    border-radius: 0;
+    color: white;
+}
+
+/* line 14, ../scss/_badges.scss */
+
+.badge-primary[href]:hover {
+    background-color: rgba(41, 46, 61, 0.8);
+    border-color: transparent;
+    border-radius: 0;
+    color: white;
+}
+
+/* line 8, ../scss/_badges.scss */
+
+.badge-secondary {
+    background-color: #0085ca;
+    border-color: transparent;
+    border-radius: 0;
+    color: white;
+}
+
+/* line 14, ../scss/_badges.scss */
+
+.badge-secondary[href]:hover {
+    background-color: rgba(0, 133, 202, 0.8);
+    border-color: transparent;
+    border-radius: 0;
+    color: white;
+}
+
+/* line 8, ../scss/_badges.scss */
+
+.badge-info {
+    background-color: #00ae9b;
+    border-color: transparent;
+    border-radius: 0;
+    color: white;
+}
+
+/* line 14, ../scss/_badges.scss */
+
+.badge-info[href]:hover {
+    background-color: rgba(0, 174, 155, 0.8);
+    border-color: transparent;
+    border-radius: 0;
+    color: white;
+}
+
+/* line 8, ../scss/_badges.scss */
+
+.badge-light {
+    background-color: #f8f8f8;
+    border-color: transparent;
+    border-radius: 0;
+    color: white;
+}
+
+/* line 14, ../scss/_badges.scss */
+
+.badge-light[href]:hover {
+    background-color: rgba(248, 248, 248, 0.8);
+    border-color: transparent;
+    border-radius: 0;
+    color: white;
+}
+
+/* line 8, ../scss/_badges.scss */
+
+.badge-highlight {
+    background-color: #7ccc4e;
+    border-color: transparent;
+    border-radius: 0;
+    color: white;
+}
+
+/* line 14, ../scss/_badges.scss */
+
+.badge-highlight[href]:hover {
+    background-color: rgba(124, 204, 78, 0.8);
+    border-color: transparent;
+    border-radius: 0;
+    color: white;
+}
+
+/* line 8, ../scss/_badges.scss */
+
+.badge-danger {
+    background-color: #BB3609;
+    border-color: transparent;
+    border-radius: 0;
+    color: white;
+}
+
+/* line 14, ../scss/_badges.scss */
+
+.badge-danger[href]:hover {
+    background-color: rgba(187, 54, 9, 0.8);
+    border-color: transparent;
+    border-radius: 0;
+    color: white;
+}
+
+/* line 8, ../scss/_badges.scss */
+
+.badge-success {
+    background-color: #25BB3D;
+    border-color: transparent;
+    border-radius: 0;
+    color: white;
+}
+
+/* line 14, ../scss/_badges.scss */
+
+.badge-success[href]:hover {
+    background-color: rgba(37, 187, 61, 0.8);
+    border-color: transparent;
+    border-radius: 0;
+    color: white;
+}
+
+/* line 8, ../scss/_badges.scss */
+
+.badge-warning {
+    background-color: #fff3cd;
+    border-color: transparent;
+    border-radius: 0;
+    color: white;
+}
+
+/* line 14, ../scss/_badges.scss */
+
+.badge-warning[href]:hover {
+    background-color: rgba(255, 243, 205, 0.8);
+    border-color: transparent;
+    border-radius: 0;
+    color: white;
+}
+
+/* line 8, ../scss/_badges.scss */
+
+.badge-white {
+    background-color: #fff;
+    border-color: transparent;
+    border-radius: 0;
+    color: white;
+}
+
+/* line 14, ../scss/_badges.scss */
+
+.badge-white[href]:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-color: transparent;
+    border-radius: 0;
+    color: white;
+}
+
+/* line 24, ../scss/_badges.scss */
+
+.badge { font-weight: 100; }
+
+/* CSS Document */
+
+/* line 7, ../scss/_pagination.scss */
+
+.page-item.active .page-link {
+    background-color: #0085ca;
+    border-color: transparent;
+    color: white;
+    z-index: 1;
+}
+
+/* line 13, ../scss/_pagination.scss */
+
+.page-item:first-child .page-link {
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+/* line 17, ../scss/_pagination.scss */
+
+.page-item:last-child .page-link {
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+/* line 24, ../scss/_pagination.scss */
+
+.page-link { color: #00ae9b; }
+
+/* line 26, ../scss/_pagination.scss */
+
+.page-link:hover {
+    background-color: #0085ca;
+    border-color: #0085ca !important;
+    color: white;
+    text-decoration: none;
+}
+
+/* Scss Document */
+
+/* line 2, ../scss/_tables.scss */
+
+.table {
+    color: #545864; /*font-family:$table-font-family;
+font-size:$table-font-size;*/
+}
+
+/* line 6, ../scss/_tables.scss */
+
+.table td, .table th {
+    border-top: 1px solid #dae3e6;
+    font-weight: 400;
+    padding: 0.35rem;
+}
+
+/* line 11, ../scss/_tables.scss */
+
+.table thead th {
+    border-bottom: 1px solid #dae3e6;
+    font-weight: 700;
+}
+
+/* line 19, ../scss/_tables.scss */
+
+.table .thead-dark th {
+    background-color: #292e3d;
+    color: white;
+    font-weight: 700;
+}
+
+/* line 27, ../scss/_tables.scss */
+
+.table .thead-light th {
+    background-color: #c7d4da;
+    color: #545864;
+    font-weight: 700;
+}
+
+/* line 35, ../scss/_tables.scss */
+
+.table-dark {
+    background-color: #292e3d;
+    color: white;
+}
+
+/* line 41, ../scss/_tables.scss */
+
+.table-striped tbody tr:nth-of-type(odd) { background-color: #ecf1f3; }
+
+/* line 46, ../scss/_tables.scss */
+
+.table-bordered { border: 1px solid #dae3e6; }
+
+/* line 49, ../scss/_tables.scss */
+
+.table-bordered th, .table-bordered td { border: 1px solid #dae3e6; }
+
+/* line 55, ../scss/_tables.scss */
+
+.table-bordered thead th, .table-bordered thead td { border-bottom-width: 2px; }
+
+/* line 63, ../scss/_tables.scss */
+
+.table-hover tbody tr:hover { background-color: #f8f8f8; }
+
+/* CSS Document */
+
+/* line 5, ../scss/_spinners.scss */
+
+.loader-primary {
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    border: 10px solid #ecf1f3;
+    border-radius: 50%;
+    border-top: 10px solid #292e3d;
+    height: 75px;
+    width: 75px;
+}
+
+/* line 5, ../scss/_spinners.scss */
+
+.loader-secondary {
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    border: 10px solid #ecf1f3;
+    border-radius: 50%;
+    border-top: 10px solid #0085ca;
+    height: 75px;
+    width: 75px;
+}
+
+/* line 5, ../scss/_spinners.scss */
+
+.loader-info {
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    border: 10px solid #ecf1f3;
+    border-radius: 50%;
+    border-top: 10px solid #00ae9b;
+    height: 75px;
+    width: 75px;
+}
+
+/* line 5, ../scss/_spinners.scss */
+
+.loader-light {
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    border: 10px solid #ecf1f3;
+    border-radius: 50%;
+    border-top: 10px solid #f8f8f8;
+    height: 75px;
+    width: 75px;
+}
+
+/* line 5, ../scss/_spinners.scss */
+
+.loader-highlight {
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    border: 10px solid #ecf1f3;
+    border-radius: 50%;
+    border-top: 10px solid #7ccc4e;
+    height: 75px;
+    width: 75px;
+}
+
+/* line 5, ../scss/_spinners.scss */
+
+.loader-danger {
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    border: 10px solid #ecf1f3;
+    border-radius: 50%;
+    border-top: 10px solid #BB3609;
+    height: 75px;
+    width: 75px;
+}
+
+/* line 5, ../scss/_spinners.scss */
+
+.loader-success {
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    border: 10px solid #ecf1f3;
+    border-radius: 50%;
+    border-top: 10px solid #25BB3D;
+    height: 75px;
+    width: 75px;
+}
+
+/* line 5, ../scss/_spinners.scss */
+
+.loader-warning {
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    border: 10px solid #ecf1f3;
+    border-radius: 50%;
+    border-top: 10px solid #fff3cd;
+    height: 75px;
+    width: 75px;
+}
+
+/* line 5, ../scss/_spinners.scss */
+
+.loader-white {
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    border: 10px solid #ecf1f3;
+    border-radius: 50%;
+    border-top: 10px solid #fff;
+    height: 75px;
+    width: 75px;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+
+    100% { transform: rotate(360deg); }
+}
+
+/* line 1, ../scss/_tooltip.scss */
+
+.tooltip-inner {
+    background-color: #000;
+    border-radius: 0;
+    color: #fff;
+    max-width: 200px;
+    padding: .25rem .5rem;
+    text-align: center;
+}
+
+/* CSS Document */
+
+/* line 2, ../scss/_popovers.scss */
+
+.popover { border-radius: 0; }
+
+/* line 1, ../scss/_collapse.scss */
+
+.card {
+    border: 1px solid #ecf1f3;
+    border-radius: 0;
+}
+
+/* line 6, ../scss/_collapse.scss */
+
+.card-header {
+    background-color: #ecf1f3;
+    border-bottom: 1px solid #ecf1f3;
+}
+
+/* line 11, ../scss/_collapse.scss */
+
+.btn-link {
+    background-color: transparent;
+    color: #545864;
+    font-weight: 400;
+}
+
+/* line 17, ../scss/_collapse.scss */
+
+.btn-link:hover {
+    background-color: transparent;
+    border-color: transparent;
+    color: #292e3d;
+    text-decoration: underline;
+}
+
+/* CSS Document */
+
+/* line 3, ../scss/_inputgroup.scss */
+
+.input-group-text {
+    background-color: #ecf1f3;
+    border: 1px solid #dae3e6;
+    border-radius: 3px;
+    color: #292e3d;
+}
+
+/* line 10, ../scss/_inputgroup.scss */
+
+.input-group-sm > .form-control, .input-group-sm > .input-group-append > .btn, .input-group-sm > .input-group-append > .input-group-text, .input-group-sm > .input-group-prepend > .btn, .input-group-sm > .input-group-prepend > .input-group-text { border-radius: 3px; }
+
+/* line 14, ../scss/_inputgroup.scss */
+
+.input-group-lg > .form-control, .input-group-lg > .input-group-append > .btn, .input-group-lg > .input-group-append > .input-group-text, .input-group-lg > .input-group-prepend > .btn, .input-group-lg > .input-group-prepend > .input-group-text { border-radius: 3px; }
+
+/* line 18, ../scss/_inputgroup.scss */
+
+.form-control {
+    border-color: #dae3e6;
+    border-radius: 3px;
+    color: #292e3d;
+}
+
+/* line 24, ../scss/_inputgroup.scss */
+
+.form-control:focus {
+    border-color: #b5c6cd;
+    box-shadow: none;
+    color: #292e3d;
+    outline: 0;
+}
+
+/* CSS Document */
+
+/* line 2, ../scss/_navbar.scss */
+
+.tsc_nav_1 .themeBorderBottom { border-bottom: 5px solid #00ae9b; }
+
+/* line 6, ../scss/_navbar.scss */
+
+.tsc_nav_1 .nav-link { font-size: 0.8rem; }
+
+/* line 10, ../scss/_navbar.scss */
+
+.tsc_nav_1 .heading_style {
+    color: white !important;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+/* line 16, ../scss/_navbar.scss */
+
+.tsc_nav_1 .navbar .nav-link:focus, .navbar .nav-link:hover, .navbar .nav-item:hover, .navbar-dark .navbar-nav .nav-link.active {
+    background: #0085ca linear-gradient(135deg, #0087ca 30%, #0087ca 50%, #42a6d8 100%);
+    color: #fff !important;
+}
+
+/* line 21, ../scss/_navbar.scss */
+
+.tsc_nav_1 .dropdown:hover > .dropdown-menu {
+    border-radius: 0px;
+    display: block;
+}
+
+/* line 26, ../scss/_navbar.scss */
+
+.tsc_nav_1 .dropdown-menu {
+    border: 1px solid #dfebf3;
+    box-shadow: 2px 5px 6px 0px rgba(0, 174, 155, 0.07);
+    font-size: 12px;
+    left: auto;
+    margin: 0;
+    padding: 0;
+    right: 0;
+    z-index: 1071;
+}
+
+/* line 37, ../scss/_navbar.scss */
+
+.tsc_nav_1 .dropdown-item { padding: 0.4rem 0.9rem; }
+
+/* line 41, ../scss/_navbar.scss */
+
+.tsc_nav_1 .dropdown-item:hover { background-color: #ecf1f3; }
+
+/* line 45, ../scss/_navbar.scss */
+
+.tsc_nav_1 .navbar .navbar-toggler { border-color: white; }
+
+/* CSS Document */
+
+/* line 3, ../scss/_tabs.scss */
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+    border-top: 3px solid #4fae9b;
+    color: #00ae9b;
+}
+
+/* line 10, ../scss/_tabs.scss */
+
+.nav-tabs .nav-link {
+    border-left: 1px solid #ecf1f3;
+    border-right: 1px solid #ecf1f3;
+    border-top: 3px solid transparent;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    color: #292e3d;
+}
+
+/* line 19, ../scss/_tabs.scss */
+
+.nav-tabs .nav-link.disabled {
+    background-color: transparent;
+    border-color: transparent;
+    color: #6c757d;
+}
+
+/* line 25, ../scss/_tabs.scss */
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+    border-color: #ffffff #e9ecef #ffffff;
+    border-top: 3px solid #00ae9b;
+}
+
+/* line 30, ../scss/_tabs.scss */
+
+.nav-link.disabled:hover {
+    border-color: transparent transparent transparent;
+    border-top: 3px solid transparent;
+}
+
+/* line 35, ../scss/_tabs.scss */
+
+.nav-tabs { border-bottom: 3px solid #00ae9b; }
+
+/* line 39, ../scss/_tabs.scss */
+
+.nav-tabs .nav-item { margin-bottom: 0px; }

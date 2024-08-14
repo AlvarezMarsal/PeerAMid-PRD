@@ -1,0 +1,26 @@
+/* CSS Document */
+
+
+@each $name,$c in $color {
+	.loader-#{$name}
+	{
+		border: $loader-border-size solid $loader-background-color;
+		border-radius: $loader-border-radius;
+		border-top: $loader-border-size solid $c;
+		width: $loader-width;
+		height: $loader-height;
+		-webkit-animation: spin $loader-speed linear infinite;
+		animation: spin $loader-speed linear infinite;
+	}
+}
+
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

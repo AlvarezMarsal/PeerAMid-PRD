@@ -1,0 +1,47 @@
+/* CSS Document */
+#tsc_nav_1 .themeBorderBottom {
+    border-bottom: $navbar_border_bottom;
+}
+
+#tsc_nav_1 .nav-link {
+    font-size: $navbar_navlink_fontsize;
+}
+
+#tsc_nav_1 .heading_style{
+	color: $navbar_heading_color;
+	font-size: $navbar_heading_fontsize;
+	font-weight: $navbar_heading_fontweight;
+}
+
+#tsc_nav_1 .navbar .nav-link:focus, .navbar .nav-link:hover, .navbar .nav-item:hover, .navbar-dark .navbar-nav .nav-link.active {
+    background: $navbar_navlink_hover_background;
+    color: $navbar_navlink_hover_color;
+}
+
+#tsc_nav_1 .dropdown:hover>.dropdown-menu {
+    display: block;
+    border-radius: 0px;
+}
+
+#tsc_nav_1 .dropdown-menu {
+    font-size: $navbar_navlink_dropdown_menu_fontsize;
+    box-shadow: $navbar_navlink_dropdown_menu_boxshadow;
+    border: $navbar_navlink_dropdown_menu_border;
+    z-index: $navbar_navlink_dropdown_menu_zindex;
+    left: auto;
+    right: 0;
+    margin: 0;
+    padding: 0;
+}
+
+#tsc_nav_1 .dropdown-item {
+	padding: $navbar_navlink_dropdown_item_padding;
+}
+
+#tsc_nav_1 .dropdown-item:hover {
+	background-color: $navbar_navlink_dropdown_item_hover_bgcolor;
+}
+
+#tsc_nav_1 .navbar .navbar-toggler {
+    border-color: $navbar_toggler_border_color;
+}

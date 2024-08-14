@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "AboutUs";
+    Layout = "~/Views/Shared/_RegisterLayout.cshtml";
+}
+<style>
+
+    .container-fluid {
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    body {
+        background: #EEEEEE;
+        margin-bottom: 0px;
+        padding-top: 50px;
+    }
+
+    .first-text {
+        color: white;
+        font-size: 1.3vw; /* originally 26px */
+        font-weight: bold;
+        left: 2%;
+        position: absolute;
+        right: 73%; /* Originaly 69% */
+        top: 30%; /* originally 38% */
+    }
+
+    .second-text {
+        color: white;
+        font-size: 1vw; /* originally 19px */
+        left: 2%;
+        position: absolute;
+        right: 70%;
+        top: 60%; /* Originaly 56% */
+    }
+</style>
+<!--About us page text and images-->
+<img src="~/Content/Images/img11.png" style="background: #000; background-size: cover; height: auto; top: 60%; width: 100%; z-index: -100;" id="aboutUsBackground" onclick="  /*quickReport();*/"/>
+<p class="first-text">
+    PeerAMid is A&M’s proprietary on-line self service platform to perform business data analysis, namely, SG&A (Selling, General and Administrative) and other financial analyses for a company and its peers. It requires authenticated access.
+</p>
+<p class="second-text">
+    If you’ve reached this page and would like access, please reach out to A&M’s Insight Center at <a target="_top" class="anchor-underline" href="mailto:insightcenter%40alvarezandmarsal.com">insightcenter@alvarezandmarsal.com</a>.
+</p>

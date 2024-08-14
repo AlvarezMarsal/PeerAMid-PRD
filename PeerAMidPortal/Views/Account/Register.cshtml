@@ -1,0 +1,417 @@
+﻿@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_RegisterLayout.cshtml";
+}
+
+@*@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+
+    }*@
+<script src="~/Scripts/angular/libs/angular.js"></script>
+@*<script src="~/Scripts/Js/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/Js/bootstrap.min.js"></script>*@
+
+<script src="~/Scripts/angular/modules/register-app.js"></script>
+<script src="~/Scripts/angular/services/registerService.js"></script>
+<script src="~/Scripts/angular/controllers/Register/registerController.js"></script>
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval");
+        <script>
+            $('.mSelect').multiselect({
+                enableCaseInsensitiveFiltering: true,
+                includeSelectAllOption: true,
+                enableFiltering: true,
+                onDropdownShown: function (e) {
+                    if (this.options.multiple == false) {
+                        this.$container.find(':radio').hide();
+                        this.$container.find('label').css("padding-left", "0px");
+                    }
+                },
+
+                buttonText: function (options, select) {
+                    if (options.length === 0) {
+                        return 'None selected';
+                    } else if (options.prevObject.length == options.length) {
+                        return 'All selected';
+                    } else if (options.length > 0) {
+                        return options.length + ' selected';
+                    }
+                }
+            });
+        </script>
+    }*@
+@*<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+
+    <script src="~/Scripts/angular/libs/angular.js"></script>
+    <script src="~/Scripts/angular/modules/home-app.js"></script>
+    <script src="~/Scripts/angular/services/homeService.js"></script>
+    <script src="~/Scripts/angular/controllers/home/homeController.js"></script>
+
+    <link href="~/Content/animate.css" rel="stylesheet" />
+    <link href="~/Content/custom.css" rel="stylesheet" />*@
+
+<style type="text/css">
+    .labelbold {
+        color: midnightblue !important;
+        font-weight: bold !important;
+    }
+
+    .error {
+        color: red !important;
+        position: absolute;
+        top: 30px;
+    }
+
+    .ng-not-empty.ng-invalid {
+        border-color: red;
+    }
+
+    .register-message {
+        font-size: 16px;
+        font-weight: normal;
+        margin-left: 74px;
+        margin-top: 20px;
+        min-height: 30px;
+    }
+
+    .btn-cancel {
+    }
+</style>
+
+@*<section class="row breadcrumbDiv" style="margin-top:3px;">
+        <div class="col-sm-12 padding15">
+
+            <p class="paddingBottom10"><a href="index.html">Home</a> &nbsp;  › &nbsp; @ViewBag.Title</p>
+            <h1 class="size20 white">@ViewBag.Title</h1>
+        </div>
+    </section>*@
+<div ng-app="registerPage" style="padding-top: 17px">
+    <section class="whiteBox">
+
+        @*<div class="paddingBottom20 text-center labelbold">
+                <div class="radioC">
+                    <input type="radio" id="radio01" name="radio" checked="" ng-model="registerDiv" value="1">
+                    <label for="radio01" class="labelbold"><span></span>Register User</label>
+                </div>
+
+                <div class="radioC">
+                    <input type="radio" id="radio02" name="radio" ng-model="registerDiv" value="2">
+                    <label for="radio02" class="labelbold"><span></span>Register Company</label>
+                </div>
+            </div>*@
+
+        <!--This is Registration form for customer or user to register in portalss-->
+        <div id="registerControllerDiv" ng-controller="RegisterController">
+            <form name="addCustomer" data-ng-show="addMode" style="margin: 0px auto;">
+
+                @*<div>
+                        <section class="col-xs-12">
+                            <div class="text-danger paddingLeft15 bold">
+                                {{msg}}
+                            </div>
+                        </section>
+                    </div>*@
+
+                <div class="row existingTab" ng-show="isShown('1')">
+                    <div class="col-xs-5 col-xs-offset-3">
+                        <div style="margin-left: 43%;">
+                            <span class="error" style="font-style: italic;">
+                                <b>Please note all fields are Mandatory</b>
+                            </span>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 text-center register-message">
+                                <div class="text-danger">
+                                    {{msg}}
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <section class="col-lg-5 paddingBottom20 text-right" style="line-height: 31px;">
+                                <p class="size12 paddingBottom5 labelbold">Company</p>
+                            </section>
+                            <section class="col-lg-7 paddingBottom20">
+                                @*<select class="mSelect singleSelect">
+                                        <option selected>Industry 1</option>
+                                        <option>Industry 2</option>
+                                        <option>Industry 3</option>
+                                        <option selected>Industry 4</option>
+                                        <option>Industry 5</option>
+                                        <option>Industry 6</option>
+                                    </select>*@
+                                @*<select data-ng-model="PeerCompanyId" data-ng-options="c.PeerCompanyId as c.PeerCompanyName for c in company">
+                                        <option value="">-- Select Company --</option>
+                                    </select>*@
+                                <select ng-init="GetCompanyList()" id="ddlIndustry" class="mSelect" onchange="removeErrorMsg()"></select>
+                                <div class="error">
+                                    {{CompanyRequiredMsg}}
+                                </div>
+                                @*<select ng-init="GetCompanyList()"  id="ddlIndustry" class="mSelect"  onchange="setSelectedCompany()"  ></select>*@
+                                @*<span class="error" data-ng-show="addCustomer.$error.email">Invalid Email format!</span>*@
+                                @*<input type="text" id="inputCompanyId" ng-model="newcustomer.CompanyId" class="inp w100" value="" ng-required="true">*@
+                            </section>
+                        </div>
+                        <div class="row" ng-show="isShown('2')">
+                            <section class="col-lg-5 paddingBottom20 text-right" style="line-height: 31px;">
+                                <p class="size12 paddingBottom5 labelbold">First Name</p>
+                            </section>
+                            <section class="col-lg-7 paddingBottom20">
+
+                                <input ng-model="newcustomer.FirstName" type="text" class="inp w100" value="">
+                            </section>
+                        </div>
+                        <div class="row" ng-show="isShown('2')">
+
+                            <section class="col-lg-5 paddingBottom20 text-right" style="line-height: 31px;">
+                                <p class="size12 paddingBottom5 labelbold">Last Name</p>
+                            </section>
+                            <section class="col-lg-7 paddingBottom20">
+
+                                <input type="text" ng-model="newcustomer.LastName" class="inp w100" value="">
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col-lg-5 paddingBottom20 text-right" style="line-height: 31px;">
+                                <p class="size12 paddingBottom5 labelbold">User Name</p>
+                            </section>
+                            <section class="col-lg-7 paddingBottom20">
+                                <input type="text" ng-model="newcustomer.Username" class="inp w100" value="" ng-maxlength="40" maxlength="40" required>
+                                @*<span class="error" data-ng-show="addCustomer.$error.text">Invalid Username</span>*@
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col-lg-5 paddingBottom20 text-right" style="line-height: 31px;">
+                                <p class="size12 paddingBottom5 labelbold">Email</p>
+                            </section>
+                            <section class="col-lg-7 paddingBottom20">
+
+                                <input type="email" ng-model="newcustomer.EmailID" class="inp w100" value="" ng-maxlength="40" maxlength="40" required ng-pattern="emailFormat">
+                                <span class="error" data-ng-show="addCustomer.$error.pattern">Please enter Email in the valid format!</span>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col-lg-5 paddingBottom20 text-right" style="line-height: 31px;">
+                                <p class="size12 paddingBottom5 labelbold">Password</p>
+                            </section>
+                            <section class="col-lg-7 paddingBottom20">
+                                @*<input type="password" data-ng-model="newcustomer.password" class="inp w100" value="">*@
+                                <input type="password" name="EPassword" ng-model="newcustomer.EPassword" ng-minlength="5" required class="inp w100"/>
+                                <span class="error" data-ng-show="addCustomer.$error.minlength">Please enter atleast 5 characters !</span>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col-lg-5 paddingBottom20 text-right" style="line-height: 31px;">
+                                <p class="size12 paddingBottom5 labelbold">Confirm Password</p>
+                            </section>
+                            <section class="col-lg-7 paddingBottom20">
+                                @*<input type="password" class="inp w100" value="" data-ng-model="newcustomer.ECPassword" required compare-to="newcustomer.password">*@
+                                <input type="password" name="ECPassword" ng-model="newcustomer.ECPassword" required compare-to="newcustomer.EPassword" class="inp w100"/>
+                                <span class="error" data-ng-show="addCustomer.ECPassword.$error.compareTo">
+                                    Passwords don't match.
+                                </span>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col-lg-5 paddingBottom20 text-right" style="line-height: 31px;"></section>
+                            <section class="col-lg-7 paddingBottom20" style="text-align: right;">
+
+                                <input class="btn btn-primary size12 marginRight10" type="submit" value="Register" data-ng-click="add()" data-ng-disabled="!addCustomer.$valid"/>
+                                @*<button class="btn btn-primary size12 marginRight10" ng-click="">Register</button>*@
+                                @*<input class="btn btn-primary size12 marginRight10" type="submit" value="Register" data-ng-click="add()" ng-disabled="validateDropdown() && IsValidated"  />*@
+
+                                <button data-ng-click="reset()" class="btn btn-default size12 marginRight10">Reset</button>
+                                <button onclick="location.href = 'UserLogin'" class="btn btn-cancel size12" style="background-color: #337ab7 !important; border-color: #2e6da4 !important; color: #fff !important;">Cancel</button>
+
+                                @*<a  href="@Url.Action("UserLogin","Account")" class="btn btn-primary size12">Back to Login</a>*@
+                            </section>
+                            <div style="margin-right: 10px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        @*<div class="row existingTab" ng-show="isShown('2')" style="padding-bottom:30px">
+                <div class="col-xs-6" style="border-right: 1px solid #dedede;">
+                    <div class="row">
+                        <section class="col-lg-3 paddingBottom20 text-right" style="line-height:31px;">
+                            <p class="size12 paddingBottom5 labelbold">Company Name</p>
+                        </section>
+                        <section class="col-lg-7 paddingBottom20">
+
+                            <input type="text" class="inp w100" value="">
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col-lg-3 paddingBottom20 text-right" style="line-height:31px;">
+                            <p class="size12 paddingBottom5 labelbold">Country</p>
+                        </section>
+                        <section class="col-lg-7 paddingBottom20">
+
+                            <input type="text" class="inp w100" value="">
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col-lg-3 paddingBottom20 text-right" style="line-height:31px;">
+                            <p class="size12 paddingBottom5 labelbold">SIC 2 Digit Code</p>
+                        </section>
+                        <section class="col-lg-7 paddingBottom20">
+
+                            <select class="mSelect singleSelect">
+                                <option>Code 1</option>
+                                <option>Code 2</option>
+                                <option>Code 3</option>
+                                <option>Code 4</option>
+                                <option>Code 5</option>
+                                <option>Code 6</option>
+                            </select>
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col-lg-3 paddingBottom20 text-right" style="line-height:31px;">
+                            <p class="size12 paddingBottom5 labelbold">SIC Sub Industry</p>
+                        </section>
+                        <section class="col-lg-7 paddingBottom20">
+
+                            <select class="mSelect singleSelect">
+                                <option>Industry 1</option>
+                                <option>Industry 2</option>
+                                <option>Industry 3</option>
+                                <option>Industry 4</option>
+                                <option>Industry 5</option>
+                                <option>Industry 6</option>
+                            </select>
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col-lg-3 paddingBottom20 text-right" style="line-height:31px;">
+                            <p class="size12 paddingBottom5 labelbold">Revenue in (Mn$)</p>
+                        </section>
+                        <section class="col-lg-7 paddingBottom20">
+                            <input type="text" class="inp w100" value="">
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col-lg-3 paddingBottom20 text-right" style="line-height:31px;">
+                            <p class="size12 paddingBottom5 labelbold">Number of Employees</p>
+                        </section>
+                        <section class="col-lg-7 paddingBottom20">
+
+                            <input type="text" class="inp w100" value="">
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col-lg-3 text-right" style="line-height:31px;">
+                            <p class="size12 paddingBottom5 labelbold">SG&A Expenses in (Mn$)</p>
+                        </section>
+                        <section class="col-lg-7">
+
+                            <input type="text" class="inp w100" value="">
+                        </section>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <section class="col-lg-3 paddingBottom20 text-right" style="line-height:31px;">
+                            <p class="size12 paddingBottom5 labelbold">First Name</p>
+                        </section>
+                        <section class="col-lg-7 paddingBottom20">
+
+                            <input type="text" class="inp w100" value="">
+                        </section>
+                    </div>
+                    <div class="row">
+
+                        <section class="col-lg-3 paddingBottom20 text-right" style="line-height:31px;">
+                            <p class="size12 paddingBottom5 labelbold">Last Name</p>
+                        </section>
+                        <section class="col-lg-7 paddingBottom20">
+
+                            <input type="text" class="inp w100" value="">
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col-lg-3 paddingBottom20 text-right" style="line-height:31px;">
+                            <p class="size12 paddingBottom5 labelbold">User Name</p>
+                        </section>
+                        <section class="col-lg-7 paddingBottom20">
+                            <input type="text" class="inp w100" value="">
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col-lg-3 paddingBottom20 text-right" style="line-height:31px;">
+                            <p class="size12 paddingBottom5 labelbold">Email</p>
+                        </section>
+                        <section class="col-lg-7 paddingBottom20">
+
+                            <input type="email" class="inp w100" value="">
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col-lg-3 paddingBottom20 text-right" style="line-height:31px;">
+                            <p class="size12 paddingBottom5 labelbold">Password</p>
+                        </section>
+                        <section class="col-lg-7 paddingBottom20">
+                            <input type="password" class="inp w100" value="">
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col-lg-3 paddingBottom20 text-right" style="line-height:31px;">
+                            <p class="size12 paddingBottom5 labelbold">Confirm Password</p>
+                        </section>
+                        <section class="col-lg-7 paddingBottom20">
+                            <input type="password" class="inp w100" value="">
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col-lg-3 text-right" style="line-height:31px;"></section>
+                        <section class="col-lg-7">
+                            <button class="btn btn-primary size12 marginRight10" ng-click="">Register</button>
+                            <button class="btn btn-default size12">Reset</button>
+                        </section>
+                    </div>
+                </div>
+            </div>*@
+    </section>
+</div>
+
+@*<script>
+
+        var app = angular.module('app', []);
+        var config = { 'Authorization': 'vOuzTZH04SDfWy0XQ49wSQ' };
+
+        app.service('RegisterService', function ($http) {
+
+            this.BaseAddress = "/api/HomeAPI/";
+
+            this.GetPeerCompanyList = function () {
+
+                var url = this.BaseAddress + "GetPeerCompanyList";
+                return $http({ url: url, method: "GET", headers: config });
+            };
+
+        });
+
+        app.controller('RegisterController', function ($scope, RegisterService) {
+
+            $scope.test  = "
+
+            RegisterService.GetPeerCompanyList().success(function (data) {
+                $scope.company = data
+
+            })
+             .error(function (data) {
+                 $scope.error = "An Error has occurred while loading posts! " + data.ExceptionMessage;
+
+             });
+        });
+    </script>*@

@@ -1,0 +1,29 @@
+/* Scss Document */
+@mixin border-radius-custom() {
+	border-radius: 0;
+}
+
+@mixin border-color-transparent() {
+	border-color: transparent;
+}
+
+@mixin text-color-default() {
+	color:white;
+}
+
+@mixin background-color-transparent() {
+	background-color: transparent;
+}
+
+a{
+	color:$info;
+	text-decoration: none;
+	
+	&:hover{
+		color:$primary;
+		text-decoration: none;
+	}
+	
+}
+
+

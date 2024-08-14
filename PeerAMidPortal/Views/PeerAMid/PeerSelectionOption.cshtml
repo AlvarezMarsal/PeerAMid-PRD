@@ -1,0 +1,68 @@
+﻿@using PeerAMid.Support
+
+@{
+    ViewBag.Title = "AboutUs";
+    Layout = "~/Views/Shared/_PeerAMidLayout.cshtml";
+}
+
+<!--Benchmark Company details-->
+<header class="px-3 py-2 bg-light">
+    <strong class="size14" id="benchmarkCompanyName">Name</strong>
+</header>
+<div class="container-fluid border-bottom  bg-light">
+    <section class="row pb-2">
+        <aside class="col-sm-1">
+            <label class="size11">Fiscal Year </label><br>
+            <strong class="size14"  id="benchmarkCompanyFinancialYear">Year</strong>
+        </aside>
+        <aside class="col-sm-1">
+            <label class="size11">Currency </label><br>
+            <strong class="size14" id="benchmarkCompanyCurrency">USD</strong>
+        </aside>
+        <aside class="col-sm-2">
+            <label class="size11">Revenue (in US$ MM) </label><br>
+            <strong class="size14" id="benchmarkCompanyRevenue">0</strong>
+        </aside>
+        <aside class="col-sm-2">
+            <label class="size11">EBITDA Margin (in %)</label><br>
+            <strong class="size14" id="benchmarkCompanyEbitda">0</strong>
+        </aside>
+        <aside class="col-sm-2">
+            <label class="size11">SG&amp;A Expense (in US$ MM)</label><br>
+            <strong class="size14" id="benchmarkCompanySga">0</strong>
+        </aside>
+        <aside class="col-sm-2">
+            <label class="size11">Gross Margin (in %)</label><br>
+            <strong class="size14" id="benchmarkCompanyGrossMargin">0</strong>
+        </aside>
+        <aside class="col-sm-2">
+            <label class="size11">Total Employees</label><br>
+            <strong class="size14" id="benchmarkCompanyEmployees">0</strong>
+        </aside>
+    </section>
+</div>
+<!--three options for peer selection-->
+<div class="container-fluid">
+    <section class="pt-3 mb-2 pb-2">
+        <div class="size14 pb-3 text-primary">
+            <strong>Do you want to use the data listed above? Please select one of the available options below: </strong>
+        </div>
+        <p class="mb-1">
+            <input type="radio" value="a1" name="suboption" id="a1" /><span style="padding-bottom: 5px;">&nbsp;&nbsp;Allow PeerAMid to identify possible peer companies.</span>
+        </p>
+        <p class="mb-1">
+            <input type="radio" value="a2" name="suboption" id="a2" /><span style="padding-bottom: 5px;">&nbsp;&nbsp;I will select my peer companies.</span>
+        </p>
+        <p class="mb-1">
+            <input type="radio" value="a3" name="suboption" id="a3" /> <span style="padding-bottom: 5px;">&nbsp;&nbsp;I will provide the latest client data.</span>
+        </p>
+    </section>
+</div>
+
+<div class="container-fluid">
+    <section class="border-top py-2">
+        <a href="#" onclick="navigateBack();" class="btn btn-outline-secondary">Back</a>
+        <a href="#" onclick="navigateURL();" class="btn btn-secondary ml-3">Next</a>
+    </section>
+</div>
+<script src="~/PeerAmidContent/js/PeerSelectionOptionPage.js"></script>

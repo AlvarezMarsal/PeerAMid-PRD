@@ -1,0 +1,302 @@
+﻿@using PeerAMid.Support
+@using PeerAMid.Utility
+
+
+@{
+    ViewBag.Title = "AboutUs";
+    Layout = "~/Views/Shared/_PeerAMidLayout.cshtml";
+    var auto = SessionData.Instance.AdditionalPeerCompanies;
+    var peer = SessionData.Instance.PossiblePeerCompanies;
+    var peerCompanyList = (peer == "" ? 0 : peer.Split(',').Length) + (auto == "" ? 0 : auto.Split(',').Length);
+    var self = SessionData.Instance.SelfPeerCompanies;
+    // ReSharper disable once UnusedVariable
+    var selfPeerCompanyList = self == "" ? 0 : self.Split(',').Length;
+    //const string email = "\"<a target='_top' class='anchor-underline' href='mailto:insightcenter%40alvarezandmarsal.com'>insightcenter@alvarezandmarsal.com</a>\"";
+    //const string suggestedPeerColor = "#77CA00";
+    //const string lightSuggestedPeerColor = "#E7F7CD";
+
+    const int maxSelectedPeers = 15;
+
+    //var initialLayout = /*(Model.AutoList.Count > 0) ? "start" :*/ "search";
+}
+
+<link rel="stylesheet" type="text/css" href="~/PeerAmidContent/plugins/autocomplete/easy-autocomplete.min.css">
+<script src="~/PeerAmidContent/plugins/autocomplete/jquery.easy-autocomplete.js"></script>
+<link rel="stylesheet" href="~/Scripts/kendo/styles/kendo.common.min.css" />
+<link rel="stylesheet" href="~/Scripts/kendo/styles/kendo.default.min.css" />
+
+<style>
+    .k-grid-header .k-header {
+        background-color: black;
+    }
+
+    .k-grid-header th.k-header {
+        color: white;
+    }
+
+    .k-grid-header .k-column-title {
+        color: white;
+    }
+
+    .suggestedCompanyRow {
+        background-color: #77CA00;
+    }
+
+    .userSelectedRow {
+        background-color: #E0E0E0;
+    }
+
+    .k-grid .k-grid-content {
+        max-height: 400px;
+    }
+
+    .k-grid td {
+        white-space: nowrap;
+    }
+
+    .k-grid-header .k-i-sort-asc-sm, .k-grid-header .k-i-sort-desc-sm, .k-grid-header .k-sort-order {
+        color: lightblue;
+    }
+</style>
+
+<style>
+    .col-10-percent,
+    .col-35-percent,
+    .col-float-percent {
+        position: relative;
+        min-height: 1px;
+        padding-right: 20px;
+        padding-left: 0;
+        flex: 0 0 auto;
+    }
+
+    .col-10-percent {
+        max-width: 10%;
+    }
+
+    .col-35-percent {
+        max-width: 35%;
+    }
+
+    .greenSquare, .yellowSquare {
+        display: inline-block;
+        height: 10px;
+        overflow: hidden;
+        vertical-align: -1px;
+        width: 10px;
+        border: 1px solid black;
+    }
+
+    .yellowSquare {
+        background: #E0E0E0;
+    }
+
+    .greenSquare {
+        background: #77ca00; /*#e8d218;*/
+    }
+
+</style>
+
+<script src="~/Scripts/kendo/js/kendo.all.min.js"></script>
+
+<!--Benchmark Company details-->
+<div class="container-fluid border-bottom bg-light">
+    <section class="row py-2">
+        <aside style="width:15px;">
+        </aside>
+        <aside class="col-float-percent">
+            <label class="size11">Benchmark Company </label><br>
+            <strong class="size14" id="benchmarkCompanyName">Name</strong>
+        </aside>
+        <aside class="col-float-percent">
+            <label class="size11">FY </label><br>
+            <strong class="size14" id="benchmarkCompanyFinancialYear">FY</strong>
+        </aside>
+        <aside class="col-float-percent">
+            <label class="size11">Revenue (in US$ MM) </label><br>
+            <strong class="size14" id="benchmarkCompanyRevenue">Rev</strong>
+        </aside>
+        <aside class="col-float-percent">
+            <label class="size11">Industry </label><br>
+            <strong class="size14" id="headerIndustryName">Industry</strong>
+        </aside>
+        <aside class="col-float-percent">
+            <label class="size11">Sub-Industry</label><br>
+            <strong class="size14" id="benchmarkCompanySubIndustry">SubInd</strong>
+        </aside>
+
+        <input type="hidden" id="optionId1" value="@SessionData.Instance.OptionId" />
+    </section>
+</div>
+
+<div class="container-fluid" style="margin-top: 15px; margin-bottom: 15px;">
+
+    <div class="col">
+
+        <strong class="row" style="margin-top: 5px; margin-bottom: 5px; height: 39px;">To run this analysis, you will need to select at least 6 peer companies; you can select up to 15.</strong>
+
+        <div class="row" style="margin-top: 5px; margin-bottom: 5px; align-items: center;">
+            <strong style="margin-top: 5px; margin-bottom: 5px; margin-right:5px;">Search by name to Add a peer company to the peer group: &nbsp;</strong>
+            <input type="text" class="form-control" maxlength="100" id="CompanySearch" placeholder="Search by Company" style="width: 300px;">
+            &nbsp;or&nbsp;
+            <input type="text" class="form-control" maxlength="20" id="TickerSearch" placeholder="Search by Ticker" style="width: 300px;">
+            <a class="btn btn-secondary text-white size14" style="margin-left:5px; width: 100px;" onclick="searchPeerCompany('nameTicker')">Add <i class="fas fa-angle-down"></i></a>
+        </div>
+
+        <div class="row" style="margin-top: 5px; margin-bottom: 5px; align-items: center; height: 39px;">
+            <strong style="margin-top: 5px; margin-bottom: 5px; margin-right: 5px;">You can expand the search for more peers by adding sub-industries or by changing the minimum and/or maximum revenue values.</strong>
+        </div>
+
+        <!--Searching the companies by industry-->
+        <div class="container-fluid border-bottom border-top bg-light" style="display: flex; flex-direction: column; padding-bottom: 10px;" id="searchCriteria">
+            <div class="row" style="margin-top: 5px;">
+                <div class="col" style="max-width: 300px;">
+                    <label for="selectedRegions" class="size11" style="margin-bottom: 0;">Regions <i class="fas fa-info-circle text-secondary" title="Select which regions to search for companies." data-toggle="tooltip"></i></label>
+                    <select id="selectedRegions" multiple="multiple" class="form-control" data-actions-box="true">
+                    </select>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 5px;">
+                <div class="col" style="max-width: 400px;">
+                    <label for="CompanyIndustrySearch" class="size11" style="width: 100%; margin-bottom: 0;">Industries <i class="fas fa-info-circle text-secondary" title="Select which industries to search for companies." data-toggle="tooltip"></i></label>
+                    <select id="CompanyIndustrySearch" class="form-control">
+                        <option value="1">Example</option>
+                    </select>
+                </div>
+                <div class="col" style="max-width: 400px;">
+                    <label for="CompanySubIndustrySearch" class="size11" style="width: 100%; margin-bottom: 0;">SubIndustries <i class="fas fa-info-circle text-secondary" title="Select which sub industries to search for companies." data-toggle="tooltip"></i></label>
+                    <select id="CompanySubIndustrySearch" multiple="multiple" class="form-control">
+                        <option value="1">Example</option>
+                    </select>
+                </div>
+                <div class="col" style="max-width: 300px;">
+                    <label for="txtMinRevenue" class="size11" style="width: 100%; margin-bottom: 0;">Range of revenue <i class="fas fa-info-circle text-secondary" title="Select the range of revenues to search for companies." data-toggle="tooltip"></i></label>
+                    <input type="text" class="form-control numeric" maxlength="10" id="txtMinRevenue" placeholder="Min Revenue (in US$ MM)" style="font-weight: bold;">
+                </div>
+                @* ReSharper disable once CssBrowserCompatibility *@
+                <div class="col" style="max-width: 18px; padding-left: 0; padding-right: 0; justify-content: center;">
+                    <label class="size11" style="width: 100%; margin-bottom: 0; height: 30px;">&nbsp;</label>
+                    <span>to</span>
+                </div>
+                <div class="col" style="max-width: 300px;">
+                    <label for="txtMinRevenue" class="size11" style="width: 100%; margin-bottom: 0;">&nbsp;</label>
+                    <input type="text" class="form-control numeric" maxlength="10" id="txtMaxRevenue" placeholder="Max Revenue (in US$ MM)" style="font-weight: bold;">
+                </div>
+                <div class="col" style="max-width: 300px;">
+                    <a class="btn btn-secondary text-white size14" style="display: inline-block;
+                                                                          position: relative;
+                                                                          top: 17px;" onclick="setLayout('searchSplit');searchPeerCompany('all');" id="CompanyIndustrySearchButton">Search <i class="fas fa-angle-down"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="size14 py-2 text-primary d-flex justify-content-between">
+        </div>-->
+        <div class="row" style="width: 100%; flex-wrap: nowrap; margin-left: 0; margin-right: 0;" id="List">
+
+            <div id="searchList" class="col" style="display: none; width: calc(50% - 20px); padding-left: 0; padding-right: 0; min-width:600px; max-width:1200px;">
+                <div class="row" style="flex-wrap: nowrap; margin-left: 0; margin-right: 0; width:100%" id="searchList1">
+                    <div class="col-auto" style="width: 100%;" id="searchList2">
+                        <div class="size14 py-2 text-primary d-flex justify-content-between" id="searchList3"></div>
+                        <div class="size14 py-2 text-primary" id="searchList4">
+                            <section id="searchList5">
+                                <strong id="searchList6">Select Peer Companies<small>&nbsp;(Max @maxSelectedPeers)</small></strong>
+                            </section>
+                        </div>
+                        <div class="mb-2 position-relative" style="max-height: 800px;" id="searchList7">
+                            <div id="peerSearchResultsGrid"></div>
+                        </div>
+                        <div class="legend size11">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" style="display: none; width: 23px; padding-left: 0; padding-right: 0;" id="moveToFinal" , title="Add the selected companies in the search list to the selected list.">
+                <div class="row" style="display: inline-block; margin-left: 0; margin-right: 0;">
+                    <div class="col text-center justify-content-center align-self-center button-center" style="padding-left:0; padding-right:0;">
+                        <a class="btn btn-secondary text-white size14" style="width: 100%; padding-left:8px; padding-right:8px; flex-basis:unset;" onclick="moveToFinalList();" id="MoveToFinalListButton">
+                            <i class="fas fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="selectedPeersList" class="col" style="display: inline-block; width: calc(50% - 20px); padding-left: 0; padding-right: 0; min-width: 600px; max-width: 1200px;">
+                <div class="row" style="flex-wrap: nowrap; margin-left: 0; margin-right: 0; width: 100%; ">
+                    <div class="col-auto" style="width: 100%;">
+                        <div class="size14 py-2 text-primary d-flex justify-content-between"></div>
+                        <div class="size14 py-2 text-primary">
+                            <span>
+                                <strong id="totalCompanies">Companies Selected &nbsp;(@peerCompanyList/@maxSelectedPeers)</strong>
+                            </span>
+                            <span style="float: right; font-size:10px; vertical-align:bottom;">
+                                <span id="suggestedSquare">
+                                    <span class="greenSquare"></span><text>&nbsp;Suggested Peer Companies (based on sub industries) &nbsp; &nbsp;</text>
+                                </span>
+                                <span id="additionalSquare">
+                                    <span class="yellowSquare"></span><text>&nbsp;Additional Peers</text>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="mb-2 position-relative" style="max-height: 800px;">
+                            <div id="selectedPeersGrid"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <section class="col-sm-12 border-top py-2">
+                @switch (SessionData.Instance.PeerSelOption)
+                {
+                    case 1:
+                    case 2:
+                        <a href="/PeerAMid/CompanyAutoSelection" class="btn btn-secondary">Back</a>
+                        <a href="#" onclick="runAnalysis();" class="btn btn-outline-secondary ml-3" id="btnRunAnalysis">Run Analysis</a>
+                        break;
+
+                    case 3:
+                        <a href="/PeerAMid/PeerSelectionOption" class="btn btn-secondary">Back</a>
+                        <a href="#" onclick="runAnalysis();" class="btn btn-outline-secondary ml-3" id="btnRunAnalysis">Run Analysis</a>
+                        break;
+
+                    default:
+                        <!-- <a href="/PeerAMid/Search" class="btn btn-outline-secondary BackLocation">Back</a> -->
+                        <a href="javascript:void(0);" onclick="goBack();" class="btn btn-secondary" id="backButton">Back</a>
+                        <a href="javascript:void(0);" onclick="redo();" class="btn btn-secondary" id="redoButton" style="display: none">Redo</a>
+                        <a href="#" onclick="runAnalysis();" class="btn btn-outline-secondary ml-3" id="btnRunAnalysis">Run Analysis</a>
+                        break;
+                }
+            </section>
+        </div>
+    </div>
+    <div class="modal fade" id="Modal2" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <p id="divMessage" class="m-0"></p>
+                </div>
+                <div class="modal-footer hide">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnText">Ok</button>
+                    &nbsp;
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnText2">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*
+    <script src="~/Scripts/pageState.js"></script>
+    <script src="~/Scripts/chevrons.js"></script>*@
+<script src="~/Scripts/grid.js"></script>
+<script src="~/Scripts/companyGrid.js"></script>
+<script src="~/PeerAmidContent/js/PeerSelectionPage.js"></script>

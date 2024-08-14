@@ -1,0 +1,29 @@
+/* CSS Document */
+
+.input-group-text {
+	border:$input-group-prepend-border;
+	border-radius:$input-group-prepend-border-radius;
+	background-color:$input-group-prepend-background-color;	
+	color: $input-group-prepend-text-color;
+}
+
+.input-group-sm>.form-control, .input-group-sm>.input-group-append>.btn, .input-group-sm>.input-group-append>.input-group-text, .input-group-sm>.input-group-prepend>.btn, .input-group-sm>.input-group-prepend>.input-group-text {
+    border-radius: $input-group-border-radius;
+}
+
+.input-group-lg>.form-control, .input-group-lg>.input-group-append>.btn, .input-group-lg>.input-group-append>.input-group-text, .input-group-lg>.input-group-prepend>.btn, .input-group-lg>.input-group-prepend>.input-group-text {
+    border-radius: $input-group-border-radius;
+}
+
+.form-control {
+	border-color:$input-group-border-color;
+	border-radius:$input-group-border-radius;
+	color: $input-group-text-color;
+}
+
+.form-control:focus {
+    color: $input-group-text-color-focus;
+    border-color: $input-group-border-color-focus; 
+    outline: 0;
+    box-shadow: none
+}

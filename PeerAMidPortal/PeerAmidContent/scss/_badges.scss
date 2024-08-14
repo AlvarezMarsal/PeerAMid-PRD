@@ -1,0 +1,27 @@
+/* CSS Document */
+
+@mixin badge($background)
+{
+	background-color: $background;
+}
+@each $name,$c in $color {
+	.badge-#{$name}{
+		@include badge($c);
+		@include border-radius-custom;
+		@include border-color-transparent;
+		@include text-color-default;
+	}
+	.badge-#{$name}[href]:hover {
+			@include badge(transparentize($c,.2));
+			@include border-radius-custom;
+			@include border-color-transparent;
+			@include text-color-default;
+		}
+}
+
+
+
+.badge{
+	font-weight:100;
+}
+

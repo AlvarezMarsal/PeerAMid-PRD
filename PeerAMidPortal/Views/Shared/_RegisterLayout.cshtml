@@ -1,0 +1,228 @@
+﻿@using PeerAMid.Utility
+@using PeerAMid.Support;
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="https://www.alvarezandmarsal.com/sites/default/themes/custom/am/favicon.ico" type="image/vnd.microsoft.icon"/>
+    <title>PeerAMid</title>
+
+    @*@Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet"/>
+    <link href="~/Content/autocomplete/easy-autocomplete.min.css" rel="stylesheet"/>
+    <link href="~/Content/multiselect/bootstrap-multiselect.css" rel="stylesheet"/>
+    @*<link href="~/Content/Css/font-awesome.min.css" rel="stylesheet" />*@
+    @*<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />*@
+    <!-- <link href="plugin/datatable/datatables.min.css" rel="stylesheet"> -->
+    <link href="~/Content/default.css" rel="stylesheet"/>
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.min.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body style="padding-top: 0px;">
+    <!--Loader added will be use when ever required-->
+    <div class="loader-div" style="">
+        <div class="loader"></div>
+    </div>
+    <!-- <script type="text/javascript" src="header.js"></script>   -->
+    <nav id="navSectionLayout" class="navbar navbar-default navbar-fixed-top loginPage" style="padding: 0px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <!--<button type="button" class="navbar-toggle mMenuBtn"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>-->
+                <a href="#">
+                    <img src="~/PeerAmidContent/images/PeerAMid-logo.png" alt="" align="left">
+                </a>
+            </div>
+            <div class="hidden-xs pull-right">
+                <ul class="nav navbar-nav navbar-right" style="display: flex; flex-direction: row;">
+                    <li>
+                        <a class="nav-link" href="https://www.alvarezandmarsal.com/">
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/Account/AboutUs">
+                            <span>About PeerAMid</span>
+                        </a>
+                    </li>
+                    <!-- Display Login link if user is an authorized PeerAMid User (Member of PeerAMid AD Group) (PEER-10) -->
+                    <li>
+                        <a class="nav-link" href="/Account/UserLogin" id="loginLink">
+                            <span>Login</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            @*<section class="mobileMenu visible-xs"> </section>
+        <aside class="whiteBase text-right visible-xs">
+            <div class="BGBlue white size14 padding10 paddingRight15">
+                Logged in as <span class="bold">Demo User</span>
+                <span class="closeMmenu">
+                    <i class="glyphicon glyphicon-remove"></i>
+                </span>
+            </div>
+            <ul class="mobileNav">
+                <li>
+                    <a href="index.html">Dashboard</a>
+                </li>
+                <li>
+                    <a href="Companies.html">Companies</a>
+                </li>
+                <li>
+                    <a href="IndustryComparison.html">Industry</a>
+                </li>
+                <li class="sep"></li>
+                <li>
+                    <a href="ChangePasswordEnduser.html">Change Password</a>
+                </li>
+                <li>
+                    <a href="login.html">Logout</a>
+                </li>
+                <li class="sep"></li>
+                <li>
+                    <a href="javascript:void(0)">Help</a>
+                </li>
+            </ul>
+        </aside>
+            *@
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <!--main content starts here-->
+    <div class="container-fluid body-content" style="padding-top: 0px">
+
+        <!-- Modal for alert and for displaying messages in popup-->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="divHeaderMessage">Alert!</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="divMessage">Some text in the modal.</p>
+                    </div>
+                    <div class="modal-footer hide">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnText">Ok</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnText2" style="display:none;">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+
+        @RenderBody()
+        <!--Footer of portal-->
+        <footer>
+        </footer>
+    </div>
+
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")*@
+    @*<script src="~/Scripts/footer.js"></script>*@
+    <script src="~/Scripts/jquery-1.11.3.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="~/Scripts/slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- <script src="plugin/datatable/datatables.min.js"></script>  -->
+
+    <script src="~/Scripts/autocomplete/jquery.easy-autocomplete.min.js"></script>
+    <script src="~/Scripts/multiselect/bootstrap-multiselect.js"></script>
+    <script src="~/Scripts/master.js"></script>
+    <script src="~/Scripts/f4c09a9637.js"></script>
+    <script src="~/Scripts/sessionData.js"></script>
+
+    <script>
+
+        $(function () {
+            $(".loader-div").hide();
+        });
+
+        function loaderShowHide(showLoader) {
+
+            if (showLoader == true)
+                $(".loader-div").show();
+            else
+                $(".loader-div").hide();
+
+        }
+
+        function bAlert(message, okFunctionCallback, headerText, btnText, btnText2) {
+            if (okFunctionCallback != null && okFunctionCallback != undefined) {
+                $("#btnText").unbind('click');
+                $("#btnText").click(function () {
+                    $('.modal').modal('hide');
+                    okFunctionCallback(1);
+                });
+                $("#btnText2").unbind('click');
+                $("#btnText2").click(function () {
+                    $('.modal').modal('hide');
+                    okFunctionCallback(2);
+                });
+            }
+            if (headerText != undefined) {
+                $('#divHeaderMessage').html(headerText);
+            }
+            if (message != undefined) {
+                $('#divMessage').html(message);
+            }
+            if (btnText != undefined) {
+                $('#btnText').html(btnText);
+            } else {
+                $('#btnText').html("Ok");
+            }
+            if (btnText2 != undefined) {
+                $('#btnText2').html(btnText2);
+                $('#btnText2').show();
+            } else {
+                $('#btnText2').hide();
+            }
+
+            $('.modal').modal('show');
+        }
+    </script>
+    @RenderSection("scripts", false)
+</body>
+</html>
+
+<script type="text/javascript">
+    // Code to execute after page is loaded
+    $(document).ready(function() {
+        const url = location.href.split("/");
+        const path = url[4] || '';
+        const li = $('ul.navbar-nav li');
+        li.find('a.nav-link').removeClass("active");
+        switch (path) {
+
+            case "UserLogin":
+                $('ul.navbar-nav li:eq(2)').find('a.nav-link').addClass("active");
+                break;
+
+            case "":
+                $('ul.navbar-nav li:eq(2)').find('a.nav-link').addClass("active");
+                break;
+
+            case "AboutUs":
+                $('ul.navbar-nav li:eq(1)').find('a.nav-link').addClass("active");
+                break;
+        }
+
+        var sd = getSessionData();
+        if (sd.SingleSignOnEnabled)
+           window.location.href = "/Account/UserLogin";
+
+    });
+</script>

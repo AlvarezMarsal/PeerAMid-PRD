@@ -1,0 +1,227 @@
+﻿@using PeerAMid.Support
+@using PeerAMid.Utility
+@model dynamic
+@{
+    ViewBag.Title = "AboutUs";
+    Layout = "~/Views/Shared/_PeerAMidLayout.cshtml";
+}
+
+<header class="border-bottom px-3 py-2 bg-light">
+    <strong class="size14">@Model.CompanyModel.CompanyName</strong>
+</header>
+<form id="formPartialDataByUser">
+    <aside id="PartialDataByUser" class="">
+        <!-- Inputs for Required Company Level Data -->
+        <div class="container-fluid">
+            <section class="mt-2 size14 text-primary">
+                Required Company Level Data
+                <input type="hidden" id="hdnCompanyId" name="CompanyUID" value="@SessionData.Instance.BenchmarkCompany.Id" />
+                <input type="hidden" id="hdnYear" name="YearId" value="@Model.CompanyModel.FinancialYear" />
+                <input type="hidden" name="YSCID" value="@Model.CompanyModel.YSCID" />
+                <input type="hidden" name="UserId" value="@SessionData.Instance.User.Id" />
+            </section>
+            <section class="row mb-2 py-2">
+                <aside class="col-sm-1">
+                    <label class="size11">Fiscal Year </label><br>
+                    <strong class="size14">@Model.CompanyModel.FinancialYear</strong>
+                </aside>
+                <aside class="col-sm-1">
+                    <label class="size11">Currency </label><br>
+                    <strong class="size14">@Model.CompanyModel.ReportingCurrency</strong>
+                </aside>
+                <aside class="col-sm-2">
+                    <label class="size11">Revenue (in US$ MM) </label><br>
+                    <strong class="size14">@Convert.ToInt64(Model.CompanyModel.Revenue).ToString("#,##0")</strong>
+                </aside>
+                <aside class="col-sm-2">
+                    <label class="size11">EBITDA Margin (in %)</label><br>
+                    <strong class="size14">@string.Format("{0:P}", Model.CompanyModel.Ebitda)</strong>
+                </aside>
+                <aside class="col-sm-2">
+                    <label class="size11">SG&amp;A Expense (in US$ MM) </label><br>
+                    <strong class="size14">@Convert.ToInt64(Model.CompanyModel.Expense).ToString("#,##0")</strong>
+                </aside>
+                <aside class="col-sm-2">
+                    <label class="size11">Gross Margin (in %)</label><br>
+                    <strong class="size14">@string.Format("{0:P}", Model.CompanyModel.GrossMargin)</strong>
+                </aside>
+                <aside class="col-sm-2">
+                    <!--Binding total employees-->
+                    <label class="size11">Total Employees</label><br>
+                    <strong class="size14">@(Model.CompanyModel.TotalEmployees == null ? 0 : Model.CompanyModel.TotalEmployees.ToString("#,##0"))</strong>
+                    <input type="hidden" name="Revenue" value="@Model.CompanyModel.Revenue" />
+                    <input type="hidden" name="GrossMargin" value="@Model.CompanyModel.GrossMargin" />
+                    <input type="hidden" name="EBITDA" value="@Model.CompanyModel.EBITDA" />
+                    <input type="hidden" id="txtExpense" name="SGA" value="@Model.CompanyModel.Expense" />
+                    <input type="hidden" id="txtTotalNumOfEmployee" name="TotalNumOfEmployee" value="@Model.CompanyModel.TotalEmployees" />
+                    <input type="hidden" id="isOptionalDataReq" name="IsOptionalData" value="0" />
+                </aside>
+            </section>
+
+            @{
+                // Hide Functional Department Level Data section if SG&A High Level Cost diagnostic was selected (PEER-2)
+                var disabledProperty = string.Empty;
+                var skipDeptLevelDataValidation = false;
+                if (SessionData.Instance.SelectedService == PeerAMidService.SgaShort)
+                {
+                    disabledProperty = "d-none";
+                    skipDeptLevelDataValidation = true;
+                }
+            }
+
+            <!-- Inputs for Functional Department Level Data -->
+            <section class="@disabledProperty mt-2 pb-2 mb-2 border-bottom size14 text-primary">
+                Functional Department Level Data <i class="fas fa-info-circle text-secondary" title="The functional departmental data is comprised of:
+Total functional costs which includes, Labor, Outsourcing, Technology and Other Costs for the in scope staff.
+FTE – A Full Time Equivalent (“FTE”) is based on a regular work week, typically 40 hours. An employee that works 20 hours a week would be 0.5 FTE.
+" data-toggle="tooltip"></i>
+            </section>
+            <div id="OptionalFunctional" class="@disabledProperty">
+                <section class="row mb-2 pb-2">
+                    <aside class="col-sm-6">
+                        <section class="row mb-2">
+                            <div class="col-sm-3 align-self-center">Unit of Measurement <i class="fas fa-info-circle text-secondary" title="Please select Unit of Measurement" data-toggle="tooltip"></i></div>
+                            <div class="col-sm-4">
+                                <!-- Dropdown control Unit Of Measurement -->
+                                <select disabled="disabled" id="ddlUnitOfMeasurement" name="dllUnitOfMeasurement" class="form-control req">
+                                    <option value="Millions">Millions</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="hidden" id="hddUnitOfMeasurement" name="UnitOfMeasure" value="@Model.CompanyModel.DataEntryUnitOfMeasure">
+                            </div>
+                        </section>
+                    </aside>
+                </section>
+                <section class="row mb-2 pb-2">
+                    <aside class="col-sm-6">
+                        <section class="row mb-2">
+                            <div class="col-sm-4 offset-3">Cost</div>
+                            <div class="col-sm-3">FTEs</div>
+                        </section>
+                        <section class="row mb-2">
+                            <div class="col-sm-3 align-self-center">Finance <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Finance function cost, and how many full time equivalents (FTEs) are assigned to the Finance function?" data-toggle="tooltip"></i></div>
+                            <div class="col-sm-4">
+                                <!-- textbox for FinanceCost --><input type="text" id="txtFinanceCost" value="@Model.ClientDataModel.SGACostFinance" maxlength="13" name="SGACostFinance" class="form-control decimal req">
+                            </div>
+                            <div class="col-sm-4">
+                                <!-- textbox for FinanceFTE --><input type="text" id="txtFinanceFTE" maxlength="10" value="@Model.ClientDataModel.FTEFinance" name="FTEFinance" class="form-control decimal req">
+                            </div>
+                        </section>
+                        <section class="row mb-2">
+                            <div class="col-sm-3 align-self-center">Human Resource <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Human Resource function cost, and how many full time equivalents (FTEs) are assigned to the Human Resource function?" data-toggle="tooltip"></i></div>
+                            <div class="col-sm-4">
+                                <!-- textbox for HumanResourceCost --><input type="text" id="txtHumanResourceCost" value="@Model.ClientDataModel.SGACostHumanResources" maxlength="13" name="SGACostHumanResources" class="form-control decimal req">
+                            </div>
+                            <div class="col-sm-4">
+                                <!-- textbox for HumanResourceFTE --><input id="txtHumanResourceFTE" maxlength="10" value="@Model.ClientDataModel.FTEHumanResources" type="text" name="FTEHumanResources" class="form-control decimal req">
+                            </div>
+                        </section>
+                        <section class="row mb-2">
+                            <div class="col-sm-3 align-self-center">Info Tech <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Information Technology function cost, and how many full time equivalents (FTEs) are assigned to the Information Technology function?" data-toggle="tooltip"></i></div>
+                            <div class="col-sm-4">
+                                <!-- textbox for InfoTechCost --><input id="txtInfoTechCost" maxlength="13" value="@Model.ClientDataModel.SGACostIT" name="SGACostIT" type="text" class="form-control decimal req">
+                            </div>
+                            <div class="col-sm-4">
+                                <!-- textbox for InfoTechFTE --><input id="txtInfoTechFTE" maxlength="10" value="@Model.ClientDataModel.FTEIT" type="text" name="FTEIT" class="form-control decimal req">
+                            </div>
+                        </section>
+                        <section class="row mb-2">
+                            <div class="col-sm-3 align-self-center">Procurement <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Procurement function cost, and how many full time equivalents (FTEs) are assigned to the Procurement function?" data-toggle="tooltip"></i></div>
+                            <div class="col-sm-4">
+                                <!-- textbox for ProcurementCost --><input id="txtProcurementCost" maxlength="13" value="@Model.ClientDataModel.SGACostProcurement" name="SGACostProcurement" type="text" class="form-control decimal req">
+                            </div>
+                            <div class="col-sm-4">
+                                <!-- textbox for ProcurementFTE --><input id="txtProcurementFTE" maxlength="10" value="@Model.ClientDataModel.FTEProcurement" type="text" name="FTEProcurement" class="form-control decimal req">
+                            </div>
+                        </section>
+                    </aside>
+
+                    <aside class="col-sm-6">
+                        <section class="row mb-2">
+                            <div class="col-sm-4 offset-3">Cost</div>
+                            <div class="col-sm-3">FTEs</div>
+                        </section>
+                        <section class="row mb-2">
+                            <div class="col-sm-3 align-self-center">Sales <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Sales function cost, and how many full time equivalents (FTEs) are assigned to the Sales function?" data-toggle="tooltip"></i></div>
+                            <div class="col-sm-4">
+                                <!-- textbox for SalesCost --><input id="txtSalesCost" maxlength="13" type="text" value="@Model.ClientDataModel.SGACostSales" name="SGACostSales" class="form-control decimal req">
+                            </div>
+                            <div class="col-sm-4">
+                                <!-- textbox for SalesFTE --><input id="txtSalesFTE" maxlength="10" type="text" value="@Model.ClientDataModel.FTESales" name="FTESales" class="form-control decimal req">
+                            </div>
+                        </section>
+                        <section class="row mb-2">
+                            <div class="col-sm-3 align-self-center">Marketing <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Marketing function cost, and how many full time equivalents (FTEs) are assigned to the Marketing function?" data-toggle="tooltip"></i></div>
+                            <div class="col-sm-4">
+                                <!-- textbox for MarketingCost --><input id="txtMarketingCost" maxlength="13" value="@Model.ClientDataModel.SGACostMarketing" type="text" name="SGACostMarketing" class="form-control decimal req">
+                            </div>
+                            <div class="col-sm-4">
+                                <!-- textbox for MarketingFTE --><input id="txtMarketingFTE" maxlength="10" value="@Model.ClientDataModel.FTEMarketing" type="text" name="FTEMarketing" class="form-control decimal req">
+                            </div>
+                        </section>
+                        <section class="row mb-2">
+                            <div class="col-sm-3 align-self-center">Customer Services <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Customer Service function cost, and how many full time equivalents (FTEs) are assigned to the Customer Service function?" data-toggle="tooltip"></i></div>
+                            <div class="col-sm-4">
+                                <!-- textbox for CustomerServicesCost --><input id="txtCustomerServicesCost" type="text" maxlength="13" value="@Model.ClientDataModel.SGACostCustomerServices" name="SGACostCustomerServices" class="form-control decimal req">
+                            </div>
+                            <div class="col-sm-4">
+                                <!-- textbox for CustomerServicesFTE --><input id="txtCustomerServicesFTE" maxlength="10" value="@Model.ClientDataModel.FTECustomerServices" type="text" name="FTECustomerServices" class="form-control decimal req">
+                            </div>
+                        </section>
+                        <section class="row mb-2">
+                            <div class="col-sm-3 align-self-center">Corp Services <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Corporate Service function cost, and how many full time equivalents (FTEs) are assigned to the Corporate Service function?" data-toggle="tooltip"></i></div>
+                            <div class="col-sm-4">
+                                <!-- textbox for CorpServicesCost --><input id="txtCorpServicesCost" maxlength="13" value="@Model.ClientDataModel.SGACostCorporateSupportServices" type="text" name="SGACostCorporateSupportServices" class="form-control decimal req">
+                            </div>
+                            <div class="col-sm-4">
+                                <!-- textbox for CorpServicesFTE --><input id="txtCorpServicesFTE" maxlength="13" value="@Model.ClientDataModel.FTECorporateSupportServices" type="text" name="FTECorporateSupportServices" class="form-control decimal req">
+                            </div>
+                        </section>
+                    </aside>
+                </section>
+            </div>
+            <section class="border-top py-2">
+                @if (SessionData.Instance.PeerSelOption == 3)
+                {
+                    <a href="/PeerAMid/PeerSelectionOption" class="btn btn-outline-secondary ">Back</a>
+                }
+                else
+                {
+                    <a href="/PeerAMid/Search" class="btn btn-outline-secondary ">Back</a>
+                }
+                @{
+                    SessionData.Instance.PeerSelOption = 1;
+                }
+                @*                <a href="/PeerAMid/Search" class="btn btn-outline-secondary">Back</a>*@
+
+                <!-- Display "Next" button and tell the "Save" event whether or not to skip department level validation (PEER-2) -->
+                @if (skipDeptLevelDataValidation)
+                {
+                    <a href="javascript:void(0);" onclick="savePartialDataAndNavigate(true);" class="btn btn-secondary ml-3">Next</a>
+                }
+                else
+                {
+                    <a href="javascript:void(0);" onclick="savePartialDataAndNavigate(false);" class="btn btn-secondary ml-3">Next</a>
+                }
+            </section>
+        </div>
+    </aside>
+</form>
+
+<!--Modal for Terms & Conditions-->
+<div class="modal fade" id="TandCconfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                By clicking on the 'Agree' button, you are agreeing to the <a href="javascript:void(0)">Terms & Conditions</a>
+            </div>
+            <div class="p-3 text-center border-top">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="TnCAgree">Agree</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" id="TCdisagree">Disagree</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/PeerAmidContent/js/BenchmarkCompanyDataPage.js"></script>

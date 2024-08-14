@@ -1,0 +1,210 @@
+.floatingChart {
+    border: 1px solid #ccc;
+    height: 600px;
+    padding: 50px 200px 50px 100px;
+    position: relative;
+    width: 1050px;
+}
+
+    .floatingChart .mainChart {
+        border-bottom: 1px solid #888;
+        border-left: 1px solid #888;
+        height: 480px;
+        position: relative;
+        width: 750px;
+    }
+
+    .floatingChart .leftLabel {
+        height: inherit;
+        left: -50px;
+        position: absolute;
+        width: 50px;
+    }
+
+        .floatingChart .leftLabel > span {
+            display: block;
+            height: 10%;
+            position: relative;
+        }
+
+            .floatingChart .leftLabel > span:after {
+                background: #000;
+                content: "";
+                height: 1px;
+                position: absolute;
+                right: 0px;
+                top: -1px;
+                width: 5px;
+            }
+
+        .floatingChart .leftLabel span .labeltext {
+            display: inline-block;
+            position: absolute;
+            right: 15px;
+            top: -8px;
+        }
+
+    .floatingChart .bottomLabel {
+        bottom: -50px;
+        height: 50px;
+        position: absolute;
+        width: inherit;
+    }
+
+        .floatingChart .bottomLabel > span {
+            display: inline-block;
+            float: left;
+            padding-top: 10px;
+            position: relative;
+            text-align: right;
+            width: 10%;
+        }
+
+        .floatingChart .bottomLabel span .labeltext {
+            display: inline-block;
+            margin-right: -10px
+        }
+
+        .floatingChart .bottomLabel > span:after {
+            background: #000;
+            content: "";
+            height: 5px;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            width: 1px;
+        }
+
+    .floatingChart .blueGrid {
+        display: inline-block;
+        position: absolute;
+    }
+
+    .floatingChart .greenGrid {
+        display: inline-block;
+        position: absolute;
+    }
+
+    .floatingChart .g1 {
+        border-top: 1px dashed #274278;
+        bottom: 75%;
+        height: 1px;
+        margin-bottom: -1px;
+        width: 100%;
+    }
+
+    .floatingChart .g3 {
+        border-top: 1px dashed #0db458;
+        bottom: 50%;
+        height: 1px;
+        margin-bottom: 0px;
+        width: 100%;
+    }
+
+    .floatingChart .g2 {
+        border-right: 1px dashed #274278;
+        height: 100%;
+        left: 75%;
+        width: 1px;
+    }
+
+    .floatingChart .g4 {
+        border-right: 1px dashed #0db458;
+        height: 100%;
+        left: 50%;
+        width: 1px;
+    }
+
+    .floatingChart .dots {
+        color: #000;
+        display: inline-block;
+        margin-bottom: -8px;
+        margin-left: -8px;
+        padding-left: 20px;
+        position: absolute;
+        width: 200px;
+    }
+
+        .floatingChart .dots:before {
+            border-radius: 16px;
+            content: "";
+            height: 16px;
+            left: 0px;
+            position: absolute;
+            width: 16px;
+        }
+
+        .floatingChart .dots.greenDot:before {
+            background: rgb(0, 206, 106); /* Old browsers */
+            /* background: -moz-radial-gradient(center, ellipse cover, rgba(0, 206, 106, 1) 1%, rgba(0, 124, 27, 1) 100%); /* FF3.6-15 */
+            /* background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 206, 106, 1) 1%, rgba(0, 124, 27, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: radial-gradient(ellipse at center, rgba(0, 206, 106, 1) 1%, rgba(0, 124, 27, 1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ce6a', endColorstr='#007c1b', GradientType=1); /* IE6-9 fallback on horizontal gradient */
+        }
+
+        .floatingChart .dots.blueDot:before {
+            background: rgb(136, 56, 201); /* Old browsers */
+            /* background: -moz-radial-gradient(center, ellipse cover, rgba(136, 56, 201, 1) 0%, rgba(75, 33, 119, 1) 100%); /* FF3.6-15 */
+            /* background: -webkit-radial-gradient(center, ellipse cover, rgba(136, 56, 201, 1) 0%, rgba(75, 33, 119, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: radial-gradient(ellipse at center, rgba(136, 56, 201, 1) 0%, rgba(75, 33, 119, 1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8838c9', endColorstr='#4b2177', GradientType=1); /* IE6-9 fallback on horizontal gradient */
+        }
+
+        .floatingChart .dots.d1 {
+            bottom: 40%;
+            left: 40%;
+        }
+
+        .floatingChart .dots.d2 {
+            bottom: 30%;
+            left: 20%;
+        }
+
+    .floatingChart .leftCaption {
+        -ms-transform: rotate(-90deg);
+        -webkit-transform: rotate(-90deg);
+        bottom: 50%;
+        color: #000;
+        font-size: 16px;
+        font-weight: bold;
+        left: -30px;
+        position: absolute;
+        transform: rotate(-90deg);
+    }
+
+    .floatingChart .bottomCaption {
+        bottom: 10px;
+        color: #000;
+        font-size: 16px;
+        font-weight: bold;
+        left: 40%;
+        position: absolute;
+    }
+
+    .floatingChart .dots.greenDotPDF:before {
+        background: #29702a
+    }
+
+    .floatingChart .dots.blueDotPDF:before {
+        background: #5e8ab4
+    }
+
+    .floatingChart .circularLabel {
+        border: 2px solid #f7a641;
+        border-radius: 253px;
+        height: 280px;
+        left: 56%;
+        position: absolute;
+        top: -42px;
+        width: 280px;
+    }
+
+    .floatingChart .highlightedSection {
+        background: rgb(237, 240, 239);
+        border: 1px solid rgba(247, 166, 65, 0.3);
+        bottom: 75%;
+        height: 120px;
+        left: 75%;
+        position: absolute;
+        width: 188px;
+    }

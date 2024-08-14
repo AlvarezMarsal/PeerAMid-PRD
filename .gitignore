@@ -1,0 +1,25 @@
+.vs
+bin
+obj
+*.user
+~*
+packages/
+Debug
+Release
+DEV
+PROD
+/temp
+/Database Snapshot
+/*.sql
+/*.dbmdl
+/*.jfm
+/USE1DEVICRSQL01
+/PeerAMid-DEV/Database/Database.dbmdl
+/PeerAMid-DEV/Database/Database.jfm
+/PeerAMid-LOCAL/Database/Database.dbmdl
+/PeerAMid-LOCAL/Database/Database.jfm
+/USE1UATICRSQL01
+/PeerAMid-EXP-Backup
+/LAPTOP-5VVVBFQ8
+/PeerAMid-Working-Backup
+/USE1PRDICRSQL01

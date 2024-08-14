@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "AssemblyInfoRewriter": {
+      "commandName": "Project",
+      "commandLineArgs": "..\\..\\..\\..\\Properties\r\nDebug\r\n\"Alvarez & Marsal\""
+    },
+    "Home": {
+      "commandName": "Project",
+      "commandLineArgs": "\\PeerAMid\\PeerAMid\\\\Properties\\ \r\nDEV \r\n\"Alvarez & Marsal\""
+    }
+  }
+}

@@ -1,0 +1,276 @@
+﻿@using PeerAMid.Support
+
+@{
+    ViewBag.Title = "AboutUs";
+    Layout = "~/Views/Shared/_PeerAMidLayout.cshtml";
+}
+
+@{
+    // Hide Functional Department Level Data section if SG&A High Level Cost diagnostic was selected (PEER-14)
+    var disabledProperty = string.Empty;
+    var skipDeptLevelDataValidation = false;
+    if (SessionData.Instance.SelectedService == PeerAMidService.SgaShort)
+    {
+        disabledProperty = "d-none";
+        skipDeptLevelDataValidation = true;
+    }
+}
+
+
+<form id="formAddCompany">
+
+
+<div class="container-fluid">
+<!-- Inputs for Required Company Level Data -->
+<section class="mb-2 border-bottom size14 text-primary" style="line-height: 51px;">
+    Required Company Level Data
+    <div class="float-right">
+        <!-- Binding Unit of Measurement -->
+        <label class="size11">Unit of Measurement <i class="fas fa-info-circle text-secondary" title="Please select Unit of Measurement" data-toggle="tooltip"></i></label>
+        <select id="ddlUnitOfMeasurement" name="UnitOfMeasure" class="form-control req" style="display: inline-block; width: 119px;">
+            <option value="Millions" selected="selected">Millions</option>
+            <option value="Billions">Billions</option>
+            <option value="Thousands">Thousands</option>
+            <option value="WholeNumbers">Whole Numbers</option>
+        </select>
+        <!-- Binding Currency -->
+        <label class="size11">Currency <i class="fas fa-info-circle text-secondary" title="Select the currency of the data" data-toggle="tooltip"></i></label>
+        <select id="ddlCurrency" name="CurrencyId" class="form-control req" style="display: inline-block; width: 83px;">
+            <option value="USD">USD</option>
+        </select>
+        <!-- Binding Exchange Rate -->
+        <label class="size11">Exchange Rate (to USD) <i class="fas fa-info-circle text-secondary" title="Enter the exchange rate for this currency" data-toggle="tooltip"></i></label>
+        <input id="txtExchangeRate" name="ExchangeRate" type="text" class="form-control req" style="display: inline-block; width: 83px;">
+        <!-- Binding Currency -->
+    </div>
+</section>
+<div id="reqCompanyLevelData">
+    <section class="row mb-2 py-2">
+        <aside class="col-sm-3">
+            <label class="size11">Company Type <i class="fas fa-info-circle text-secondary" title="Select your business entity company type" data-toggle="tooltip"></i></label>
+            <select class="form-control req" name="CompanyType" id="ddlCompanyType">
+                <option value="">Select</option>
+                <option value="Private">Private</option>
+                <option value="Public">Public</option>
+            </select>
+            <!-- Binding Company Type -->
+        </aside>
+        <aside class="col-sm-3">
+            <label class="size11">Company Name <i class="fas fa-info-circle text-secondary" title="Name of the business entity for which you intend to submit data" data-toggle="tooltip"></i></label>
+            <input type="text" id="txtCompanyName" maxlength="100" name="CompanyName" class="form-control req">
+            <input type="hidden" name="UserId" value="@SessionData.Instance.User.Id"/>
+            <!-- Binding Company Name -->
+        </aside>
+        <aside class="col-sm-3">
+            <label class="size11">Ticker/Business Entity Short Name <i class="fas fa-info-circle text-secondary" title="Publicly traded companies please enter your stock exchange followed by the Ticker Symbol (example NYSE:IBM), other private companies with no ticker symbol, please provide your Business Entity’s Short Name" data-toggle="tooltip"></i></label>
+            <input type="text" id="txtTicker" maxlength="30" name="Ticker" class="form-control req">
+            <!-- Binding Ticker/Business Entity Short Name -->
+        </aside>
+        <aside class="col-sm-3">
+            <label class="size11">SIC 2 digit Industry Code <i class="fas fa-info-circle text-secondary" title="Select the two digit Standard Industrial Classification (SIC) industry code" data-toggle="tooltip"></i></label>
+            <select class="form-control req" name="IndustryId" id="ddlIndustry">
+                <option value="">Select</option>
+                @*foreach (var item in Model.IndustryList)
+                {
+                    <option value="@item.IndustryId">@item.IndustryName</option>
+                }*@
+            </select>
+            <!-- Binding SIC 2 digit Industry Code -->
+        </aside>
+    </section>
+    <hr>
+    <section class="row mb-2 pb-2">
+        <aside class="col-sm-3">
+            <label class="size11">SIC 4 digit Sub-Industry code<i class="fas fa-info-circle text-secondary" title="Select the four digit Standard Industrial Classification (SIC) sub industry code" data-toggle="tooltip"></i></label>
+            <select class="form-control req" name="SubIndustryId" id="ddlSubIndustry">
+                <option value="">Select</option>
+            </select>
+            <!-- Binding SIC 4 digit Sub-Industry code -->
+        </aside>
+        <aside class="col-sm-3">
+            <label class="size11">Fiscal Year <i class="fas fa-info-circle text-secondary" title="Select the data year of your business entity data" data-toggle="tooltip"></i></label>
+            <select id="ddlFiscalYear" name="YearId" class="form-control req"></select>
+            <!-- Binding Fiscal Year -->
+        </aside>
+        <aside class="col-sm-3">
+            <label class="size11">Total Employees <i class="fas fa-info-circle text-secondary" title="What is the number of all employees (temporary, part-time, and full-time) at your business entity?" data-toggle="tooltip"></i></label>
+            <input id="txtTotalEmployees" name="TotalNumOfEmployee" maxlength="8" type="text" class="form-control req numeric">
+            <input type="hidden" id="isOptionalDataReq" name="IsOptionalData" value="0"/>
+            <!-- Binding Total Employees -->
+        </aside>
+        <aside class="col-sm-3">
+            <label class="size11">Revenue <i class="fas fa-info-circle text-secondary" title="What is the total annual revenue for your business entity?" data-toggle="tooltip"></i></label>
+            <input id="txtRevenue" name="Revenue" type="text" maxlength="13" class="form-control req decimal">
+            <!-- Binding Revenue -->
+        </aside>
+    </section>
+    <section class="row mb-2 pb-2">
+
+        <aside class="col-sm-3">
+            <label class="size11">EBITDA <i class="fas fa-info-circle text-secondary" title="What is the EBITDA for your business entity?" data-toggle="tooltip"></i></label>
+            <input id="txtEBITDA" name="EBITDA" type="text" maxlength="13" class="form-control req negativeDecimal">
+            <!-- input box for EBITDA -->
+        </aside>
+        <aside class="col-sm-3">
+            <label class="size11">SG&A Expense <i class="fas fa-info-circle text-secondary" title="What is the total annual selling, general, and administrative (SG&A) costs incurred by your business entity?" data-toggle="tooltip"></i></label>
+            <input id="txtExpense" name="SGA" type="text" maxlength="13" class="form-control req decimal">
+            <!-- input box for SG&A Expense -->
+        </aside>
+        <aside class="col-sm-3">
+            <label class="size11">Gross Profit <i class="fas fa-info-circle text-secondary" title="What is the total Gross Profit made by your business entity?" data-toggle="tooltip"></i></label>
+            <input id="txtGrossProfit" maxlength="13" type="text" name="GrossMargin" class="form-control req negativeDecimal">
+            <!-- input box for Gross Profit -->
+        </aside>
+        <aside class="col-sm-3">
+            <label class="size11">Country<i class="fas fa-info-circle text-secondary" title="Select the name of the country for the company" data-toggle="tooltip"></i></label>
+            <select class="form-control req" name="Country" id="ddlCountry">
+                <option value="">Select</option>
+                @foreach (var item in MvcApplication.GlobalStaticData.AllCountries)
+                {
+                    <option value="@item.Name">@item.Name</option>
+                }
+            </select>
+            <!-- Binding SIC 4 digit Sub-Industry code -->
+        </aside>
+    </section>
+    <section class="row mb-2 pb-2">
+
+        <aside class="col-sm-3"></aside>
+        <aside class="col-sm-3"></aside>
+        <aside class="col-sm-3"></aside>
+    </section>
+</div>
+
+<!--Functional Department Level Data -->
+<section class="@disabledProperty mt-2 pb-2 mb-2 border-bottom size14 text-primary">
+    Functional Department Level Data <i class="fas fa-info-circle text-secondary" title="The functional departmental data is comprised of:
+Total functional costs which includes, Labor, Outsourcing, Technology and Other Costs for the in scope staff.
+FTE – A Full Time Equivalent (“FTE”) is based on a regular work week, typically 40 hours. An employee that works 20 hours a week would be 0.5 FTE.
+" data-toggle="tooltip"></i>
+</section>
+
+<div class="@disabledProperty" id="OptionalFunctional">
+    <section class="row mb-2 pb-2">
+        <aside class="col-sm-6">
+            <section class="row mb-2">
+                <div class="col-sm-4 offset-3">Cost </div>
+                <div class="col-sm-3">FTEs</div>
+            </section>
+            <section class="row mb-2">
+                <div class="col-sm-3 align-self-center">Finance <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Finance function cost, and how many full time equivalents (FTEs) are assigned to the Finance function?" data-toggle="tooltip"></i></div>
+                <div class="col-sm-4">
+                    <!-- input box for Finance function --><input id="txtFinanceCost" maxlength="13" name="SGACostFinance" type="text" class="form-control decimal req">
+                </div>
+                <div class="col-sm-4">
+                    <!-- input box for Finance FTE --><input id="txtFinanceFTE" maxlength="10" type="text" name="FTEFinance" class="form-control decimal req">
+                </div>
+            </section>
+            <section class="row mb-2">
+                <div class="col-sm-3 align-self-center">Human Resource <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Human Resource function cost, and how many full time equivalents (FTEs) are assigned to the Human Resource function?" data-toggle="tooltip"></i></div>
+                <div class="col-sm-4">
+                    <!-- input box for Human Resource cost--><input id="txtHumanResourceCost" maxlength="13" name="SGACostHumanResources" type="text" class="form-control decimal req">
+                </div>
+                <div class="col-sm-4">
+                    <!-- input box for Human Resource fte--><input id="txtHumanResourceFTE" maxlength="10" type="text" name="FTEHumanResources" class="form-control decimal req">
+                </div>
+            </section>
+            <section class="row mb-2">
+                <div class="col-sm-3 align-self-center">Info Tech <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Information Technology function cost, and how many full time equivalents (FTEs) are assigned to the Information Technology function?" data-toggle="tooltip"></i></div>
+                <div class="col-sm-4">
+                    <!-- input box for InfonTech Cost --><input id="txtInfoTechCost" maxlength="13" name="SGACostIT" type="text" class="form-control decimal req">
+                </div>
+                <div class="col-sm-4">
+                    <!-- input box for InfoTech Fte --><input id="txtInfoTechFTE" maxlength="10" type="text" name="FTEIT" class="form-control decimal req">
+                </div>
+            </section>
+            <section class="row mb-2">
+                <div class="col-sm-3 align-self-center">Procurement <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Procurement function cost, and how many full time equivalents (FTEs) are assigned to the Procurement function?" data-toggle="tooltip"></i></div>
+                <div class="col-sm-4">
+                    <!-- input box for ProcurementCost --><input id="txtProcurementCost" maxlength="13" name="SGACostProcurement" type="text" class="form-control decimal req">
+                </div>
+                <div class="col-sm-4">
+                    <!-- input box for FTEProcurement --><input id="txtProcurementFTE" maxlength="10" type="text" name="FTEProcurement" class="form-control decimal req">
+                </div>
+            </section>
+        </aside>
+
+        <aside class="col-sm-6">
+            <section class="row mb-2">
+                <div class="col-sm-4 offset-3">Cost </div>
+                <div class="col-sm-3">FTEs</div>
+            </section>
+            <section class="row mb-2">
+                <div class="col-sm-3 align-self-center">Sales <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Sales function cost, and how many full time equivalents (FTEs) are assigned to the Sales function?" data-toggle="tooltip"></i></div>
+                <div class="col-sm-4">
+                    <!-- input box for SalesCost --><input id="txtSalesCost" maxlength="13" type="text" name="SGACostSales" class="form-control decimal req">
+                </div>
+                <div class="col-sm-4">
+                    <!-- input box for SalesFTE --><input id="txtSalesFTE" maxlength="10" type="text" name="FTESales" class="form-control decimal req">
+                </div>
+            </section>
+            <section class="row mb-2">
+                <div class="col-sm-3 align-self-center">Marketing <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Marketing function cost, and how many full time equivalents (FTEs) are assigned to the Marketing function?" data-toggle="tooltip"></i></div>
+                <div class="col-sm-4">
+                    <!-- input box for MarketingCost --><input id="txtMarketingCost" maxlength="13" type="text" name="SGACostMarketing" class="form-control decimal req">
+                </div>
+                <div class="col-sm-4">
+                    <!-- input box for MarketingFTE --><input id="txtMarketingFTE" maxlength="10" type="text" name="FTEMarketing" class="form-control decimal req">
+                </div>
+            </section>
+            <section class="row mb-2">
+                <div class="col-sm-3 align-self-center">Customer Services <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Customer Service function cost, and how many full time equivalents (FTEs) are assigned to the Customer Service function?" data-toggle="tooltip"></i></div>
+                <div class="col-sm-4">
+                    <!-- input box for CustomerServicesCost --><input id="txtCustomerServicesCost" maxlength="13" name="SGACostCustomerServices" type="text" class="form-control decimal req">
+                </div>
+                <div class="col-sm-4">
+                    <!-- input box for CustomerServicesFTE --><input id="txtCustomerServicesFTE" maxlength="10" type="text" name="FTECustomerServices" class="form-control decimal req">
+                </div>
+            </section>
+            <section class="row mb-2">
+                <div class="col-sm-3 align-self-center">Corp Services <i class="fas fa-info-circle text-secondary" title="What is your business entity's total annual Corporate Service function cost, and how many full time equivalents (FTEs) are assigned to the Corporate Service function?" data-toggle="tooltip"></i></div>
+                <div class="col-sm-4">
+                    <!-- input box for CorpServicesCost --><input id="txtCorpServicesCost" maxlength="13" type="text" name="SGACostCorporateSupportServices" class="form-control decimal req">
+                </div>
+                <div class="col-sm-4">
+                    <!-- input box for CorpServicesFTE --><input id="txtCorpServicesFTE" maxlength="10" type="text" name="FTECorporateSupportServices" class="form-control decimal req">
+                </div>
+            </section>
+        </aside>
+    </section>
+</div>
+
+<section class="border-top py-2">
+    <!-- Display "Back" button -->
+    <a href="/PeerAMid/Search" class="btn btn-outline-secondary">Back</a>
+
+    <!-- Display "Next" button and tell the "Save" event whether or not to skip deparment level validation (PEER-14) -->
+    @if (skipDeptLevelDataValidation)
+    {
+        <a href="#" onclick="saveAndNavigate(true);" class="btn btn-secondary ml-3">Next</a>
+    }
+    else
+    {
+        <a href="#" onclick="saveAndNavigate(false);" class="btn btn-secondary ml-3">Next</a>
+    }
+</section>
+</div>
+</form>
+
+<!--Modal for Terms & Conditions-->
+<div class="modal fade" id="TandCconfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                By clicking on the 'Agree' button, you are agreeing to the <a href="javascript:void(0)">Terms & Conditions</a>
+            </div>
+            <div class="p-3 text-center border-top">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="TnCAgree">Agree</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" id="TCdisagree">Disagree</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*
+<script src="~/Scripts/pageState.js"></script>
+<script src="~/Scripts/chevrons.js"></script>*@
+<script src="~/PeerAmidContent/js/NewCompanyPage.js"></script>
