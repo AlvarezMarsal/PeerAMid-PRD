@@ -63,11 +63,11 @@ public static class StringExtensionMethods
         }
 
         var b = new StringBuilder();
-        b.Append(items[0]);
+        b.Append(items[0]).Append(", ").Append(items[1]);
         var stop = items.Count - 1;
-        for (var i = 1; i < stop; ++i)
+        for (var i = 2; i < stop; ++i)
             b.Append(", ").Append(items[i]);
-        b.Append(", and ").Append(items[stop]);
+        b.Append(" and ").Append(items[stop]); // not really an oxford comma, is it?
         return b.ToString();
     }
 

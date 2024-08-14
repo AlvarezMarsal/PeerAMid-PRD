@@ -280,11 +280,10 @@ function GenerateWCDChart1(workingCapitalData) {
 function BindSNGChartDifferenceTable(diffTableData) {
     var blankCellMark = "-";
     var targetCompany = analysisState.benchmarkCompany.DisplayName || "";
-    //var CostMedian = diffTableData.CostMedian;
-    var CostTarget = diffTableData.CostTarget;
+    var costTarget = diffTableData.CostTarget;
     var profileChartmessage =
         `Optimizing SG&A spend can liberate capital for more strategic leverage within operations or drive savings to the bottom line. As per reported 10-K, ${
-            targetCompany} SG&A cost as a % of revenue is ${CostTarget}%.`;
+            targetCompany} SG&A cost as a % of revenue is ${costTarget}%.`;
     $("#divIndustryGroupProfile").html(profileChartmessage);
     // var CostTopQuartile = diffTableData.CostTopQuartile;
     // var CostTopDecile = diffTableData.CostTopDecile;

@@ -385,12 +385,14 @@ function GetDepartmentTextUpTo80Percent(chartData, numForPercent) {
 function OxfordComma(items) {
     if (items.length == 0)
         return "";
-    var result = items[0];
     if (items.length == 1)
-        return result;
-    var i = 1;
+        return items[0];
+    if (items.length == 2)
+        return items[0] + " and " + items[1];
+    let result = items[0] + ", " + items[2];
+    let i = 2;
     while (i < (items.length - 1))
         result = result + ", " + items[i++];
-    result += ` and ${items[i]}`;
+    result += " and " + items[i]; // not really the oxford comma, is it?
     return result;
-};
+}
