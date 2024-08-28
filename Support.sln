@@ -43,12 +43,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeerAMid", "PeerAMid\PeerAM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{8F5236C3-EACA-4396-A343-CF66161E0C34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddUser", "AddUser\AddUser.csproj", "{6F618D9D-5B6F-4FFD-AF1F-CB2F8A8DC759}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F618D9D-5B6F-4FFD-AF1F-CB2F8A8DC759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F618D9D-5B6F-4FFD-AF1F-CB2F8A8DC759}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F618D9D-5B6F-4FFD-AF1F-CB2F8A8DC759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F618D9D-5B6F-4FFD-AF1F-CB2F8A8DC759}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E78D1146-7CFD-426B-B53F-D2A04C1CCE68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E78D1146-7CFD-426B-B53F-D2A04C1CCE68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E78D1146-7CFD-426B-B53F-D2A04C1CCE68}.Release|Any CPU.Build.0 = Release|Any CPU
