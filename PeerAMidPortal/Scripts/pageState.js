@@ -30,6 +30,8 @@ function resetAnalysisState(service) {
     a.format = analysisStateFormat;
     if (typeof(service) === 'number')
         a.service = service; // 0=None,  1=SgaFull, 2=WcdFull, 3=SgaShort, 4=WcdShort, 5=RetailFull, 6=RetailShorta.service
+    else if (analysisState == null)
+        a.service = 0;
     else
         a.service = analysisState.service;
     a.selectedRegions = "1,2,3,4,5";

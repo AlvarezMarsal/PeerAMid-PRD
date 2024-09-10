@@ -229,7 +229,6 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Images\am-logo.jpg" />
     <Content Include="Content\Images\am-logo.svg" />
-    <Content Include="Content\Images\apfeffer_landscape.jpg" />
     <Content Include="Content\Images\buildings-image.png" />
     <Content Include="Content\Images\footerbg.PNG" />
     <Content Include="Content\Images\footerlogo.jpg" />
@@ -258,13 +257,7 @@
     <Content Include="Content\Images\pdf_end.jpg" />
     <Content Include="Content\Images\pdf_globe.jpg" />
     <Content Include="Content\Images\PDF_Logo.jpg" />
-    <Content Include="Content\Images\sandeep-image.jpg" />
-    <Content Include="Content\Images\sandeepimage1.jpg" />
-    <Content Include="Content\Images\sandeepimage1.PNG" />
     <Content Include="Content\Images\star-label.png" />
-    <Content Include="Content\Images\stone.png" />
-    <Content Include="Content\Images\thesmartcube.png" />
-    <Content Include="Content\Images\thesmartcubeBig.png" />
     <Content Include="Content\Images\whatwedo.jpg" />
     <Content Include="Content\Images\whatwedo.png" />
     <Content Include="Content\multiselect\bootstrap-multiselect.css" />
