@@ -6,7 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
+    <ApplicationIcon>AM-Logo.ico</ApplicationIcon>
 </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="AM-Logo.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\Properties\.editorconfig" Link=".editorconfig" />

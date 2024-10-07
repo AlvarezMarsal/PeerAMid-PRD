@@ -5,7 +5,12 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ApplicationIcon>AM-Logo.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="AM-Logo.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PeerAMid\PeerAMid.csproj" />
