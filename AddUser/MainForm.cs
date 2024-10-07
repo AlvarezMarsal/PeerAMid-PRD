@@ -9,8 +9,9 @@ namespace AddUser;
 public partial class MainForm : Form
 {
     //public const string emailDomain = "@alvarezandmarsal.com";
-    public const string alvarezMarsal = "ALVAREZMARSAL";
-    public const string windowsDomain = alvarezMarsal + @"\";
+    public const string AlvarezMarsal = "ALVAREZMARSAL";
+    public const string WindowsDomain = AlvarezMarsal + @"\";
+    private static readonly char[] _nameSeperators = [',', ';', '\r', '\n', ' '];
 
     public MainForm()
     {
@@ -25,7 +26,7 @@ public partial class MainForm : Form
         _comboBoxServer.SelectedIndex = 0;
     }
 
-    private void _buttonOK_Click(object sender, EventArgs e)
+    private void OkClicked(object sender, EventArgs e)
     {
         var users = SplitUserNames(_textBoxUsers.Text);
         if (users.Length == 0)
@@ -41,7 +42,7 @@ public partial class MainForm : Form
         _textBoxUsers.Text = string.Join(Environment.NewLine, remainingUsers);
     }
 
-    private void _buttonClose_Click(object sender, EventArgs e)
+    private void CloseClicked(object sender, EventArgs e)
     {
         var users = SplitUserNames(_textBoxUsers.Text);
         if (users.Length != 0)
@@ -50,67 +51,86 @@ public partial class MainForm : Form
         Close();
     }
 
-    private string[] SplitUserNames(string users)
+    private static string[] SplitUserNames(string users)
     {
-        return users.Split(new[] { ',', ';', '\r', '\n', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        return users.Split(_nameSeperators, StringSplitOptions.RemoveEmptyEntries);
     }
 
     private string[] AddUsers(string connectionString, string[] users)
     {
         var remainingUsers = new List<string>();
         var index = 0;
+        SearchResult? results = null;
         try
         {
             using var db = new SqlConnection(connectionString);
             db.Open();
-            using var root = new DirectoryEntry($"LDAP://{alvarezMarsal}");
+            using var root = new DirectoryEntry($"LDAP://{AlvarezMarsal}");
             for (/**/; index < users.Length; ++index)
             {
                 var user = users[index];
                 using var searcher = new DirectorySearcher(root);
                 //searcher.PropertiesToLoad.Add("adspath");
                 var isEmail = user.Contains('@');
+                var ldapError = false;
                 if (isEmail)
                 {
                     var email = user;
-                    searcher.Filter = $"(&(objectCategory=person)(objectClass=user)(mail={email}))";
-                    searcher.PropertiesToLoad.Add("sAMAccountName");
-                    var results = searcher.FindOne();
+                    try
+                    {
+                        searcher.Filter = $"(&(objectCategory=person)(objectClass=user)(mail={email}))";
+                        searcher.PropertiesToLoad.Add("sAMAccountName");
+                        results = searcher.FindOne();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine("LDAP Error: " + ex.Message);
+                        ldapError = true;
+                    }
 
                     if (results == null)
                     {
-                        MessageBox.Show(this, $"No user was found with email address {email}.", "Error", MessageBoxButtons.OK);
-                        remainingUsers.Add(users[index]);
-                        continue;
+                        if (!ldapError)
+                        {
+                            MessageBox.Show(this, $"No user was found with email address {email}.", "Error", MessageBoxButtons.OK);
+                            remainingUsers.Add(users[index]);
+                            continue;
+                        }
+                        else
+                        {
+                            user = email[..email.IndexOf('@')];
+                        }
                     }
-
-                    var properties = results.Properties;
-                    if (properties == null)
+                    else
                     {
-                        MessageBox.Show(this, $"The user with email address {email} has no visible properties", "Error", MessageBoxButtons.OK);
-                        remainingUsers.Add(users[index]);
-                        continue;
+                        var properties = results.Properties;
+                        if (properties == null)
+                        {
+                            MessageBox.Show(this, $"The user with email address {email} has no visible properties", "Error", MessageBoxButtons.OK);
+                            remainingUsers.Add(users[index]);
+                            continue;
+                        }
+
+                        if (!properties.Contains("sAMAccountName"))
+                        {
+                            MessageBox.Show(this, $"The user with email address {email} has no login", "Error", MessageBoxButtons.OK);
+                            remainingUsers.Add(users[index]);
+                            continue;
+
+                        }
+
+                        user = properties["sAMAccountName"][0]?.ToString();
+                        Debug.WriteLine($"Email address {email} belongs to {user}");
                     }
-
-                    if (!properties.Contains("sAMAccountName"))
-                    {
-                        MessageBox.Show(this, $"The user with email address {email} has no login", "Error", MessageBoxButtons.OK);
-                        remainingUsers.Add(users[index]);
-                        continue;
-
-                    }
-
-                    user = properties["sAMAccountName"][0]?.ToString();
-                    Debug.WriteLine($"Email address {email} belongs to {user}");
                 }
                 else
                 {
-                    if (user.StartsWith(windowsDomain, StringComparison.OrdinalIgnoreCase))
-                        user = user.Substring(windowsDomain.Length);
+                    if (user.StartsWith(WindowsDomain, StringComparison.OrdinalIgnoreCase))
+                        user = user[WindowsDomain.Length..];
 
                     searcher.Filter = $"(&(objectCategory=person)(objectClass=user)(sAMAccountName={user}))";
                     //searcher.PropertiesToLoad.Add("mail");
-                    var results = searcher.FindOne();
+                    results = searcher.FindOne();
 
                     if (results == null)
                     {
@@ -156,18 +176,18 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show(this, ex.Message, "Add User", MessageBoxButtons.OK);
+            MessageBox.Show(this, "LDAP Error: " + ex.Message, "Add User", MessageBoxButtons.OK);
             if (index < users.Length)
                 remainingUsers.AddRange(users.Skip(index));
         }
 
-        return remainingUsers.ToArray();
+        return [.. remainingUsers];
     }
 
     private bool AddUserSql(SqlConnection connection, string user)
     {
-        var fullName = $"{windowsDomain}{user}".ToUpper();
-        var userId = GetUserId(connection, $"{windowsDomain}{user}");
+        // var fullName = $"{WindowsDomain}{user}".ToUpper();
+        var userId = GetUserId(connection, $"{WindowsDomain}{user}");
         if (userId != -1)
         {
             MessageBox.Show(this, $"User {user} is already in the database.", "Add User", MessageBoxButtons.OK);
@@ -191,7 +211,7 @@ public partial class MainForm : Form
         return true;
     }
 
-    private int GetUserId(SqlConnection connection, string fullUserName)
+    private static int GetUserId(SqlConnection connection, string fullUserName)
     {
         var fullName = fullUserName.ToUpper();
         using var cmd = connection.CreateCommand();

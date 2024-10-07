@@ -95,7 +95,7 @@ partial class MainForm
         _buttonClose.TabIndex = 5;
         _buttonClose.Text = "Close";
         _buttonClose.UseVisualStyleBackColor = true;
-        _buttonClose.Click += _buttonClose_Click;
+        _buttonClose.Click += CloseClicked;
         // 
         // _buttonOK
         // 
@@ -107,7 +107,7 @@ partial class MainForm
         _buttonOK.TabIndex = 6;
         _buttonOK.Text = "Add User";
         _buttonOK.UseVisualStyleBackColor = true;
-        _buttonOK.Click += _buttonOK_Click;
+        _buttonOK.Click += OkClicked;
         // 
         // MainForm
         // 
